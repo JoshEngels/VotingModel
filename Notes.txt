@@ -9,9 +9,16 @@ Change to a different way of clearing visual finsts
 Remake non visual grouping voting methods to use visual grouping?
 Figure out documentation
 Ask about problems
-Version control A-Voting-Folder
+Ok to make git public? Not pressing, easier to ask forgiveness than permission
 Get emaccs
-All the big stuff: stored in the ol' nogin--> I should probably write it all down
+All the big stuff: stored in the ol' nogin--> I should probably write it all down:
+Create other methods
+Add real races
+Compare statistics to actual
+Start adding other ways, perhaps using super and sub groups
+Make structure more general, or maybe just define transfers between groups better--> only imaginal and goal buffers? Then can send control from one to any and get more freedom. 
+Maybe send it through production that clears everything except these things, although might not be optimal for general conglumerations (would do it for simplicity)
+Rewrite ballot method/learn lisp/get results + split into two files (noise and no noise)
 
 Problems --> talk about in paper:
 Names for groups for different object types (oval, text observed) repeat counts
@@ -38,6 +45,7 @@ Problem
 What I did
 How it turned out --> error report
 What does it mean --> future implications
+Work super hard on this and publish on website?
 
 Vote function: small noise, big noise, real time, use model (optional)
 (vote 0 0 t)    Human demonstration
