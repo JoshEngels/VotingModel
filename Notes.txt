@@ -1,0 +1,47 @@
+TODO:
+Remove all warnings one way or another
+Comment + diagram
+Need to find party better (i.e. not go down or backwards (never observed))
+Clean it all up baby
+Creating .tem files?
+Put in new contract
+Change to a different way of clearing visual finsts
+Remake non visual grouping voting methods to use visual grouping?
+Figure out documentation
+Ask about problems
+Version control A-Voting-Folder
+Get emaccs
+All the big stuff: stored in the ol' nogin--> I should probably write it all down
+
+Problems --> talk about in paper:
+Names for groups for different object types (oval, text observed) repeat counts
+Reloading/resetting/running again slows it down
+Need a better nearest method: now goes from centers, this caused lots of problems
+Would really be good to not use this at all and use super and sub groups: perhaps try every single possible radius and find points of inflection where number of groups is changing the fastest? Something like this, should work 100% for no noise and okish for noise --> nearest-center
+Confusion in names of models like serial_party and serial_retrieve-party: how is retrieve-party and retrieve-recognize-party different?
+Can make grouping versions very quickly: should I?
+
+When pasting in:
+Delete before and after the start voting section
+Change vbp-moved-to-candidate to moved-to-candidate
+Change find-next-race to 
+Delete productions which have goal state moved-to-candidate as a condition
+Switch the state the abstain production sets the goal to from ready-to-advance to find-next-race
+Optional: Delete the past-end-state production (to remove warnings)
+
+
+Simple procedure but would have to repeat many times for all combinations: write a python (lisp!) script?
+Delete to-do? use notepad++ regex replace, to-do.*?$ and blank
+
+For essay:
+Problem
+What I did
+How it turned out --> error report
+What does it mean --> future implications
+
+Vote function: small noise, big noise, real time, use model (optional)
+(vote 0 0 t)    Human demonstration
+(vote 0 0 t t)  Model demonstration, normal ballot, normal speed
+(vote 1 6 t t)  Model demonstration, ballot with noise, normal speed
+(vote 1 6 nil t) Model demonstration, ballot with noise, fast speed
+
