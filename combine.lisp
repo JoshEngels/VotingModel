@@ -15,8 +15,6 @@
 		(base-file-name "C:/Users/Joshua Engels/Desktop/A-Voting-Folder/")
 		(output-file-name "C:/Users/Joshua Engels/Desktop/A-Voting-Folder/combination.lisp")
 		
-		; First goal
-		(first-goal '(add-dm (Vote ISA MakeVote state start-voting to-do SelectCandidate default "party3" endState "nameofrace" left -1 right -1)))
 		
 		(model-combination 
 		
@@ -25,11 +23,23 @@
 		
 		; Parameters
 		(sgp :v t :needs-mouse t :show-focus t :esc t :process-cursor t)
+		
+		(sgp :visual-finst-span 100) ;neccesary to avoid forgetting where we looked for the recognition strategies
 
 		; Grouping Parameters
 		(setf vg-glomming-radius 8)
 		(setf vg-collision-type 'box) ;'point is faster, but less plausible (also needs a larger radius to work similarly)
 		(setf vg-naming-type 'sequential) 
+		
+		;********************************
+		; Enable forgetting / Activation 
+		(sgp :ans 0.3)
+		(sgp :rt 0)
+		;********************************
+
+		(sgp :act t)
+
+		(setf *actr-enabled-p* t)
 
 
 		; Declarative Memory
@@ -38,7 +48,10 @@
 		(chunk-type VoteParty default)
 		(chunk-type Abstain contest)
 		(chunk-type VisualGroup race-group candidate-group party-group nextpage-group nextpage-text party-text candidate-text race-text button-group)
-		)
+		
+		; First Goal
+		(add-dm (Vote ISA MakeVote state start-voting to-do SelectCandidate default "party3" endState "nameofrace" left -1 right -1)))
+		
 		)
 		
 	)
@@ -58,12 +71,10 @@
 			(micronavigation-file (open (car (directory (concatenate 'string base-file-name "5Micronavigation/*.lisp")))))
 			(click-file (open (car (directory (concatenate 'string base-file-name "6Click/*.lisp")))))
 			(output-file (open output-file-name :direction :output :if-exists :supersede))
-			
-			(declaritive first-goal)
 		)
 		
 		
-		
+				
 			;function that takes in a file and returns a list of the s-expressions in it
 			(defun get-to-add (file)
 				(let ((line (read file nil)) (so-far '()))
@@ -82,9 +93,10 @@
 			
 			
 			;Creates and writes the model file
-			(setf declaritive (append declaritive (get-to-add memory-file))) ;creates declaritive memory
-			(setf model-combination (append model-combination (list declaritive))) ;adds declaritive memory to the model
+			;(setf declaritive (append declaritive (get-to-add memory-file))) ;creates declaritive memory
+			;(setf model-combination (append model-combination (list declaritive))) ;adds declaritive memory to the model
 
+			(setf model-combination (append model-combination (get-to-add memory-file))) ;Adds declaritive memory to the model
 			(setf model-combination (append model-combination (get-to-add macronavigation-file))) ;Adds macronavigation to the model
 			(setf model-combination (append model-combination (get-to-add encoding-file))) ;Adds encoding to the model
 			(setf model-combination (append model-combination (get-to-add micronavigation-file))) ;Adds micronavigation to the model
@@ -105,4 +117,37 @@
 
 
 )
+
+
+(defun test-ballot-human (file-name)
+
+	(let 
+	(		
+		; File Names
+		(base-file-name "C:/Users/Joshua Engels/Desktop/A-Voting-Folder/")
+		(output-file-name "C:/Users/Joshua Engels/Desktop/A-Voting-Folder/combination.lisp")
+		
+		(model-combination '(define-model combined))
+	)
+
+
+		(load (car (directory (concatenate 'string base-file-name "1Ballot/" file-name)))) ;load in ballot specified
+
+		(let 
+		(
+			(output-file (open output-file-name :direction :output :if-exists :supersede))
+		)
+		
+			(pprint '(clear-all) output-file)
+			(pprint model-combination output-file)	
+			(close output-file) ;bad practice, but leave for now
+		)
+		
+		; runs the model file
+		(load output-file-name) ;hopefully this works
+		(vote t nil) ;human interaction
+)
+)
+
+
 
