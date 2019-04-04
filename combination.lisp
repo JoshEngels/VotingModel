@@ -662,6 +662,9 @@
                  =VISUAL>
                  VALUE
                  =TEXT
+                 ?VISUAL>
+                 STATE
+                 FREE
                  =VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
@@ -685,9 +688,9 @@
                  =GOAL>
                  STATE
                  READY-TO-MAKE-CHOICE
-                 +RETRIEVAL>
-                 :RECENTLY-RETRIEVED
-                 RESET
+                 +VISUAL>
+                 ISA
+                 CLEAR-ALL-FINSTS
                  !OUTPUT!
                  ("Example of party is: ~s" =TEXT))
               (P SELECT-CHOICE_LOCATE-CONTEST-DESCRIPTION
@@ -696,8 +699,6 @@
                  MAKEVOTE
                  STATE
                  READY-TO-MAKE-CHOICE
-                 TO-DO
-                 SELECTCANDIDATE
                  =IMAGINAL>
                  RACE-GROUP
                  =VAL1
@@ -724,8 +725,6 @@
                  MAKEVOTE
                  STATE
                  FOUND-CONTEST-DESCRIPTION
-                 TO-DO
-                 SELECTCANDIDATE
                  =VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
@@ -751,8 +750,6 @@
                  MAKEVOTE
                  STATE
                  ATTENDED-CONTEST-DESCRIPTION
-                 TO-DO
-                 SELECTCANDIDATE
                  =VISUAL>
                  ISA
                  TEXT
@@ -782,8 +779,6 @@
                  MAKEVOTE
                  STATE
                  CHECKING-CONTEST
-                 TO-DO
-                 SELECTCANDIDATE
                  =RETRIEVAL>
                  ISA
                  ABSTAIN
@@ -794,17 +789,13 @@
                  ISA
                  MAKEVOTE
                  STATE
-                 FIND-NEXT-RACE
-                 TO-DO
-                 NAVIGATE)
+                 FIND-NEXT-RACE)
               (P SELECT-CHOICE_ENCODE-CONTEST-DESCRIPTION
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
                  CHECKING-CONTEST
-                 TO-DO
-                 SELECTCANDIDATE
                  ?RETRIEVAL>
                  BUFFER
                  FAILURE
@@ -831,8 +822,6 @@
                  MAKEVOTE
                  STATE
                  ENCODED-CONTEST-DESCRIPTION
-                 TO-DO
-                 SELECTCANDIDATE
                  =RETRIEVAL>
                  ISA
                  CANDIDATE
@@ -842,6 +831,7 @@
                  =N
                  =IMAGINAL>
                  ==>
+                 =RETRIEVAL>
                  =IMAGINAL>
                  ISA
                  MAKEVOTE
@@ -854,14 +844,12 @@
                  SEARCH-SCREEN-RETRIEVAL
                  !OUTPUT!
                  ("I'm voting for: ~s" =N))
-              (P SELECT-CHOICE_SEARCH-SCREEN-ORDERED_RETRIEVAL
+              (P SELECT-CHOICE_SEARCH-SCREEN-FASTEST_RETRIEVAL
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
                  SEARCH-SCREEN-RETRIEVAL
-                 TO-DO
-                 SELECTCANDIDATE
                  ?VISUAL-LOCATION>
                  STATE
                  FREE
@@ -873,17 +861,12 @@
                  +VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
-                 GROUP
-                 =VAL2
                  KIND
                  TEXT
-                 >
-                 SCREEN-Y
-                 CURRENT
-                 SCREEN-Y
-                 LOWEST
-                 SCREEN-X
-                 LOWEST
+                 GROUP
+                 =VAL2
+                 :ATTENDED
+                 NIL
                  =GOAL>
                  STATE
                  SOMETHING-FOUND-RETRIEVAL)
@@ -893,8 +876,6 @@
                  MAKEVOTE
                  STATE
                  SOMETHING-FOUND-RETRIEVAL
-                 TO-DO
-                 SELECTCANDIDATE
                  =VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
@@ -920,8 +901,6 @@
                  MAKEVOTE
                  STATE
                  ATTENDING-SOMETHING-FOUND-RETRIEVAL
-                 TO-DO
-                 SELECTCANDIDATE
                  =VISUAL>
                  ISA
                  TEXT
@@ -945,8 +924,6 @@
                  MAKEVOTE
                  STATE
                  ENCODED-SEARCH-RETRIEVAL
-                 TO-DO
-                 SELECTCANDIDATE
                  =IMAGINAL>
                  ISA
                  MAKEVOTE
@@ -982,8 +959,6 @@
                  MAKEVOTE
                  STATE
                  ENCODED-SEARCH-RETRIEVAL
-                 TO-DO
-                 SELECTCANDIDATE
                  ?VISUAL-LOCATION>
                  STATE
                  FREE
@@ -997,8 +972,6 @@
                  MAKEVOTE
                  STATE
                  ENCODED-CONTEST-DESCRIPTION
-                 TO-DO
-                 SELECTCANDIDATE
                  ?RETRIEVAL>
                  BUFFER
                  FAILURE
@@ -1016,8 +989,6 @@
                  MAKEVOTE
                  STATE
                  ENCODED-SEARCH-RETRIEVAL
-                 TO-DO
-                 SELECTCANDIDATE
                  ?VISUAL-LOCATION>
                  BUFFER
                  FAILURE
@@ -1029,14 +1000,12 @@
                  ("Looked at everything and nothing retrieved--switch to recognition")
                  !EVAL!
                  (SETF CURRENT-STRAT 'RECOGNITION))
-              (P SELECT-CHOICE_SEARCH-SCREEN-ORDERED_RECOGNITION
+              (P SELECT-CHOICE_SEARCH-SCREEN-FASTEST_RECOGNITION
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
                  SEARCH-SCREEN-RECOGNITION
-                 TO-DO
-                 SELECTCANDIDATE
                  ?RETRIEVAL>
                  STATE
                  FREE
@@ -1054,17 +1023,12 @@
                  +VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
-                 GROUP
-                 =VAL2
                  KIND
                  TEXT
-                 >
-                 SCREEN-Y
-                 CURRENT
-                 SCREEN-Y
-                 LOWEST
-                 SCREEN-X
-                 LOWEST
+                 :ATTENDED
+                 NIL
+                 GROUP
+                 =VAL2
                  =GOAL>
                  STATE
                  SOMETHING-FOUND-RECOGNITION)
@@ -1074,8 +1038,6 @@
                  MAKEVOTE
                  STATE
                  SOMETHING-FOUND-RECOGNITION
-                 TO-DO
-                 SELECTCANDIDATE
                  =VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
@@ -1101,8 +1063,6 @@
                  MAKEVOTE
                  STATE
                  ATTENDING-SOMETHING-FOUND-RECOGNITION
-                 TO-DO
-                 SELECTCANDIDATE
                  =VISUAL>
                  ISA
                  TEXT
@@ -1132,8 +1092,6 @@
                  MAKEVOTE
                  STATE
                  ENCODED-SEARCH-RECOGNITION
-                 TO-DO
-                 SELECTCANDIDATE
                  =RETRIEVAL>
                  ISA
                  CANDIDATE
@@ -1171,8 +1129,6 @@
                  MAKEVOTE
                  STATE
                  ENCODED-SEARCH-RECOGNITION
-                 TO-DO
-                 SELECTCANDIDATE
                  ?VISUAL-LOCATION>
                  STATE
                  FREE
@@ -1192,8 +1148,6 @@
                  MAKEVOTE
                  STATE
                  SOMETHING-FOUND-RECOGNITION
-                 TO-DO
-                 SELECTCANDIDATE
                  ?VISUAL-LOCATION>
                  BUFFER
                  FAILURE
@@ -1202,17 +1156,15 @@
                  STATE
                  SEARCH-BY-PARTY
                  !OUTPUT!
-                 ("Looked at everything and nothing recognized-- voting by party")
+                 ("Looked at everything and nothing retrieved-- voting by party")
                  !EVAL!
                  (SETF CURRENT-STRAT 'PARTY))
-              (P VBP-SEARCH-SCREEN-TOP-DOWN
+              (P VBP-SELECT-CHOICE_SEARCH-SCREEN-RANDOM
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
                  SEARCH-BY-PARTY
-                 TO-DO
-                 SELECTCANDIDATE
                  ?RETRIEVAL>
                  STATE
                  FREE
@@ -1233,55 +1185,15 @@
                  =VAL3
                  :ATTENDED
                  NIL
-                 SCREEN-Y
-                 LOWEST
                  =GOAL>
                  STATE
-                 VBP-SOMETHING-FOUND)
-              (P VBP-SEARCH-SCREEN-BOTTOM-UP
+                 VBP-ATTEND-NAME)
+              (P VOTE-BY-PARTY_ATTEND-LOCATION
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 SEARCH-BY-PARTY-AT-BOTTOM
-                 TO-DO
-                 SELECTCANDIDATE
-                 ?RETRIEVAL>
-                 STATE
-                 FREE
-                 ?VISUAL-LOCATION>
-                 STATE
-                 FREE
-                 =IMAGINAL>
-                 PARTY-GROUP
-                 =VAL3
-                 ==>
-                 =IMAGINAL>
-                 +VISUAL-LOCATION>
-                 ISA
-                 VISUAL-LOCATION
-                 KIND
-                 TEXT
-                 GROUP
-                 =VAL3
-                 <
-                 SCREEN-Y
-                 CURRENT
-                 SCREEN-Y
-                 HIGHEST
-                 SCREEN-X
-                 LOWEST
-                 =GOAL>
-                 STATE
-                 VBP-SOMETHING-FOUND)
-              (P VBP-SELECT-CHOICE_ATTEND-SEARCH
-                 =GOAL>
-                 ISA
-                 MAKEVOTE
-                 STATE
-                 VBP-SOMETHING-FOUND
-                 TO-DO
-                 SELECTCANDIDATE
+                 VBP-ATTEND-NAME
                  =VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
@@ -1300,15 +1212,13 @@
                  =VISUAL-LOCATION
                  =GOAL>
                  STATE
-                 VBP-ATTENDING-SOMETHING-FOUND)
-              (P VBP-ENCODE-SEARCH-MATCH
+                 PARTY-FOUND)
+              (P VOTE-BY-PARTY_MATCH
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 VBP-ATTENDING-SOMETHING-FOUND
-                 TO-DO
-                 SELECTCANDIDATE
+                 PARTY-FOUND
                  DEFAULT
                  =PARTY
                  =VISUAL>
@@ -1322,6 +1232,7 @@
                  STATE
                  FREE
                  ==>
+                 =VISUAL>
                  +MANUAL>
                  ISA
                  MOVE-CURSOR
@@ -1331,58 +1242,53 @@
                  STATE
                  MOVED-TO-CANDIDATE
                  !OUTPUT!
-                 ("Party matches: ~s" =PARTY))
-              (P VBP-NO-MATCH-NEXT-CHOICE
+                 ("Party found ~s and matches default" =PARTY))
+              (P VOTE-BY-PARTY_NO-MATCH
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 VBP-ATTENDING-SOMETHING-FOUND
-                 TO-DO
-                 SELECTCANDIDATE
+                 PARTY-FOUND
                  DEFAULT
-                 =PARTY
+                 =P
                  =VISUAL>
                  ISA
                  TEXT
                  -
                  VALUE
-                 =PARTY
+                 =P
                  VALUE
-                 =NOTPARTY
+                 =Q
                  ==>
                  =GOAL>
                  STATE
                  SEARCH-BY-PARTY
                  !OUTPUT!
-                 ("Party ~s does not match, search again."
-                  =NOTPARTY))
-              (P VBP-BOTTOM-OF-LIST-FAIL
+                 ("Party ~s does not match default, search again"
+                  =Q))
+              (P VOTE-BY-PARTY_NO-MATCH-ABSTAIN
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 VBP-SOMETHING-FOUND
-                 TO-DO
-                 SELECTCANDIDATE
+                 VBP-ATTEND-NAME
                  ?VISUAL-LOCATION>
                  BUFFER
                  FAILURE
                  ==>
                  =GOAL>
                  STATE
-                 START-VOTING
-                 TO-DO
-                 NAVIGATE)
+                 FIND-NEXT-RACE)
               (SPP SELECT-CHOICE_IMAGINAL-MATCH-STOP_RETRIEVAL
                    :U
                    1000)
-              (SPP SELECT-CHOICE_SEARCH-SCREEN-ORDERED_RETRIEVAL
+              (SPP SELECT-CHOICE_SEARCH-SCREEN-FASTEST_RETRIEVAL
                    :U
                    8)
-              (SPP SELECT-CHOICE_SEARCH-SCREEN-ORDERED_RECOGNITION
+              (SPP SELECT-CHOICE_SEARCH-SCREEN-FASTEST_RECOGNITION
                    :U
                    8)
+              (SPP CHECK-CONTEST :U 4000)
               (P FIND-BUBBLE
                  =GOAL>
                  STATE

@@ -22,6 +22,7 @@ Rewrite ballot method/learn lisp/get results + split into two files (noise and n
 Overall encoding --> really need that closest to object, runs into lots of problems and weird workarounds --> also need super and sub groups
 Make encoding work with one candidate
 Fix the cheating in macronavigation --> can we even figure out a way that doesn't cheat without the two things we need
+Bring file names out of functions
 
 Problems --> talk about in paper:
 Names for groups for different object types (oval, text observed) repeat counts

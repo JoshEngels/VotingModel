@@ -285,6 +285,9 @@
 =visual>
 	value		=text
 
+?visual>
+	state		free
+	
 =visual-location>
 	ISA			visual-location	
 	kind		text
@@ -305,8 +308,8 @@
 =goal>
 	state		ready-to-make-choice
 	
-+retrieval>
-	:recently-retrieved 	reset
++visual>
+	ISA     clear-all-finsts
 	
 !output! ("Example of party is: ~s" =text)
 	
