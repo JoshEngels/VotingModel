@@ -139,7 +139,7 @@
 
 )
 
-; Encodes the candidate group and makes a visual request for another candidate with greater y so we can eventually find the party
+; Encodes the candidate group and makes a visual request for another candidate with greatest y so we can eventually find the party
 (P Encode-Candidate
 
  =goal>
@@ -167,7 +167,7 @@
 	ISA			visual-location
 	kind		text
 	group		=group2
-	> screen-y	current
+	screen-y	highest
 
 =imaginal>
 	candidate-group  =group2
@@ -180,7 +180,7 @@
 	
 )
 
-; Attends a different candidate so we can find a party with smaller y
+; Attends the candidate with greatest y so we can find a party with smaller y
 (P Attend-Different-Candidate
 
 =goal>
