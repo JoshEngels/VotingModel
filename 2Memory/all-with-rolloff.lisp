@@ -46,34 +46,32 @@
 (Party ISA VoteParty default "Dem")
 )
 
+
 ; Chunk base-level activations for intended candidates
-(sdp GordonBearce :base-level .8)
-(sdp CoreyDery :base-level .8)
-(sdp RobertMettler :base-level .8)
-(sdp RickStickles :base-level .8)
-(sdp CassiePrincipe :base-level .8)
-(sdp RickOrgan :base-level .8)
-(sdp ThereseGustin :base-level .8)
-(sdp EliseEllzey :base-level .8)
-(sdp PollyRylander :base-level .8)
-(sdp JillianBalas :base-level .8)
-(sdp WesleySteven-Millette :base-level .8)
-(sdp SusanneRael :base-level .8)
-(sdp PeterVarga :base-level .8)
-(sdp TimGrasty :base-level .8)
-(sdp DerrickMelgar :base-level .8)
-(sdp CoreyBehnke :base-level .8)
-(sdp DeanCaffee :base-level .8)
-(sdp JasonValle :base-level .8)
-(sdp HowardGrady :base-level .8)
-(sdp ClydeGaytonJr. :base-level .8)
-(sdp LewisShine :base-level .8)
-
-; default party chunk
-(sdp Vote :base-level .8)
-
+(sdp GordonBearce :base-level .7)
+(sdp CoreyDery :base-level .7)
+(sdp RobertMettler :base-level .7)
+(sdp RickStickles :base-level .7)
+(sdp CassiePrincipe :base-level .7)
+(sdp RickOrgan :base-level .7)
+(sdp ThereseGustin :base-level .7)
+(sdp EliseEllzey :base-level .6)
+(sdp PollyRylander :base-level .6)
+(sdp JillianBalas :base-level .6)
+(sdp WesleySteven-Millette :base-level .6)
+(sdp SusanneRael :base-level .6)
+(sdp PeterVarga :base-level .6)
+(sdp TimGrasty :base-level .6)
+(sdp DerrickMelgar :base-level 0.5)
+(sdp CoreyBehnke :base-level 0.5)
+(sdp DeanCaffee :base-level 0.5)
+(sdp JasonValle :base-level 0.5)
+(sdp HowardGrady :base-level 0.5)
+(sdp ClydeGaytonJr. :base-level 0.5)
+(sdp LewisShine :base-level 0.5)
 
 ; no Activations for other candidates
 
-
+; default party chunk
+(sdp Vote :base-level .8)
 
