@@ -302,16 +302,26 @@
                  FIND-RACE-NEXT-COLUMN
                  RIGHT
                  =RIGHT-BOUND
+                 LEFT
+                 =LEFT-BOUND
                  =VISUAL>
+                 !BIND!
+                 =RIGHT-GUESS
+                 (+ =RIGHT-BOUND (- =RIGHT-BOUND =LEFT-BOUND))
                  ==>
                  +VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
                  KIND
                  TEXT
+                 SCREEN-Y
+                 LOWEST
                  >
                  SCREEN-X
                  =RIGHT-BOUND
+                 <
+                 SCREEN-X
+                 =RIGHT-GUESS
                  :NEAREST
                  CURRENT
                  =GOAL>
@@ -596,7 +606,7 @@
                  >
                  SCREEN-X
                  CURRENT
-                 <
+                 <=
                  SCREEN-Y
                  CURRENT
                  >

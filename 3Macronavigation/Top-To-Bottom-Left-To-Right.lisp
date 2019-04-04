@@ -199,16 +199,30 @@
 =goal>
 	state 		find-race-next-column
 	right		=right-bound
+	left		=left-bound
 	
 =visual>
 
+
+; Cheating big time
+!bind! =right-guess (+ =right-bound (- =right-bound =left-bound))
+
+
 ==>
 
+; +visual-location>
+	; ISA			visual-location
+	; kind		text
+	; > screen-x	=right-bound
+	; :nearest	current
+	
 +visual-location>
 	ISA			visual-location
 	kind		text
+	screen-y	lowest
 	> screen-x	=right-bound
-	:nearest	current
+	< screen-x	=right-guess
+	:nearest	current	
 	
 =goal>
 	state		attending-race-next-column

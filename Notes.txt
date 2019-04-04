@@ -19,7 +19,9 @@ Start adding other ways, perhaps using super and sub groups
 Make structure more general, or maybe just define transfers between groups better--> only imaginal and goal buffers? Then can send control from one to any and get more freedom. 
 Maybe send it through production that clears everything except these things, although might not be optimal for general conglumerations (would do it for simplicity)
 Rewrite ballot method/learn lisp/get results + split into two files (noise and no noise)
-Overall encoding --> really need that closest to object, runs into lots of problems and weird workarounds
+Overall encoding --> really need that closest to object, runs into lots of problems and weird workarounds --> also need super and sub groups
+Make encoding work with one candidate
+Fix the cheating in macronavigation --> can we even figure out a way that doesn't cheat without the two things we need
 
 Problems --> talk about in paper:
 Names for groups for different object types (oval, text observed) repeat counts

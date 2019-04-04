@@ -207,7 +207,7 @@
 	
 )
 
-; Makes the request to finnaly find the party
+; Makes the request to finnaly find the party by requesting a party with y less than or equal to this bubble
 (P Find-Party
 
 =goal>
@@ -230,7 +230,7 @@
 	ISA			visual-location
 	kind		text
 	> screen-x	current
-	< screen-y	current
+	<= screen-y	current
 	> screen-y	=top
 	- group		=candidate-group
 	- group		=race-group
