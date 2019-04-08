@@ -23,6 +23,9 @@ Overall encoding --> really need that closest to object, runs into lots of probl
 Make encoding work with one candidate
 Fix the cheating in macronavigation --> can we even figure out a way that doesn't cheat without the two things we need
 Bring file names out of functions
+Make sure correct models
+Move params to own file
+Document (honestly this to do list is too long idk even know if I have this somewhere else)
 
 Problems --> talk about in paper:
 Names for groups for different object types (oval, text observed) repeat counts
@@ -33,16 +36,16 @@ Confusion in names of models like serial_party and serial_retrieve-party: how is
 Can make grouping versions very quickly: should I?
 
 When pasting in:
-Delete before and after the start voting section
-Change vbp-moved-to-candidate to moved-to-candidate
-Change find-next-race to 
+Delete before and after the start voting section, leaving in selection production utilities
+Change vbp-moved-to-candidate to moved-to-candidate 
 Delete productions which have goal state moved-to-candidate as a condition
 Switch the state the abstain production sets the goal to from ready-to-advance to find-next-race
+Delete to-do: use notepad++ regex replace, to-do.*?$ and blank
 Optional: Delete the past-end-state production (to remove warnings)
 
 
 Simple procedure but would have to repeat many times for all combinations: write a python (lisp!) script?
-Delete to-do? use notepad++ regex replace, to-do.*?$ and blank
+
 
 For essay:
 Problem

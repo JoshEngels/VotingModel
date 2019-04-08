@@ -54,7 +54,7 @@
                             TO-DO
                             SELECTCANDIDATE
                             DEFAULT
-                            "DEM"
+                            "party3"
                             ENDSTATE
                             "nameofrace"
                             LEFT
@@ -346,15 +346,8 @@
                  =VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
-                 SCREEN-X
-                 =CENTER-X
-                 WIDTH
-                 =WIDTH
                  KIND
                  TEXT
-                 !BIND!
-                 =NEW-LEFT
-                 (/ (+ =OLD-RIGHT (- =CENTER-X (/ =WIDTH 2))) 2)
                  ==>
                  +IMAGINAL>
                  RACE-GROUP
@@ -377,7 +370,7 @@
                  STATE
                  STORING-RACE-GROUP
                  LEFT
-                 =NEW-LEFT)
+                 =OLD-RIGHT)
               (P FIND-RACE-NEXT-COLUMN-NO-MATCH
                  =GOAL>
                  STATE
@@ -729,7 +722,7 @@
                  STATE
                  FOUND-CONTEST-DESCRIPTION
                  !EVAL!
-                 (SETF CURRENT-STRAT 'RECOGNITION))
+                 (SETF CURRENT-STRAT 'RETRIEVAL))
               (P SELECT-CHOICE_ATTEND-CONTEST-DESCRIPTION
                  =GOAL>
                  ISA
@@ -740,7 +733,7 @@
                  ISA
                  VISUAL-LOCATION
                  KIND
-                 TEXT
+                 =TEXT
                  GROUP
                  =VAL1
                  ?VISUAL>
@@ -755,7 +748,7 @@
                  =GOAL>
                  STATE
                  ATTENDED-CONTEST-DESCRIPTION)
-              (P ENCODE-CONTEST-DESCRIPTION
+              (P CHECK-CONTEST
                  =GOAL>
                  ISA
                  MAKEVOTE
@@ -766,18 +759,68 @@
                  TEXT
                  VALUE
                  =TEXTVAL
+                 ?RETRIEVAL>
+                 STATE
+                 FREE
+                 =IMAGINAL>
                  ==>
                  +RETRIEVAL>
                  ISA
                  ABSTAIN
                  CONTEST
                  =TEXTVAL
+                 =IMAGINAL>
+                 ISA
+                 MAKEVOTE
+                 RACE
+                 =TEXTVAL
+                 =GOAL>
+                 STATE
+                 CHECKING-CONTEST)
+              (P ABSTAIN
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 CHECKING-CONTEST
+                 =RETRIEVAL>
+                 ISA
+                 ABSTAIN
+                 CONTEST
+                 =THIS
+                 ==>
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 FIND-NEXT-RACE)
+              (P SELECT-CHOICE_ENCODE-CONTEST-DESCRIPTION
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 CHECKING-CONTEST
+                 ?RETRIEVAL>
+                 BUFFER
+                 FAILURE
+                 =IMAGINAL>
+                 ISA
+                 MAKEVOTE
+                 RACE
+                 =TEXTVAL
+                 ==>
+                 +RETRIEVAL>
+                 ISA
+                 CANDIDATE
+                 RACE
+                 =TEXTVAL
+                 =IMAGINAL>
                  =GOAL>
                  STATE
                  ENCODED-CONTEST-DESCRIPTION
                  !OUTPUT!
                  ("Contest is: ~s" =TEXTVAL))
-              (P CHECK-CONTEST
+              (P INITIAL-RETRIEVAL-SUCCESS
                  =GOAL>
                  ISA
                  MAKEVOTE
@@ -785,41 +828,35 @@
                  ENCODED-CONTEST-DESCRIPTION
                  =RETRIEVAL>
                  ISA
-                 ABSTAIN
-                 CONTEST
-                 =RACE
+                 CANDIDATE
+                 RACE
+                 =R
+                 NAME
+                 =N
+                 =IMAGINAL>
                  ==>
+                 =RETRIEVAL>
+                 =IMAGINAL>
+                 ISA
+                 MAKEVOTE
+                 RACE
+                 =R
+                 CANDIDATE
+                 =N
+                 =GOAL>
+                 STATE
+                 SEARCH-SCREEN-RETRIEVAL
+                 !OUTPUT!
+                 ("I'm voting for: ~s" =N))
+              (P SELECT-CHOICE_SEARCH-SCREEN-FASTEST_RETRIEVAL
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 FIND-NEXT-RACE)
-              (P PAST-END-STATE
-                 =GOAL>
-                 ISA
-                 MAKEVOTE
+                 SEARCH-SCREEN-RETRIEVAL
+                 ?VISUAL-LOCATION>
                  STATE
-                 ATTENDED-CONTEST-DESCRIPTION
-                 ENDSTATE
-                 =END
-                 =VISUAL>
-                 ISA
-                 TEXT
-                 VALUE
-                 =END
-                 ==>
-                 +GOAL>
-                 ISA
-                 CLEAR)
-              (P SELECT-CHOICE_SEARCH-SCREEN-ORDERED
-                 =GOAL>
-                 ISA
-                 MAKEVOTE
-                 STATE
-                 ENCODED-CONTEST-DESCRIPTION
-                 ?RETRIEVAL>
-                 BUFFER
-                 FAILURE
+                 FREE
                  =IMAGINAL>
                  CANDIDATE-GROUP
                  =VAL2
@@ -828,26 +865,21 @@
                  +VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
-                 GROUP
-                 =VAL2
                  KIND
                  TEXT
-                 >
-                 SCREEN-Y
-                 CURRENT
-                 SCREEN-Y
-                 LOWEST
-                 SCREEN-X
-                 LOWEST
+                 GROUP
+                 =VAL2
+                 :ATTENDED
+                 NIL
                  =GOAL>
                  STATE
-                 SOMETHING-FOUND)
-              (P SELECT-CHOICE_ATTEND-SEARCH
+                 SOMETHING-FOUND-RETRIEVAL)
+              (P SELECT-CHOICE_ATTEND-SEARCH_RETRIEVAL
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 SOMETHING-FOUND
+                 SOMETHING-FOUND-RETRIEVAL
                  =VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
@@ -866,13 +898,175 @@
                  =VISUAL-LOCATION
                  =GOAL>
                  STATE
-                 ATTENDING-SOMETHING-FOUND)
-              (P SELECT-CHOICE_ENCODE-SEARCH
+                 ATTENDING-SOMETHING-FOUND-RETRIEVAL)
+              (P SELECT-CHOICE_ENCODE-SEARCH_RETRIEVAL
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 ATTENDING-SOMETHING-FOUND
+                 ATTENDING-SOMETHING-FOUND-RETRIEVAL
+                 =VISUAL>
+                 ISA
+                 TEXT
+                 VALUE
+                 =VAL
+                 SCREEN-POS
+                 =POS
+                 ?VISUAL-LOCATION>
+                 STATE
+                 FREE
+                 ==>
+                 =VISUAL>
+                 =GOAL>
+                 STATE
+                 ENCODED-SEARCH-RETRIEVAL
+                 !OUTPUT!
+                 ("Looking at candidate: ~s" =VAL))
+              (P SELECT-CHOICE_IMAGINAL-MATCH-STOP_RETRIEVAL
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 ENCODED-SEARCH-RETRIEVAL
+                 =IMAGINAL>
+                 ISA
+                 MAKEVOTE
+                 CANDIDATE
+                 =VAL
+                 =VISUAL>
+                 ISA
+                 TEXT
+                 VALUE
+                 =VAL
+                 SCREEN-POS
+                 =POS
+                 ?VISUAL-LOCATION>
+                 STATE
+                 FREE
+                 ?MANUAL>
+                 STATE
+                 FREE
+                 ==>
+                 =IMAGINAL>
+                 =VISUAL>
+                 +MANUAL>
+                 ISA
+                 MOVE-CURSOR
+                 LOC
+                 =POS
+                 =GOAL>
+                 STATE
+                 MOVED-TO-CANDIDATE)
+              (P SELECT-CHOICE_NO-MATCH_RETRIEVAL
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 ENCODED-SEARCH-RETRIEVAL
+                 ?VISUAL-LOCATION>
+                 STATE
+                 FREE
+                 ==>
+                 =GOAL>
+                 STATE
+                 SEARCH-SCREEN-RETRIEVAL)
+              (P RETRIEVAL-FAILS
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 ENCODED-CONTEST-DESCRIPTION
+                 ?RETRIEVAL>
+                 BUFFER
+                 FAILURE
+                 ==>
+                 =GOAL>
+                 STATE
+                 SEARCH-SCREEN-RECOGNITION
+                 !OUTPUT!
+                 ("Initial retrieval fails, switch to recog strategy.")
+                 !EVAL!
+                 (SETF CURRENT-STRAT 'RECOGNITION))
+              (P RETRIEVAL-FAILS-AFTER-SEARCHING
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 ENCODED-SEARCH-RETRIEVAL
+                 ?VISUAL-LOCATION>
+                 BUFFER
+                 FAILURE
+                 ==>
+                 =GOAL>
+                 STATE
+                 SEARCH-SCREEN-RECOGNITION
+                 !OUTPUT!
+                 ("Looked at everything and nothing retrieved--switch to recognition")
+                 !EVAL!
+                 (SETF CURRENT-STRAT 'RECOGNITION))
+              (P SELECT-CHOICE_SEARCH-SCREEN-FASTEST_RECOGNITION
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 SEARCH-SCREEN-RECOGNITION
+                 ?RETRIEVAL>
+                 STATE
+                 FREE
+                 ?VISUAL-LOCATION>
+                 STATE
+                 FREE
+                 ?VISUAL>
+                 STATE
+                 FREE
+                 =IMAGINAL>
+                 CANDIDATE-GROUP
+                 =VAL2
+                 ==>
+                 =IMAGINAL>
+                 +VISUAL-LOCATION>
+                 ISA
+                 VISUAL-LOCATION
+                 KIND
+                 TEXT
+                 :ATTENDED
+                 NIL
+                 GROUP
+                 =VAL2
+                 =GOAL>
+                 STATE
+                 SOMETHING-FOUND-RECOGNITION)
+              (P SELECT-CHOICE_ATTEND-SEARCH_RECOGNITION
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 SOMETHING-FOUND-RECOGNITION
+                 =VISUAL-LOCATION>
+                 ISA
+                 VISUAL-LOCATION
+                 KIND
+                 TEXT
+                 GROUP
+                 =VAL2
+                 ?VISUAL>
+                 STATE
+                 FREE
+                 ==>
+                 +VISUAL>
+                 ISA
+                 MOVE-ATTENTION
+                 SCREEN-POS
+                 =VISUAL-LOCATION
+                 =GOAL>
+                 STATE
+                 ATTENDING-SOMETHING-FOUND-RECOGNITION)
+              (P SELECT-CHOICE_ENCODE-SEARCH_RECOGNITION
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 ATTENDING-SOMETHING-FOUND-RECOGNITION
                  =VISUAL>
                  ISA
                  TEXT
@@ -893,15 +1087,15 @@
                  =VAL
                  =GOAL>
                  STATE
-                 ENCODED-CONTEST
+                 ENCODED-SEARCH-RECOGNITION
                  !OUTPUT!
                  ("Looking at Candidate: ~s" =VAL))
-              (P SELECT-CHOICE_MATCH-STOP
+              (P SELECT-CHOICE_MATCH-STOP_RECOGNITION
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 ENCODED-CONTEST
+                 ENCODED-SEARCH-RECOGNITION
                  =RETRIEVAL>
                  ISA
                  CANDIDATE
@@ -933,12 +1127,12 @@
                  MOVED-TO-CANDIDATE
                  !OUTPUT!
                  ("Match! Voting for: ~s" =VAL))
-              (P SELECT-CHOICE_NO-MATCH
+              (P SELECT-CHOICE_NO-MATCH_RECOGNITION
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 ENCODED-CONTEST
+                 ENCODED-SEARCH-RECOGNITION
                  ?VISUAL-LOCATION>
                  STATE
                  FREE
@@ -949,40 +1143,36 @@
                  =RETRIEVAL>
                  =GOAL>
                  STATE
-                 ENCODED-CONTEST-DESCRIPTION
+                 SEARCH-SCREEN-RECOGNITION
                  !OUTPUT!
                  ("Name does not match. Read another."))
-              (P SELECT-CHOICE_NO-MATCH-VOTEBYPARTY
+              (P RECOGNITION-FAILS
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 SOMETHING-FOUND
+                 SOMETHING-FOUND-RECOGNITION
                  ?VISUAL-LOCATION>
                  BUFFER
                  FAILURE
                  ==>
-                 =VISUAL-LOCATION>
                  =GOAL>
                  STATE
-                 READ-BY-PARTY
+                 SEARCH-BY-PARTY
                  !OUTPUT!
-                 ("Bottom of list and nothing matches. Voting by party.")
+                 ("Looked at everything and nothing retrieved-- voting by party")
                  !EVAL!
                  (SETF CURRENT-STRAT 'PARTY))
-              (P VBP-SELECT-CHOICE_SEARCH-SCREEN-ORDERED
+              (P VBP-SELECT-CHOICE_SEARCH-SCREEN-RANDOM
                  =GOAL>
                  ISA
                  MAKEVOTE
                  STATE
-                 READ-BY-PARTY
+                 SEARCH-BY-PARTY
                  ?RETRIEVAL>
                  STATE
                  FREE
                  ?VISUAL-LOCATION>
-                 STATE
-                 FREE
-                 ?VISUAL>
                  STATE
                  FREE
                  =IMAGINAL>
@@ -993,18 +1183,16 @@
                  +VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
-                 GROUP
-                 =VAL3
                  KIND
                  TEXT
+                 GROUP
+                 =VAL3
                  :ATTENDED
                  NIL
-                 SCREEN-Y
-                 LOWEST
                  =GOAL>
                  STATE
                  VBP-ATTEND-NAME)
-              (P VBP-SELECT-CHOICE_ATTEND-SEARCH
+              (P VOTE-BY-PARTY_ATTEND-LOCATION
                  =GOAL>
                  ISA
                  MAKEVOTE
@@ -1029,7 +1217,7 @@
                  =GOAL>
                  STATE
                  PARTY-FOUND)
-              (P VBP-ENCODE-SEARCH-MATCH
+              (P VOTE-BY-PARTY_MATCH
                  =GOAL>
                  ISA
                  MAKEVOTE
@@ -1058,7 +1246,7 @@
                  STATE
                  MOVED-TO-CANDIDATE
                  !OUTPUT!
-                 ("Matches party ~s" =PARTY))
+                 ("Party found ~s and matches default" =PARTY))
               (P VOTE-BY-PARTY_NO-MATCH
                  =GOAL>
                  ISA
@@ -1066,23 +1254,22 @@
                  STATE
                  PARTY-FOUND
                  DEFAULT
-                 =PARTY
+                 =P
                  =VISUAL>
                  ISA
                  TEXT
                  -
                  VALUE
-                 =PARTY
+                 =P
                  VALUE
-                 =NOTPARTY
+                 =Q
                  ==>
                  =GOAL>
                  STATE
-                 READ-BY-PARTY
+                 SEARCH-BY-PARTY
                  !OUTPUT!
-                 ("Party ~s does not match default" =NOTPARTY)
-                 !OUTPUT!
-                 ("Default party is: ~s" =PARTY))
+                 ("Party ~s does not match default, search again"
+                  =Q))
               (P VOTE-BY-PARTY_NO-MATCH-ABSTAIN
                  =GOAL>
                  ISA
@@ -1095,14 +1282,17 @@
                  ==>
                  =GOAL>
                  STATE
-                 FIND-NEXT-RACE
-                 !OUTPUT!
-                 ("Reached the end of the search and nothing matches-- Abstain"))
-              (SPP PAST-END-STATE :AT 0 :U 4000)
-              (SPP HALT! :AT 0 :U 4000)
-              (SPP SELECT-CHOICE_MATCH-STOP :U 1000)
-              (SPP SELECT-CHOICE_SEARCH-SCREEN-ORDERED :U 1000)
-              (SPP CHECK-CONTEST :U 1000)
+                 FIND-NEXT-RACE)
+              (SPP SELECT-CHOICE_IMAGINAL-MATCH-STOP_RETRIEVAL
+                   :U
+                   1000)
+              (SPP SELECT-CHOICE_SEARCH-SCREEN-FASTEST_RETRIEVAL
+                   :U
+                   8)
+              (SPP SELECT-CHOICE_SEARCH-SCREEN-FASTEST_RECOGNITION
+                   :U
+                   8)
+              (SPP CHECK-CONTEST :U 4000)
               (P FIND-BUBBLE
                  =GOAL>
                  STATE

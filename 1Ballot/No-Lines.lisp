@@ -247,8 +247,8 @@
 		(button-map (make-hash-table)) 
 		(button-state (make-hash-table)) 
 		(button-index (make-hash-table)) 
-		(noise 1)
-		(noise_macro 6))
+		(noise 0)
+		(noise_macro 0))
 		
 	
 		(loop

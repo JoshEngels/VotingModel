@@ -245,7 +245,13 @@
 
 =visual-location>
 	ISA			visual-location	
+	screen-x	=center-x
+	width		=width
 	kind		text
+
+; More cheating	
+!bind! =new-left (/ (+ =old-right (- =center-x (/ =width 2))) 2)
+
 	
 ;****************************************
 
@@ -267,7 +273,7 @@
 	
 =goal>
 	state		storing-race-group	
-	left		=old-right
+	left		=new-left
 	
 )
 
