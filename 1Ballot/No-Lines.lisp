@@ -1,3 +1,5 @@
+(defparameter cntst-lst nil)
+
 (defclass contest ()
   ((office-name :accessor office-name :initarg :office-name :initform nil)
 
@@ -233,6 +235,7 @@
     (- (random (1+ (* 2 n))) n))
 
 
+; invibislbe for now
 (defun vote (realtime use-model)
 
   
@@ -240,7 +243,7 @@
   
   
 	(let* (
-		(window (open-exp-window "Ballet" :width 900 :height 550)) 
+		(window (open-exp-window "Ballet" :width 900 :height 550 :visible nil)) 
 		(starting-x 10) 
 		(i 0)
 		(j 0)
@@ -273,16 +276,15 @@
 					(randomy (+ starting-y (rand noise_macro)))
 				
 					(candidate-party-object-array (make-array '(6)))
-				
-					(race-num (+ (* i 6) j))
-
 
 					(contest (pop cntst-lst))
 					(candidates (cand-lst contest))
 				
 					(candidate (pop candidates))
 					(y-offset 20)
-					(index 0))
+					(index 0)
+					
+					(button_temp nil))
 									
 					
 					; Adds the race name

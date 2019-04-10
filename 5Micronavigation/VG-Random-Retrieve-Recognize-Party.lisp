@@ -1,21 +1,22 @@
 
 ;****************************************
 ;****************************************
-; Vote on the next race (micronavigation)
+;start to vote
 ;****************************************
 ;****************************************
-; We should be able to paste anything into this section
+
+;****************************************
 
 (P Select-Choice_Locate-Contest-Description
 
 =goal>
 	ISA       MakeVote
 	state     ready-to-make-choice
-	to-do     selectCandidate
+	
 
 =imaginal>
 	race-group  =val1
-	
+
 ?visual-location>
 	state     free
 
@@ -29,7 +30,7 @@
 	group     =val1
 
 =goal>
-	state    found-contest-description
+	state     found-contest-description
 	
 !eval! (setf current-strat 'retrieval)
 
@@ -42,7 +43,7 @@
 =goal>
 	ISA       MakeVote
 	state     found-contest-description
-	to-do     SelectCandidate
+	
 
 =visual-location>
 	ISA       visual-location
@@ -55,22 +56,23 @@
 ==>
 
 +visual>
-	ISA          move-attention
-	screen-pos   =visual-location
+	ISA           move-attention
+	screen-pos    =visual-location
 
 =goal>
-	state        attended-contest-description
+	state      attended-contest-description
 
 )
 
 ;****************************************
 ; the following two productions check if model should abstain from contest
+
 (P check-contest
 
 =goal>
 	ISA       MakeVote
 	state     attended-contest-description
-	to-do     SelectCandidate
+	
 
 =visual>
 	ISA       text
@@ -92,7 +94,7 @@
 	race      =textVal 
 
 =goal>
-	state     checking-contest
+	state   checking-contest
 
 )
 
@@ -101,9 +103,9 @@
 (P abstain
 
 =goal>
-	ISA      MakeVote
-	state 	 checking-contest
-	to-do    SelectCandidate
+	ISA     MakeVote
+	state   checking-contest
+	
 
 =retrieval>
 	ISA      Abstain
@@ -113,9 +115,9 @@
 
 ; sends to navigation production
 =goal>
-	ISA 	MakeVote
-	state	find-next-race
-	to-do	Navigate
+	ISA     MakeVote
+	state   find-next-race
+	
 
 )
 
@@ -126,10 +128,10 @@
 =goal>
 	ISA       MakeVote
 	state     checking-contest
-	to-do     SelectCandidate
+	
 
 ?retrieval>
-	buffer    failure
+	buffer     failure
 
 =imaginal>
 	ISA       MakeVote
@@ -139,15 +141,17 @@
 
 +retrieval>
 	ISA       Candidate
-	race      =textval  
+	race      =textval 
 
 =imaginal>
 
 =goal>
-	state    encoded-contest-description
+	state     encoded-contest-description
 
 !output! ("Contest is: ~s" =textVal)
+
 )
+
 
 
 ;****************************************
@@ -158,7 +162,7 @@
 =goal> 
 	ISA     MakeVote
 	state   encoded-contest-description
-	to-do   SelectCandidate
+	
 
 =retrieval>
 	ISA     Candidate
@@ -169,13 +173,15 @@
 
 ==>
 
+=retrieval>
+
 =imaginal> ;moving the info in retrieval to imaginal buffer for later
-	ISA         MakeVote
-	race        =r
-	candidate   =n
+	ISA	       MakeVote
+	race       =r
+	candidate  =n
 
 =goal>
-	state	   search-screen-retrieval
+	state   search-screen-retrieval
 
 !output! ("I'm voting for: ~s" =n)
 
@@ -183,12 +189,12 @@
 
 ;****************************************
 
-(p Select-Choice_Search-Screen-Ordered_Retrieval
+(P Select-Choice_Search-Screen-Fastest_Retrieval
 
 =goal>
-	ISA     MakeVote
-	state   search-screen-retrieval
-	to-do   SelectCandidate
+	ISA      MakeVote
+	state    search-screen-retrieval
+	
 
 ?visual-location>
 	state     free
@@ -197,20 +203,18 @@
 	candidate-group  =val2
 
 ==>
-
+ 
 =imaginal>
-
+ 
 +visual-location>
 	ISA          visual-location
-	group        =val2
 	kind         text
-	> screen-y   current
-	screen-y     lowest
-	screen-x     lowest
+	group        =val2
+	:attended    nil
 
 =goal>
 	state     something-found-retrieval
-  
+
 )
 
 ;****************************************
@@ -218,24 +222,23 @@
 (P Select-Choice_Attend-Search_Retrieval
 
 =goal>
-	ISA       MakeVote
-	state     something-found-retrieval
-	to-do     SelectCandidate
+	ISA      MakeVote
+	state    something-found-retrieval
+	
 
 =visual-location>
-	ISA       visual-location
-	kind      text
-	group     =val2
+	ISA      visual-location
+	kind     text
+	group    =val2
 
 ?visual>
-	state     free
+	state    free
 
 ==>
 
 +visual>
 	ISA          move-attention
 	screen-pos   =visual-location
-
 
 =goal>
 	state     attending-something-found-retrieval
@@ -247,14 +250,14 @@
 (P Select-Choice_Encode-Search_Retrieval
 
 =goal>
-	ISA     MakeVote
+	ISA	    MakeVote
 	state   attending-something-found-retrieval
-	to-do   SelectCandidate
+	
 
 =visual>
-	ISA          text
-	value        =val
-	screen-pos   =pos
+	ISA         text
+	value       =val
+	screen-pos  =pos
 
 ?visual-location>
 	state        free
@@ -264,20 +267,20 @@
 =visual>
 
 =goal>
-	state	 encoded-search-retrieval
+	state    encoded-search-retrieval
 
 !output! ("Looking at candidate: ~s" =val)
 
 )
 
-;****************************************
+;**************************************** 
 
 (P  Select-Choice_Imaginal-Match-Stop_Retrieval
 
 =goal>
-	ISA         MakeVote
-	state       encoded-search-retrieval
-	to-do       SelectCandidate
+	ISA       MakeVote
+	state     encoded-search-retrieval
+	
 
 =imaginal>
 	ISA         MakeVote
@@ -318,10 +321,10 @@
 =goal>
 	ISA       MakeVote
 	state     encoded-search-retrieval
-	to-do     SelectCandidate
+	
 
 ?visual-location>
-	state	  free
+	state    free
 
 ==>
 
@@ -338,22 +341,21 @@
 ;****************************************
 
 ;****************************************
-;Model has read contest description but retrieval of candidate has failed 
 
 (P Retrieval-Fails
 
 =goal>
-	ISA 	MakeVote
-	state 	encoded-contest-description
-	to-do	selectCandidate
+	ISA     MakeVote
+	state   encoded-contest-description
+	
 
 ?retrieval>
-	buffer	failure
+	buffer   failure
 
 ==>
 
 =goal>
-	state	search-screen-recognition
+	state   search-screen-recognition
 
 !output! ("Initial retrieval fails, switch to recog strategy.")
 !eval! (setf current-strat 'recognition)
@@ -368,7 +370,7 @@
 =goal>
 	ISA     MakeVote
 	state   encoded-search-retrieval
-	to-do   SelectCandidate
+	
 
 ?visual-location>
 	buffer	failure
@@ -384,14 +386,14 @@
 )
 
 ;****************************************
-;Read text in order with no specific name in mind
+;Random search
 
-(p Select-Choice_Search-Screen-Ordered_Recognition
+(P Select-Choice_Search-Screen-Fastest_Recognition
 
 =goal>
-	ISA     MakeVote
-	state   search-screen-recognition
-	to-do   selectCandidate
+	ISA       MakeVote
+	state     search-screen-recognition
+	
 
 ?retrieval>
 	state   free
@@ -407,19 +409,18 @@
 
 ==>
 
-=imaginal> 
-
+=imaginal>
+ 
 +visual-location>
 	ISA          visual-location
-	group        =val2
 	kind         text
-	> screen-y   current
-	screen-y     lowest
-	screen-x     lowest
+	:attended    nil
+	group        =val2
+
 
 =goal>
-	state    something-found-recognition
-	
+	state     something-found-recognition
+
 )
 
 ;****************************************
@@ -430,7 +431,7 @@
 =goal>
 	ISA       MakeVote
 	state     something-found-recognition
-	to-do     SelectCandidate
+	
 
 =visual-location>
 	ISA       visual-location
@@ -453,13 +454,12 @@
 
 ;****************************************
 ;Search for that name in memory
-
 (P Select-Choice_Encode-Search_Recognition
 
 =goal>
 	ISA       MakeVote
 	state     attending-something-found-recognition
-	to-do     SelectCandidate
+	
 
 =visual>
 	ISA     text
@@ -495,7 +495,7 @@
 =goal>
 	ISA       MakeVote
 	state     encoded-search-recognition
-	to-do     SelectCandidate
+	
 
 =retrieval>
 	ISA       candidate 
@@ -539,7 +539,7 @@
 =goal>
 	ISA       MakeVote
 	state     encoded-search-recognition
-	to-do     SelectCandidate
+	
 
 ?visual-location>
 	state     free
@@ -561,85 +561,49 @@
 
 ;****************************************
 
-; Productions that handle recognition failure 
+; Productions that handle recognition failure
 ; Switches to voting by party
 ; VBP = Vote By Party
 
 ;****************************************
-;; Model has read contest description but recognition of candidate has failed as well
+;; Model has read contest description but retrieval of candidate has failed
 ; initiates vote-by-party strategy
 
 (P Recognition-Fails
 
 =goal>
-	ISA 	MakeVote
-	state 	something-found-recognition
-	to-do	selectCandidate
+	ISA     MakeVote
+	state   something-found-recognition
+	
 
 ?visual-location>
-	buffer	failure
+	buffer  failure
 
 ==>
 
 =goal>
-	state	search-by-party
+	state   search-by-party
 
-!output! ("Looked at everything and nothing recognized-- voting by party")
+!output! ("Looked at everything and nothing retrieved-- voting by party")
 !eval! (setf current-strat 'party)
 
 )
 
 ;****************************************
-;; current visual location is at the top of the list (Production fires if initial retrieval fails)
-;; looking at party
+; random searches the screen to find a candidate's party
 
-(P VBP-Search-Screen-Top-Down
+(P VBP-Select-Choice_Search-Screen-random
 
 =goal>
 	ISA     MakeVote
 	state   search-by-party
-	to-do   SelectCandidate
-
-?retrieval>
-	state	free
-
-?visual-location>
-	state	free
 	
-=imaginal>
-	party-group  =val3
-
-==>
-
-=imaginal>
-
-+visual-location>
-	ISA         visual-location
-	kind        text
-	group       =val3
-	:attended    nil
-	screen-y     lowest
-  
-=goal>
-	state    vbp-something-found
-  
-)
-
-; same production that fires if current visual location is at the bottom of the list
-; this happens if it initial retrieval succeeds, but fails during search
-
-(P VBP-Search-Screen-Bottom-Up
-
-=goal>
-	ISA     MakeVote
-	state   search-by-party-at-bottom
-	to-do   SelectCandidate
 
 ?retrieval>
-	state	free
+	state   free
 
 ?visual-location>
-	state	free
+	state   free
 
 =imaginal>
 	party-group  =val3
@@ -652,122 +616,135 @@
 	ISA         visual-location
 	kind        text
 	group       =val3
-	< screen-y  current
- 	screen-y    highest
- 	screen-x    lowest
-
+	:attended   nil
+  
 =goal>
-	state    vbp-something-found
+	state    vbp-attend-name
   
 )
 
 ;****************************************
-; looks at party
-(P VBP-Select-Choice_Attend-Search
+; something found, moves attention to that location
+
+(P Vote-by-Party_Attend-Location
 
 =goal>
-	ISA       MakeVote
-	state     vbp-something-found
-	to-do     SelectCandidate
+	ISA     MakeVote
+	state   vbp-attend-name
+	
 
 =visual-location>
-	ISA       visual-location
-	kind      text
-	group     =val3
+	ISA     visual-location
+	kind    text
+	group   =val3
 
 ?visual>
-	state     free
+	state   free
 
-==>
+==> 
 
 +visual>
 	ISA          move-attention
 	screen-pos   =visual-location
 
 =goal>
-	state     vbp-attending-something-found
+	state   party-found
 
 )
 
 ;****************************************
-(P VBP-Encode-Search-Match
+; a name was found and matches with the default party
+
+(P Vote-by-Party_Match
 
 =goal>
 	ISA      MakeVote
-	state    vbp-attending-something-found
-	to-do    SelectCandidate
+	state    party-found
+	
 	default  =party
 
-=visual> 
+=visual>
 	ISA         text
 	value       =party
 	screen-pos  =pos
 
 ?manual>
-	state	 free
+	state   free
 
 ==>
 
+=visual>
+
 +manual>
-	ISA     move-cursor
-	loc     =pos
+	ISA    move-cursor
+	loc    =pos
 
 =goal>
 	state   moved-to-candidate
 
-!output! ("Party matches: ~s" =party)
+!output! ("Party found ~s and matches default" =party)
 
 )
 
 ;****************************************
-;; if visual item doesn't match what we're looking at, then search again
-(P VBP-No-Match-Next-Choice
+; production fires if default party does not match
+; returns goal state to search again
+
+(P Vote-by-Party_No-Match
 
 =goal>
 	ISA      MakeVote
-	state    vbp-attending-something-found
-	to-do    SelectCandidate
-	default  =party
+	state    party-found
+	
+	default  =p
 
 =visual>
-	ISA      text
-	- value  =party
-	value    =notparty
+	ISA     text
+	- value =p
+	value   =q
 
 ==>
 
 =goal>
-	state	search-by-party
+	state    search-by-party
 
-!output! ("Party ~s does not match, search again." =notparty)
+!output! ("Party ~s does not match default, search again" =q)
 
 )
 
-;****************************************
-; if we reach bottom and nothing has been retrieved then vote by party
 
-(P VBP-bottom-of-list-fail
+;****************************************
+; if the model has looked at the entire list and cannot recall default party 
+; abstain
+
+(P Vote-by-Party_No-Match-ABSTAIN
 
 =goal>
 	ISA     MakeVote
-	state   vbp-something-found
-	to-do   SelectCandidate
+	state   vbp-attend-name
+	
 
 ?visual-location>
-	buffer	failure
+	buffer   failure
 
 ==>
 
 =goal>
-	state	start-voting
-	to-do	Navigate
+	state   find-next-race
+	
 
 )
+
+
 
 
 
 (spp Select-Choice_Imaginal-Match-Stop_Retrieval :u 1000)
-(spp Select-Choice_Search-Screen-Ordered_Retrieval :u 8)
-(spp Select-Choice_Search-Screen-Ordered_Recognition :u 8)
+(spp Select-Choice_Search-Screen-Fastest_Retrieval :u 8)
+(spp Select-Choice_Search-Screen-Fastest_recognition :u 8)
+(spp check-contest :u 4000)
+
+;(spp Select-Choice_Search-Screen :u 0)
+;(spp Select-Choice_Search-Screen-Faster :u 9.5 :reward -.5)
 
 

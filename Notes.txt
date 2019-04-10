@@ -26,6 +26,7 @@ Bring file names out of functions
 Make sure correct models
 Move params to own file
 Document (honestly this to do list is too long idk even know if I have this somewhere else)
+What are the time consuming parts of the model --> fix these (check tutorials?) (maybe don't create new window, etc.)
 
 Problems --> talk about in paper:
 Names for groups for different object types (oval, text observed) repeat counts
@@ -38,8 +39,8 @@ Can make grouping versions very quickly: should I?
 When pasting in:
 Delete before and after the start voting section, leaving in selection production utilities
 Change vbp-moved-to-candidate to moved-to-candidate 
+Change ready-to-advance to find-next-race
 Delete productions which have goal state moved-to-candidate as a condition
-Switch the state the abstain production sets the goal to from ready-to-advance to find-next-race
 Delete to-do: use notepad++ regex replace, to-do.*?$ and blank
 Optional: Delete the past-end-state production (to remove warnings)
 Delete end state productions?

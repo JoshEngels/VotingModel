@@ -1,7 +1,7 @@
 ; Parameters
-(sgp :v t :needs-mouse t :show-focus t :esc t :process-cursor t)
+(sgp :v nil :needs-mouse t :esc t :process-cursor t)
 		
-(sgp :visual-finst-span 100) ;neccesary to avoid forgetting where we looked for the recognition strategies
+(sgp :visual-finst-span 10) ;neccesary to avoid forgetting where we looked for the recognition strategies
 
 ; Grouping Parameters
 (setf vg-glomming-radius 8)
