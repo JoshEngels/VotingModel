@@ -42,6 +42,7 @@ Delete productions which have goal state moved-to-candidate as a condition
 Switch the state the abstain production sets the goal to from ready-to-advance to find-next-race
 Delete to-do: use notepad++ regex replace, to-do.*?$ and blank
 Optional: Delete the past-end-state production (to remove warnings)
+Delete end state productions?
 
 
 Simple procedure but would have to repeat many times for all combinations: write a python (lisp!) script?

@@ -247,6 +247,7 @@
 		(button-map (make-hash-table)) 
 		(button-state (make-hash-table)) 
 		(button-index (make-hash-table)) 
+		(button-candidate (make-hash-table)) 
 		(noise 0)
 		(noise_macro 0))
 		
@@ -306,14 +307,20 @@
 							(progn
 								(modify-text-for-exp-window (aref (gethash button button-map) (gethash button button-index)) :color 'blue)
 								(modify-text-for-exp-window (aref (gethash button button-map) (+ (gethash button button-index) 3)) :color 'blue)
+								(log-candidate (cand-name (gethash button button-candidate)) (gethash button button-index)) 
 								(setf (gethash button button-state) 1))
 							(progn
 								(modify-text-for-exp-window (aref (gethash button button-map) (gethash button button-index)) :color 'black)
 								(modify-text-for-exp-window (aref (gethash button button-map) (+ (gethash button button-index) 3)) :color 'black)
-								(setf (gethash button button-state) 0))))))								
+								;(unlog-candidate (gethash button button-candidate)) 
+								(setf (gethash button button-state) 0))))))	
+
+						; Button information, stored in hashmaps
 						(setf (gethash button_temp button-map) candidate-party-object-array)
 						(setf (gethash button_temp button-state) 0)
 						(setf (gethash button_temp button-index) index)
+						(setf (gethash button_temp button-candidate) candidate)
+
 						
 						; Loop increment operations
 						(setf y-offset (+ y-offset 15))
@@ -344,6 +351,8 @@
 		;(run 200 :real-time t)
 		(run 200)
 		)())
+		
+	(log-ballot)
 
 		
 ))

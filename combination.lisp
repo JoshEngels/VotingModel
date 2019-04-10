@@ -17,7 +17,6 @@
               (SETF VG-NAMING-TYPE 'SEQUENTIAL)
               (SGP :ANS 0.3)
               (SGP :RT 0)
-              (SGP :ACT T)
               (SETF *ACTR-ENABLED-P* T)
               (CHUNK-TYPE MAKEVOTE
                           RACE
@@ -51,8 +50,6 @@
                             MAKEVOTE
                             STATE
                             START-VOTING
-                            TO-DO
-                            SELECTCANDIDATE
                             DEFAULT
                             "DEM"
                             ENDSTATE
