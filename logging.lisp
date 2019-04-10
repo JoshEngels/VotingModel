@@ -28,14 +28,14 @@
 ;; logs the header
 (defun log-header ()
   (with-open-file (strm logging-file-name :direction :output :if-exists :append :if-does-not-exist :create)
-    (format strm "ts	micro	dm	run-num		data~%")
+    (format strm "ts	model	dm	run-num	race-num	race	evt-id	data~%")
   )
 )
 
 ;; the general logging function 
 (defun log-line ()
   (with-open-file (strm logging-file-name :direction :output :if-exists :append :if-does-not-exist :create)
-    (format strm "~S	~S	~S	~S	~S~%" (get-time) (read-from-string current-micro) (read-from-string current-dm) run-number (list final-candidates final-indices final-strats))
+    (format strm "~S	~S	~S	~S	~S	~S	~S	~S~%" (get-time) (read-from-string current-micro) (read-from-string current-dm) run-number '22 'Nameofrace 'VOTE-SUMMARY (list (append final-candidates '(nil nil)) (append final-indices '(nil nil)) final-strats))
   )
 )
 

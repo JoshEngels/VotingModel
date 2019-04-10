@@ -765,23 +765,6 @@
                  ENCODED-CONTEST-DESCRIPTION
                  !OUTPUT!
                  ("Contest is: ~s" =TEXTVAL))
-              (P CHECK-CONTEST
-                 =GOAL>
-                 ISA
-                 MAKEVOTE
-                 STATE
-                 ENCODED-CONTEST-DESCRIPTION
-                 =RETRIEVAL>
-                 ISA
-                 ABSTAIN
-                 CONTEST
-                 =RACE
-                 ==>
-                 =GOAL>
-                 ISA
-                 MAKEVOTE
-                 STATE
-                 FIND-NEXT-RACE)
               (P PAST-END-STATE
                  =GOAL>
                  ISA
@@ -799,7 +782,24 @@
                  +GOAL>
                  ISA
                  CLEAR)
-              (P SELECT-CHOICE_SEARCH-SCREEN-ORDERED
+              (P CHECK-CONTEST
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 ENCODED-CONTEST-DESCRIPTION
+                 =RETRIEVAL>
+                 ISA
+                 ABSTAIN
+                 CONTEST
+                 =RACE
+                 ==>
+                 =GOAL>
+                 ISA
+                 MAKEVOTE
+                 STATE
+                 FIND-NEXT-RACE)
+              (P SELECT-CHOICE_SEARCH-SCREEN-FASTEST
                  =GOAL>
                  ISA
                  MAKEVOTE
@@ -816,17 +816,12 @@
                  +VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
-                 GROUP
-                 =VAL2
                  KIND
                  TEXT
-                 >
-                 SCREEN-Y
-                 CURRENT
-                 SCREEN-Y
-                 LOWEST
-                 SCREEN-X
-                 LOWEST
+                 :ATTENDED
+                 NIL
+                 GROUP
+                 =VAL2
                  =GOAL>
                  STATE
                  SOMETHING-FOUND)
@@ -883,7 +878,7 @@
                  STATE
                  ENCODED-CONTEST
                  !OUTPUT!
-                 ("Looking at Candidate: ~s" =VAL))
+                 ("Looking at ~s" =VAL))
               (P SELECT-CHOICE_MATCH-STOP
                  =GOAL>
                  ISA
@@ -927,9 +922,6 @@
                  MAKEVOTE
                  STATE
                  ENCODED-CONTEST
-                 ?VISUAL-LOCATION>
-                 STATE
-                 FREE
                  ?RETRIEVAL>
                  BUFFER
                  FAILURE
@@ -939,7 +931,7 @@
                  STATE
                  ENCODED-CONTEST-DESCRIPTION
                  !OUTPUT!
-                 ("Name does not match. Read another."))
+                 ("Retrieval Fail, redo search"))
               (P SELECT-CHOICE_NO-MATCH-VOTEBYPARTY
                  =GOAL>
                  ISA
@@ -955,10 +947,10 @@
                  STATE
                  READ-BY-PARTY
                  !OUTPUT!
-                 ("Bottom of list and nothing matches. Voting by party.")
+                 ("Visual Buffer failure, voting by party")
                  !EVAL!
                  (SETF CURRENT-STRAT 'PARTY))
-              (P VBP-SELECT-CHOICE_SEARCH-SCREEN-ORDERED
+              (P VOTE-BY-PARTY_SEARCH-SCREEN-RANDOM
                  =GOAL>
                  ISA
                  MAKEVOTE
@@ -970,9 +962,6 @@
                  ?VISUAL-LOCATION>
                  STATE
                  FREE
-                 ?VISUAL>
-                 STATE
-                 FREE
                  =IMAGINAL>
                  PARTY-GROUP
                  =VAL3
@@ -981,18 +970,16 @@
                  +VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
-                 GROUP
-                 =VAL3
                  KIND
                  TEXT
+                 GROUP
+                 =VAL3
                  :ATTENDED
                  NIL
-                 SCREEN-Y
-                 LOWEST
                  =GOAL>
                  STATE
                  VBP-ATTEND-NAME)
-              (P VBP-SELECT-CHOICE_ATTEND-SEARCH
+              (P VOTE-BY-PARTY_ATTEND-LOCATION
                  =GOAL>
                  ISA
                  MAKEVOTE
@@ -1017,7 +1004,7 @@
                  =GOAL>
                  STATE
                  PARTY-FOUND)
-              (P VBP-ENCODE-SEARCH-MATCH
+              (P VOTE-BY-PARTY_MATCH
                  =GOAL>
                  ISA
                  MAKEVOTE
@@ -1046,7 +1033,7 @@
                  STATE
                  MOVED-TO-CANDIDATE
                  !OUTPUT!
-                 ("Matches party ~s" =PARTY))
+                 ("Party found: ~s" =PARTY))
               (P VOTE-BY-PARTY_NO-MATCH
                  =GOAL>
                  ISA
@@ -1068,9 +1055,8 @@
                  STATE
                  READ-BY-PARTY
                  !OUTPUT!
-                 ("Party ~s does not match default" =NOTPARTY)
-                 !OUTPUT!
-                 ("Default party is: ~s" =PARTY))
+                 ("Party found does not match default: ~s"
+                  =NOTPARTY))
               (P VOTE-BY-PARTY_NO-MATCH-ABSTAIN
                  =GOAL>
                  ISA
@@ -1089,7 +1075,7 @@
               (SPP PAST-END-STATE :AT 0 :U 4000)
               (SPP HALT! :AT 0 :U 4000)
               (SPP SELECT-CHOICE_MATCH-STOP :U 1000)
-              (SPP SELECT-CHOICE_SEARCH-SCREEN-ORDERED :U 1000)
+              (SPP SELECT-CHOICE_SEARCH-SCREEN-FASTEST :U 8)
               (SPP CHECK-CONTEST :U 1000)
               (P FIND-BUBBLE
                  =GOAL>

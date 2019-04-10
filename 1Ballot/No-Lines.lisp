@@ -243,7 +243,7 @@
   
   
 	(let* (
-		(window (open-exp-window "Ballet" :width 900 :height 550 :visible nil)) 
+		(window (open-exp-window "Ballet" :width 900 :height 700 :visible t)) 
 		(starting-x 10) 
 		(i 0)
 		(j 0)
@@ -280,12 +280,15 @@
 					(contest (pop cntst-lst))
 					(candidates (cand-lst contest))
 				
+				
 					(candidate (pop candidates))
 					(y-offset 20)
 					(index 0)
 					
 					(button_temp nil))
 									
+					
+
 					
 					; Adds the race name
 					(add-text-to-exp-window :text (office-name contest) :x randomx :y randomy)
@@ -331,13 +334,18 @@
 			
 				(setq j (+ j 1))
 			
-				(when (> j 5) (return j))
+				(when (> j 7) (return j))
+				
+				(when (not cntst-lst) (return j)) ;checks if we've run out of races
 		
 			)
 		
 		(setq i (+ i 1))
 				
 		(when (> i 2) (return i))
+		
+		(when (not cntst-lst) (return i)) ;checks if we've run out of races
+
 				
 		
 	
