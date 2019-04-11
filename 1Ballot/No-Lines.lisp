@@ -236,14 +236,14 @@
 
 
 ; invibislbe for now
-(defun vote (realtime use-model)
+(defun vote (realtime use-model visible)
 
   
 	(reset)
   
   
 	(let* (
-		(window (open-exp-window "Ballet" :width 900 :height 700 :visible t)) 
+		(window (open-exp-window "Ballet" :width 900 :height 700 :visible visible)) 
 		(starting-x 10) 
 		(i 0)
 		(j 0)
