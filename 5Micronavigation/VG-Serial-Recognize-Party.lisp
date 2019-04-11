@@ -210,6 +210,8 @@
 =goal>
 	ISA 	MakeVote
 	state	find-next-race
+	!eval! (log-candidate nil nil)	
+
 	
 
 )
@@ -583,6 +585,8 @@
 
 =goal>
 	state	find-next-race
+	!eval! (log-candidate nil nil)	
+
 	
 
 !output! ("Reached the end of the search and nothing matches-- Abstain")

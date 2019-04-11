@@ -76,7 +76,7 @@
 	
 	; runs the model file
 	(load output-file-name) ;hopefully this works
-	(vote nil t) ;runs it in not real time
+	(vote nil t t) ;runs it in not real time and visible
 
 )
 
@@ -149,7 +149,7 @@
 	
 	; runs the model file
 	(load output-file-name) ;hopefully this works
-	(vote nil t) ;runs it in not real time
+	(vote nil t nil) ;runs it in not real time and invisible
 
 )
 
@@ -181,7 +181,7 @@
 		
 		; runs the model file
 		(load output-file-name) ;hopefully this works
-		(vote t nil) ;human interaction
+		(vote t nil t) ;human interaction
 )
 )
 

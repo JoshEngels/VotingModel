@@ -875,7 +875,9 @@
                  ISA
                  MAKEVOTE
                  STATE
-                 FIND-NEXT-RACE)
+                 FIND-NEXT-RACE
+                 !EVAL!
+                 (LOG-CANDIDATE NIL NIL))
               (P SELECT-CHOICE_ENCODE-CONTEST-DESCRIPTION
                  =GOAL>
                  ISA
@@ -1223,6 +1225,8 @@
                  =GOAL>
                  STATE
                  FIND-NEXT-RACE
+                 !EVAL!
+                 (LOG-CANDIDATE NIL NIL)
                  !OUTPUT!
                  ("VBP reached bottom of list-- abstain from voting"))
               (SPP SELECT-CHOICE_IMAGINAL-MATCH-STOP :U 1000)

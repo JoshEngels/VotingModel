@@ -202,6 +202,8 @@
 =goal>
 	ISA 	MakeVote
 	state	find-next-race
+	!eval! (log-candidate nil nil)	
+
 	
 
 )
@@ -642,6 +644,8 @@
 
 =goal>
 	state	find-next-race
+	!eval! (log-candidate nil nil)	
+
 	
 
 !output! ("Looked at all parties and nothing matches-- Abstain.")

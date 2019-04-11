@@ -117,7 +117,8 @@
 =goal>
 	ISA     MakeVote
 	state   find-next-race
-	
+	!eval! (log-candidate nil nil)	
+
 
 )
 
@@ -527,7 +528,8 @@
 
 =goal>
 	state   find-next-race
-	
+	!eval! (log-candidate nil nil)	
+
 
 !output! ("VBP reached bottom of list-- abstain from voting")
 )

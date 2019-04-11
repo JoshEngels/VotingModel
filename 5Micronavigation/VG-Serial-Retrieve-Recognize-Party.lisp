@@ -205,7 +205,7 @@
 	ISA 	MakeVote
 	state	find-next-race
 	
-	
+!eval! (log-candidate nil nil)	
 
 )
 
