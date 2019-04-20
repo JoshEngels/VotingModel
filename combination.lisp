@@ -3,6 +3,7 @@
 (DEFINE-MODEL COMBINED
               (SGP :V NIL :NEEDS-MOUSE T :ESC T :PROCESS-CURSOR T)
               (SGP :VISUAL-FINST-SPAN 10)
+              (SGP :CURSOR-NOISE T)
               (SETF VG-GLOMMING-RADIUS 8)
               (SETF VG-COLLISION-TYPE 'BOX)
               (SETF VG-NAMING-TYPE 'SEQUENTIAL)
@@ -51,80 +52,37 @@
                             -1))
               (ADD-DM (GORDONBEARCE ISA CANDIDATE NAME "GordonBearce"
                        PARTY "Rep" RACE "PresidentoftheUnitedStates")
-                      (VERNONSTANLEYALBURY ISA CANDIDATE NAME
-                       "VernonStanleyAlbury" PARTY "Dem" RACE
-                       "PresidentoftheUnitedStates")
-                      (JANETTEFROMAN ISA CANDIDATE NAME
-                       "JanetteFroman" PARTY "Lib" RACE
-                       "PresidentoftheUnitedStates")
-                      (CECILECADIEUX ISA CANDIDATE NAME
-                       "CecileCadieux" PARTY "Rep" RACE
-                       "UnitedStatesSenator")
-                      (FERNBRZEZINSKI ISA CANDIDATE NAME
-                       "FernBrzezinski" PARTY "Dem" RACE
-                       "UnitedStatesSenator")
                       (COREYDERY ISA CANDIDATE NAME "CoreyDery" PARTY
                        "Ind" RACE "UnitedStatesSenator")
-                      (PEDROBROUSE ISA CANDIDATE NAME "PedroBrouse"
-                       PARTY "Rep" RACE
-                       "UnitedStatesRepresentativeDistrict7")
                       (ROBERTMETTLER ISA CANDIDATE NAME
                        "RobertMettler" PARTY "Dem" RACE
                        "UnitedStatesRepresentativeDistrict7")
-                      (GLENTRAVISLOZIER ISA CANDIDATE NAME
-                       "GlenTravisLozier" PARTY "Rep" RACE
-                       "Governor")
                       (RICKSTICKLES ISA CANDIDATE NAME "RickStickles"
                        PARTY "Dem" RACE "Governor")
-                      (MAURICEHUMBLE ISA CANDIDATE NAME
-                       "MauriceHumble" PARTY "Ind" RACE "Governor")
-                      (SHANETERRIO ISA CANDIDATE NAME "ShaneTerrio"
-                       PARTY "Rep" RACE "LieutenantGovernor")
                       (CASSIEPRINCIPE ISA CANDIDATE NAME
                        "CassiePrincipe" PARTY "Dem" RACE
                        "LieutenantGovernor")
-                      (TIMSPEIGHT ISA CANDIDATE NAME "TimSpeight"
-                       PARTY "Rep" RACE "AttorneyGeneral")
                       (RICKORGAN ISA CANDIDATE NAME "RickOrgan" PARTY
                        "Dem" RACE "AttorneyGeneral")
                       (THERESEGUSTIN ISA CANDIDATE NAME
                        "theresegustin" PARTY "Ind" RACE
                        "comptrollerofpublicaccounts")
-                      (GREGCONVERSE ISA CANDIDATE NAME "GregConverse"
-                       PARTY "Dem" RACE
-                       "comptrollerofpublicaccounts")
                       (ELISEELLZEY ISA CANDIDATE NAME "eliseellzey"
                        PARTY "Dem" RACE
-                       "commissionerofgenerallandoffice")
-                      (SAMSADDLER ISA CANDIDATE NAME "SamSaddler"
-                       PARTY "Rep" RACE
                        "commissionerofgenerallandoffice")
                       (POLLYRYLANDER ISA CANDIDATE NAME
                        "pollyrylander" PARTY "Rep" RACE
                        "commissionerofagriculture")
-                      (ROBERTOARON ISA CANDIDATE NAME "RobertoAron"
-                       PARTY "Dem" RACE "commissionerofagriculture")
                       (JILLIANBALAS ISA CANDIDATE NAME "jillianbalas"
                        PARTY "Rep" RACE "railroadcommissioner")
-                      (ZACHARYMINICK ISA CANDIDATE NAME
-                       "ZacharyMinick" PARTY "Dem" RACE
-                       "railroadcommissioner")
                       (WESLEYSTEVEN-MILLETTE ISA CANDIDATE NAME
                        "wesleystevenmillette" PARTY "Dem" RACE
                        "statesenator")
-                      (RICARDONIGRO ISA CANDIDATE NAME "RicardoNigro"
-                       PARTY "Rep" RACE "statesenator")
                       (SUSANNERAEL ISA CANDIDATE NAME "susannerael"
                        PARTY "Dem" RACE
                        "stateRepresentativedistrict134")
-                      (PETRABENCOMO ISA CANDIDATE NAME "PetraBencomo"
-                       PARTY "Rep" RACE
-                       "stateRepresentativedistrict134")
                       (PETERVARGA ISA CANDIDATE NAME "petervarga"
                        PARTY "Rep" RACE
-                       "memberstateboardofeducationdistrict2")
-                      (MARKBABER ISA CANDIDATE NAME "MarkBaber" PARTY
-                       "Dem" RACE
                        "memberstateboardofeducationdistrict2")
                       (TIMGRASTY ISA CANDIDATE NAME "timgrasty" PARTY
                        "Dem" RACE
@@ -132,40 +90,19 @@
                       (DERRICKMELGAR ISA CANDIDATE NAME
                        "derrickmelgar" PARTY "Dem" RACE
                        "presidingjudgecourtofcriminalappeals")
-                      (DANPLOUFFE ISA CANDIDATE NAME "DanPlouffe"
-                       PARTY "Rep" RACE
-                       "presidingjudgecourtofcriminalappeals")
                       (COREYBEHNKE ISA CANDIDATE NAME "coreybehnke"
                        PARTY "Rep" RACE "districtattorney")
-                      (JENNIFERALUNDEED ISA CANDIDATE NAME
-                       "JenniferALundeed" PARTY "Dem" RACE
-                       "districtattorney")
                       (DEANCAFFEE ISA CANDIDATE NAME "deancaffee"
                        PARTY "Rep" RACE "countytreasurer")
-                      (GORDONKALLAS ISA CANDIDATE NAME "GordonKallas"
-                       PARTY "Dem" RACE "countytreasurer")
                       (JASONVALLE ISA CANDIDATE NAME "jasonvalle"
                        PARTY "Dem" RACE "sheriff")
-                      (STANLEYSAARI ISA CANDIDATE NAME "StanleySaari"
-                       PARTY "Rep" RACE "sheriff")
                       (HOWARDGRADY ISA CANDIDATE NAME "howardgrady"
                        PARTY "Rep" RACE "countytaxassessor")
-                      (RANDYHCLEMONS ISA CANDIDATE NAME
-                       "RandyHClemons" PARTY "Dem" RACE
-                       "countytaxassessor")
                       (CLYDEGAYTONJR. ISA CANDIDATE NAME
                        "clydegaytonjr" PARTY "Dem" RACE
                        "justiceofthepeace")
-                      (DEBORAHKAMPS ISA CANDIDATE NAME "DeborahKamps"
-                       PARTY "Rep" RACE "justiceofthepeace")
                       (LEWISSHINE ISA CANDIDATE NAME "lewisshine"
                        PARTY "Dem" RACE "countyjudge")
-                      (DANATCHLEY ISA CANDIDATE NAME "DanAtchley"
-                       PARTY "Rep" RACE "countyjudge")
-                      (PLACEHOLDER ISA CANDIDATE NAME "Candidate2"
-                       PARTY "Dem" RACE "NameofRace")
-                      (PLACEHOLDER2 ISA CANDIDATE NAME "Candidate3"
-                       PARTY "Dem" RACE "LastRace")
                       (PARTY ISA VOTEPARTY DEFAULT "Dem"))
               (SDP GORDONBEARCE :BASE-LEVEL 0.7)
               (SDP COREYDERY :BASE-LEVEL 0.7)
@@ -188,29 +125,6 @@
               (SDP HOWARDGRADY :BASE-LEVEL 0.5)
               (SDP CLYDEGAYTONJR. :BASE-LEVEL 0.5)
               (SDP LEWISSHINE :BASE-LEVEL 0.5)
-              (SDP VERNONSTANLEYALBURY :BASE-LEVEL -0.4)
-              (SDP JANETTEFROMAN :BASE-LEVEL -0.4)
-              (SDP CECILECADIEUX :BASE-LEVEL -0.4)
-              (SDP FERNBRZEZINSKI :BASE-LEVEL -0.4)
-              (SDP PEDROBROUSE :BASE-LEVEL -0.4)
-              (SDP GLENTRAVISLOZIER :BASE-LEVEL -0.4)
-              (SDP MAURICEHUMBLE :BASE-LEVEL -0.4)
-              (SDP SHANETERRIO :BASE-LEVEL -0.4)
-              (SDP TIMSPEIGHT :BASE-LEVEL -0.4)
-              (SDP GREGCONVERSE :BASE-LEVEL -0.4)
-              (SDP SAMSADDLER :BASE-LEVEL -0.4)
-              (SDP ROBERTOARON :BASE-LEVEL -0.4)
-              (SDP ZACHARYMINICK :BASE-LEVEL -0.4)
-              (SDP RICARDONIGRO :BASE-LEVEL -0.4)
-              (SDP PETRABENCOMO :BASE-LEVEL -0.4)
-              (SDP MARKBABER :BASE-LEVEL -0.4)
-              (SDP DANPLOUFFE :BASE-LEVEL -0.4)
-              (SDP JENNIFERALUNDEED :BASE-LEVEL -0.4)
-              (SDP GORDONKALLAS :BASE-LEVEL -0.4)
-              (SDP STANLEYSAARI :BASE-LEVEL -0.4)
-              (SDP RANDYHCLEMONS :BASE-LEVEL -0.4)
-              (SDP DEBORAHKAMPS :BASE-LEVEL -0.4)
-              (SDP DANATCHLEY :BASE-LEVEL -0.4)
               (SDP VOTE :BASE-LEVEL 0.8)
               (P FIND-FIRST-RACE
                  =GOAL>
@@ -788,9 +702,6 @@
                  =IMAGINAL>
                  RACE-GROUP
                  =VAL1
-                 ?VISUAL-LOCATION>
-                 STATE
-                 FREE
                  ==>
                  =IMAGINAL>
                  +VISUAL-LOCATION>
@@ -904,24 +815,6 @@
                  ENCODED-CONTEST-DESCRIPTION
                  !OUTPUT!
                  ("Contest is: ~s" =TEXTVAL))
-              (P PAST-END-STATE
-                 =GOAL>
-                 ISA
-                 MAKEVOTE
-                 STATE
-                 ENCODED-CONTEST-DESCRIPTION
-                 ENDSTATE
-                 =END
-                 =IMAGINAL>
-                 ISA
-                 MAKEVOTE
-                 RACE
-                 =END
-                 ==>
-                 =IMAGINAL>
-                 +GOAL>
-                 ISA
-                 CLEAR)
               (P RETRIEVAL-SUCCESS
                  =GOAL>
                  ISA
@@ -937,7 +830,6 @@
                  =P
                  =IMAGINAL>
                  ==>
-                 =RETRIEVAL>
                  =IMAGINAL>
                  ISA
                  MAKEVOTE
@@ -950,7 +842,7 @@
                  SEARCH-SCREEN
                  !OUTPUT!
                  ("I'm voting for: ~s" =P))
-              (P SELECT-CHOICE_SEARCH-SCREEN-FASTEST
+              (P SELECT-CHOICE_SEARCH-SCREEN-ORDERED
                  =GOAL>
                  ISA
                  MAKEVOTE
@@ -961,7 +853,7 @@
                  FREE
                  =IMAGINAL>
                  PARTY-GROUP
-                 =VAL
+                 =VAL2
                  ==>
                  =IMAGINAL>
                  +VISUAL-LOCATION>
@@ -970,9 +862,14 @@
                  KIND
                  TEXT
                  GROUP
-                 =VAL
-                 :ATTENDED
-                 NIL
+                 =VAL2
+                 >
+                 SCREEN-Y
+                 CURRENT
+                 SCREEN-Y
+                 LOWEST
+                 SCREEN-X
+                 LOWEST
                  =GOAL>
                  STATE
                  SOMETHING-FOUND)
@@ -986,9 +883,9 @@
                  ISA
                  VISUAL-LOCATION
                  KIND
-                 TEXT
+                 =TEXT
                  GROUP
-                 =VAL
+                 =VAL2
                  ?VISUAL>
                  STATE
                  FREE
@@ -1106,7 +1003,7 @@
                  ("Looked at everything and nothing retrieved-- voting by party")
                  !EVAL!
                  (SETF CURRENT-STRAT 'PARTY))
-              (P VBP-SELECT-CHOICE_SEARCH-SCREEN-FASTEST
+              (P VBP-SELECT-CHOICE_SEARCH-SCREEN-ORDERED
                  =GOAL>
                  ISA
                  MAKEVOTE
@@ -1130,8 +1027,13 @@
                  TEXT
                  GROUP
                  =VAL3
-                 :ATTENDED
-                 NIL
+                 >
+                 SCREEN-Y
+                 CURRENT
+                 SCREEN-Y
+                 LOWEST
+                 SCREEN-X
+                 LOWEST
                  =GOAL>
                  STATE
                  VBP-SOMETHING-FOUND)
@@ -1179,7 +1081,6 @@
                  STATE
                  FREE
                  ==>
-                 =VISUAL>
                  +MANUAL>
                  ISA
                  MOVE-CURSOR
@@ -1230,7 +1131,7 @@
                  !OUTPUT!
                  ("VBP reached bottom of list-- abstain from voting"))
               (SPP SELECT-CHOICE_IMAGINAL-MATCH-STOP :U 1000)
-              (SPP SELECT-CHOICE_SEARCH-SCREEN-FASTEST :U 8)
+              (SPP SELECT-CHOICE_SEARCH-SCREEN-ORDERED :U 8)
               (SPP CHECK-CONTEST :U 1000)
               (P FIND-BUBBLE
                  =GOAL>

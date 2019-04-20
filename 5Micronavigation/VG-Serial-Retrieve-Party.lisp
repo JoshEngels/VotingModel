@@ -202,7 +202,7 @@
 =goal>
 	ISA     MakeVote
 	state   find-next-race
-	!eval! (log-candidate nil nil)	
+	
 
 	
 
@@ -238,28 +238,7 @@
 !output! ("Contest is: ~s" =textVal)
 )
 
-;****************************************
-; Production that halts if it goes beyond CountyJudge
-(P Past-End-State
 
-=goal>
-	ISA        MakeVote
-	state      encoded-contest-description
-	
-	endState   =end
-
-=imaginal>
-	ISA        MakeVote
-	race       =end
-
-==>
-
-=imaginal>
-
-+goal>
-	ISA       clear
-
-)
 
 ;****************************************
 ; Successful retrieval of candidate to vote for
@@ -636,7 +615,7 @@
 
 =goal>
 	state   find-next-race
-	!eval! (log-candidate nil nil)	
+	
 
 	
 
@@ -644,17 +623,8 @@
 )
 
 
-
-;****************************************
-;Selection
-;****************************************
-
-(spp Select-Choice_Imaginal-Match-Stop :u 1000)
+;Production Parameters
 (spp Select-Choice_Search-Screen-Ordered :u 8)
-
-
-;(spp Select-Choice_Search-Screen :u 0)
-;(spp Select-Choice_Search-Screen-Faster :u 9.5 :reward -.5)
 (spp check-contest :u 4000)
 
 

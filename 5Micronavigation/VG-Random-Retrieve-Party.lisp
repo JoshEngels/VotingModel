@@ -202,7 +202,7 @@
 =goal>
 	ISA 	MakeVote
 	state	find-next-race
-	!eval! (log-candidate nil nil)	
+	
 
 	
 
@@ -239,29 +239,6 @@
 
 )
 
-;****************************************
-; Production that recognizes if model has gone past hardcoded endstate "CountyJudge"
-
-(P Past-End-State
-
-=goal>
-	ISA 	  MakeVote
-	state	  encoded-contest-description
-	
-	endState  =end
-
-=imaginal> ; if encoded contest description matches hardcoded endstate
-	ISA       MakeVote
-	race      =end
-
-==>
-
-=imaginal> 
-
-+goal>
-	ISA	   clear
-
-)
 
 ;****************************************
 ; Successful retrieval of candidate to vote for
@@ -644,7 +621,7 @@
 
 =goal>
 	state	find-next-race
-	!eval! (log-candidate nil nil)	
+	
 
 	
 
@@ -652,21 +629,7 @@
 
 )
 
-
 ;Production Parameters
-
-;****************************************
-
-(spp Halt! :at 0 :u 4000)
-
-;****************************************
-;Selection
-;****************************************
-
-(spp Select-Choice_Imaginal-Match-Stop :u 1000)
-
-;(spp Select-Choice_Search-Screen :u 0)
-;(spp Select-Choice_Search-Screen-Faster :u 9.5 :reward -.5)
 (spp Select-Choice_Search-Screen-Fastest :u 8)
 (spp check-contest :u 1000)
 

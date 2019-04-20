@@ -1,3 +1,87 @@
+;;;  -*- mode: LISP; Syntax: COMMON-LISP;  Base: 10 -*-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Author      : Mike Byrne [and others]
+;;; Copyright   : (c) 2016 Mike Byrne
+;;; Address     : Department of Psychology 
+;;;             : Rice University
+;;;             : Houston, TX 77005
+;;;             : byrne@rice.edu
+;;; 
+;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Filename    : VG-Random_Retrieve-Recognize-Party.lisp
+;;; Version     : r1
+;;; 
+;;; Description : Model of voting on virtual VoteBox DRE.
+;;;             : * Model attends contest and retrieves desired candidate using a random search strategy.
+;;;				: * If initial retrieval fails, switches to recognition by name
+;;;				: * If no name is recognized, votes by party
+;;;				: * Abstains from race if retrieval of default party fails
+;;; 
+;;; Bugs        : * None known
+;;;
+;;; To do       : *
+;;; 
+;;; ----- History -----
+;;; 2019.2.14   Xianni Wang
+;;;				: * modified the logical flow
+;;; 2019.1.31   Xianni Wang
+;;;				: * updated screen learning code
+;;;				: * removed clear-finsts production
+;;; 2018.9.5    Xianni Wang
+;;;				: * added defparameter and !eval! functions to log strategies for simulation
+;;; 2018.5.19   Xianni Wang
+;;;				: * added two more activation levels 
+;;;				: * added candidate chunks and abstain chunks
+;;; 2018.4.25   Xianni Wang
+;;;				: * removed unnecessary imaginal buffers
+;;; 2018.4.24   Xianni Wang
+;;;				: * added Clear-Finsts production
+;;; 2018.4.14   Xianni Wang
+;;;				: * adjusted the format
+;;; 2018.4.4    Xianni Wang
+;;;				: * adapted file with visual grouping learning model
+;;;	2017.4.20   Marita Sailor
+;;;				: * duplicated file from Off-by-one folder
+;;;				: * replaced Candidate chunks in DM
+;;;				: * moved abstain chunks from this file
+;;; 2017.4.16	Marita Sailor
+;;;				: * duplicated file from Intentional Abstention folder
+;;;				: * added cursor-noise and process-cursor
+;;;				: * added find-cursor and find-cursor-2 chunks
+;;;				: * adjust end goal state of P Advance-Screen_Imaginal-Match-Stop
+;;;				: * new productions: find-cursor-location, find-cursor-incorrect
+;;;				: * tested and works
+;;; 2017.3.21  Marita Sailor
+;;;				: * duplicated file from Updated DM folder
+;;;				: * added VoteParty chunk type and Abstain chunk type
+;;;				: * added checking-contest chunk
+;;;				: * added Abstain chunks and chunk base-level activations
+;;;				: * added intermediary productions 1) check-contest and 2) abstain
+;;;				: * reorganized imaginal buffer requests in Encode-contest production
+;;;				: * adjusted production parameter for check-contest
+;;; 2016.11.22 Marita Sailor
+;;;				: * added base-level activations for all chunks
+;;; 2016.11.14 Marita Sailor
+;;;				: * model check-up
+;;; 2016.11.22 Marita Sailor
+;;;				: * Fixed so it votes by party if initial retrieval fails
+;;; 2016.11.06 Marita Sailor
+;;;				: * Created file from duplicate
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; General Docs:
+;;;
+;;; The model does a single retrieveal from DM for each race and then does a random 
+;;; search for the string that was retrieved from memory. Votes by party if retrieval fails.
+;;;
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 
 ;****************************************
 ;****************************************
@@ -117,7 +201,7 @@
 =goal>
 	ISA     MakeVote
 	state   find-next-race
-	!eval! (log-candidate nil nil)	
+	
 
 	
 
@@ -733,22 +817,17 @@
 
 =goal>
 	state   find-next-race
-	!eval! (log-candidate nil nil)	
+	
 
 	
 
 )
 
 
-
-
-
-(spp Select-Choice_Imaginal-Match-Stop_Retrieval :u 1000)
+;Production Parameters
 (spp Select-Choice_Search-Screen-Fastest_Retrieval :u 8)
 (spp Select-Choice_Search-Screen-Fastest_recognition :u 8)
 (spp check-contest :u 4000)
 
-;(spp Select-Choice_Search-Screen :u 0)
-;(spp Select-Choice_Search-Screen-Faster :u 9.5 :reward -.5)
 
 

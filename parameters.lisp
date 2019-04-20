@@ -3,6 +3,8 @@
 		
 (sgp :visual-finst-span 10) ;neccesary to avoid forgetting where we looked for the recognition strategies
 
+(sgp :cursor-noise t)
+
 ; Grouping Parameters
 (setf vg-glomming-radius 8)
 (setf vg-collision-type 'box) ;'point is faster, but less plausible (also needs a larger radius to work similarly)

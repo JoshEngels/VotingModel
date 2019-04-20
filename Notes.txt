@@ -35,6 +35,7 @@ Need a better nearest method: now goes from centers, this caused lots of problem
 Would really be good to not use this at all and use super and sub groups: perhaps try every single possible radius and find points of inflection where number of groups is changing the fastest? Something like this, should work 100% for no noise and okish for noise --> nearest-center
 Confusion in names of models like serial_party and serial_retrieve-party: how is retrieve-party and retrieve-recognize-party different?
 Can make grouping versions very quickly: should I?
+Misclicks (or reason for needing to avoid misclicks) not in my model --> reason errors are a little different / less
 
 When pasting in:
 Delete before and after the start voting section, leaving in selection production utilities
@@ -54,6 +55,7 @@ Problem
 What I did
 How it turned out --> error report
 What does it mean --> future implications
+apa
 Work super hard on this and publish on website?
 
 Vote function: small noise, big noise, real time, use model (optional)

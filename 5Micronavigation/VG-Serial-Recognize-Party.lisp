@@ -210,33 +210,12 @@
 =goal>
 	ISA 	MakeVote
 	state	find-next-race
-	!eval! (log-candidate nil nil)	
+	
 
 	
 
 )
 
-;****************************************
-; Production that recognizes if model has gone past "CountyJudge"
-
-(P Past-End-State
-
-=goal>
-	ISA         MakeVote
-	state       attended-contest-description
-	
-	endState    =end
-
-=visual>
-	ISA      text
-	value    =end	
-
-==>
-
-+goal>
-	ISA     clear
-
-)
 
 ;****************************************
 ;Read text in order with no specific name in mind
@@ -585,7 +564,7 @@
 
 =goal>
 	state	find-next-race
-	!eval! (log-candidate nil nil)	
+	
 
 	
 
@@ -594,16 +573,6 @@
 )
 
 ;Production Parameters
-
-;****************************************
-(spp Past-End-State :at 0 :u 4000)
-(spp Halt! :at 0 :u 4000)
-
-;****************************************
-;Selection
-;****************************************
-
-(spp Select-Choice_Match-Stop :u 1000)
 (spp Select-Choice_Search-Screen-Ordered :u 1000)
 (spp check-contest :u 1000)
 

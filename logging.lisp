@@ -1,9 +1,38 @@
+;;;  -*- mode: LISP; Syntax: COMMON-LISP;  Base: 10 -*-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Author      : Joshua Engels
+;;; Copyright   : (c) 2018 Joshua Engels
+;;; Address     : Lovett College 
+;;;             : Rice University
+;;;             : Houston, TX 77005
+;;;             : jae4@rice.edu
+;;; 
+;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Filename    : logging.lisp
+;;; Version     : 1
+;;; 
+;;; Description : 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; General Docs:
+;;; Previously named SearchWithRace_InOrder_VBModel.lisp
+;;;
+;;; This model does a serial search down the list of candidates until it finds the
+;;; one that matches a name in memory.
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;Parameters this file has control over
 (defparameter logging-file-name nil)
 (defparameter run-number nil)
 (defparameter final-strats '())
 (defparameter final-candidates '())
 (defparameter final-indices '())
+(defparameter vote-for-this-race 'false)
 
 ; ready to log
 (defun create-new-file ()
@@ -59,6 +88,17 @@
 	(setf final-strats (append final-strats (list current-strat)))
 	(setf final-candidates (append final-candidates (list candidate)))
 	(setf final-indices (append final-indices (list index)))
+	(setf vote-for-this-race 'true)
+
+)
+
+
+; Called whenever find-next-race is called in order to track abstentions and resets the boolean
+(defun log-finish
+
+	(if (= vote-for-this-race 'false) 
+		((log-candidate nil nil))())
+	(setf vote-for-this-race 'false)
 
 )
 

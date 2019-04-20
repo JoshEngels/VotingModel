@@ -1,4 +1,55 @@
-
+;;;  -*- mode: LISP; Syntax: COMMON-LISP;  Base: 10 -*-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Author      : Mike Byrne [and others]
+;;; Copyright   : (c) 2016 Mike Byrne
+;;; Address     : Department of Psychology 
+;;;             : Rice University
+;;;             : Houston, TX 77005
+;;;             : byrne@rice.edu
+;;; 
+;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Filename    : VG-Serial-RetreiveParty-Party.lisp
+;;; Version     : r1
+;;; 
+;;; Description : Model of voting on virtual VoteBox DRE.
+;;;             : Performs a serial search
+;;;             : Uses a retrieve-based memory strategy to search candidates by party
+;;;             : If initial retrieval fails, performs a serial search by party
+;;;            
+;;; Bugs        : * None known
+;;;
+;;; To do       : * 
+;;; ----- History -----
+;;;
+;;; 2019.1.31   Xianni Wang
+;;;				: * updated screen learning code
+;;; 2018.9.5    Xianni Wang
+;;;				: * added defparameter and !eval! functions to log strategies for simulation
+;;; 2018.5.19   Xianni Wang
+;;;				: * added two more activation levels 
+;;;				: * added candidate chunks and abstain chunks
+;;; 2018.4.25   Xianni Wang
+;;;				: * removed unnecessary imaginal buffers
+;;; 2018.4.14   Xianni Wang
+;;;				: * adjusted the format
+;;; 2018.4.8 Xianni Wang
+;;;				: * adapted file with studying model
+;;; 2018.2.26 Xianni Wang
+;;;				: * created file 
+;;;				: * tested, model works!
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; General Docs:
+;;;
+;;; This model does a serial search down the list of party until it finds the
+;;; one that matches a name in memory.
+;;;
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;****************************************
 ;****************************************
@@ -117,7 +168,7 @@
 =goal>
 	ISA     MakeVote
 	state   find-next-race
-	!eval! (log-candidate nil nil)	
+	
 
 
 )
@@ -528,7 +579,7 @@
 
 =goal>
 	state   find-next-race
-	!eval! (log-candidate nil nil)	
+	
 
 
 !output! ("VBP reached bottom of list-- abstain from voting")
@@ -536,11 +587,8 @@
 
 
 
-
-
-(spp Select-Choice_Imaginal-Match-Stop :u 1000)
+;Production Parameters
 (spp Select-Choice_Search-Screen-Ordered :u 8)
-;(spp VBP-Select-Choice_Search-Screen-Ordered :u 1000)
 (spp check-contest :u 1000)
 
 
