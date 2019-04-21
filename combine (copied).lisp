@@ -4,6 +4,7 @@
 ; DONE: first-for-each: a proof of concept function that takes the first file name from each category and creates and runs a model (fast speed)
 ; TODO: test: takes as input a file name from a category and uses arbitrary other components and runs the model
 ; TODO: run-all: runs every single combination and collects data
+; TODO: write about benefits of this system (ironically because of the file location of this comment this isn't one)
 
 ; Global Variables
 (defvar base-file-name "C:/Users/Joshua Engels/Desktop/A-Voting-Folder/")
@@ -82,7 +83,7 @@
 
 ; TODO clean up in general
 ; TODO combine with first-for-all
-; File-names contains a list of file names or nils (if default is desired). Creates the model in the output file and runs it with no display not in real time
+; File-names contains a list of file names or nils (if default is desired). Creates the model in the output file
 (defun create-specific (file-names)
 	
 	(print file-names)
@@ -149,7 +150,7 @@
 	
 	; runs the model file
 	(load output-file-name) ;hopefully this works
-	(vote nil t nil) ;runs it in not real time and invisible
+	
 
 )
 
@@ -189,7 +190,7 @@
 
 
 
-(defun run-lists (num-trials)
+(defun run-lists (num-trials visible)
 
 	(defvar current-dm "TEMPTEMP")
 	(defvar current-micro "TEMPTEMP")
@@ -197,19 +198,30 @@
 	(load (concatenate 'string base-file-name "logging.lisp")) ;load in the logging functions
 	(create-new-file) ;create a new logging file
 	
-	(let ((micros '("VG-Random-Retrieve-Recognize-Party"
-				"VG-Serial-Recognize-Party"
-				"VG-Serial-Retrieve-Party"
-				"VG-Serial-RetrieveParty-Party"
-				"VG-Serial-Retrieve-Recognize-Party"
-				"VG-Random-Recognize-Party"
-				"VG-Random-Retrieve-Party"
-				"VG-Random-RetrieveParty-Party"))
+	(let (
+	
+	
+		; (micros '("VG-Random-Retrieve-Recognize-Party"
+				; "VG-Serial-Recognize-Party"
+				; "VG-Serial-Retrieve-Party"
+				; "VG-Serial-RetrieveParty-Party"
+				; "VG-Serial-Retrieve-Recognize-Party"
+				; "VG-Random-Recognize-Party"
+				; "VG-Random-Retrieve-Party"
+				; "VG-Random-RetrieveParty-Party"))
+		; (dms '("all-perfect"
+			; "all-rolloff"
+			; "most-rolloff"
+			; "most-perfect"
+			; "full-dm"))
+			
+			
+		(micros '("VG-Random-RetrieveParty-Party"
+				))
 		(dms '("all-perfect"
-			"all-rolloff"
-			"most-rolloff"
-			"most-perfect"
-			"full-dm")))
+			))
+			
+		)
 		
 	
 		(loop for micro in micros
@@ -220,20 +232,10 @@
 			(dotimes (trial num-trials)
 				(progn 
 				(print trial)
-				(create-specific (list nil dm nil nil micro nil)))
+				(create-specific (list nil dm nil nil micro nil))
+				(vote nil t visible))
 				)
 			)))
 			
 ))
 
-
-
-
-; (defvar *dm-path* *load-truename*)
-; (case *which-dm*
-  ; (all-perfect (load (merge-pathnames "all-candidates-perfect.lisp" *dm-path*)))
-  ; (all-rolloff (load (merge-pathnames "all-with-rolloff.lisp" *dm-path*)))
-  ; (most-rolloff (load (merge-pathnames "most-with-rolloff.lisp" *dm-path*)))
-  ; (most-perfect (load (merge-pathnames "most-with-abstention.lisp" *dm-path*)))
-  ; (full-dm (load (merge-pathnames "full-dm.lisp" *dm-path*)))
-; )
