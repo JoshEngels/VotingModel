@@ -8,7 +8,7 @@ library(stringr)
 #---------------------- high activations ----------------------
 ## ------------------- import data --------------------##
 setwd("C:/Users/Joshua Engels/Desktop/A-Voting-Folder/data")
-votes <- read.delim("Final.tsv",sep="\t")
+votes <- read.delim("1-run.tsv",sep="\t")
 
 votes <- data.frame(lapply(votes, function(x) {gsub("VG-SERIAL-RETRIEVE-RECOGNIZE-PARTY", "Serial_Retrieve-Recognize-Party_VG", x)}))
 votes <- data.frame(lapply(votes, function(x) {gsub("VG-RANDOM-RETRIEVE-RECOGNIZE-PARTY", "Random_Retrieve-Recognize-Party_VG", x)}))

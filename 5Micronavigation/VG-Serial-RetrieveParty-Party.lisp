@@ -49,7 +49,6 @@
 ;;; one that matches a name in memory.
 ;;;
 ;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;****************************************
 ;****************************************
@@ -113,6 +112,7 @@
 =goal>
 	state     attended-contest-description
 
+
 )
 
 ;****************************************
@@ -170,7 +170,6 @@
 	state   find-next-race
 	
 
-
 )
 
 ;****************************************
@@ -205,7 +204,7 @@
 
 
 ;****************************************
-; Successful retrieval of party to vote for
+; Successful retrieval of candidate to vote for
 
 (P Retrieval-Success
 
@@ -298,7 +297,7 @@
 )
 
 ;****************************************
-;Search for that party in memory
+;Search for that name in memory
 
 (P Select-Choice_Encode-Search
 
@@ -327,7 +326,7 @@
 )
 
 ;****************************************
-;See if the party in the visual location matches
+;See if the name in the visual location matches
 ;any name in memory
 
 (P Select-Choice_Imaginal-Match-Stop
@@ -371,7 +370,6 @@
 
 ;****************************************
 ; don't match, search again
-
 (P Select-Choice-No-Match
 
 =goal>
@@ -441,6 +439,7 @@
 
 )
 
+
 ;****************************************
 ;; restarts search from top
 
@@ -478,7 +477,6 @@
 
 ;****************************************
 ; looks at party
-
 (P VBP-Select-Choice_Attend-Search
 
 =goal>
@@ -538,7 +536,6 @@
 
 ;****************************************
 ; if default party and attended party don't match
-
 (P VBP-No-Match-Next-Choice
 
 =goal>
@@ -581,18 +578,13 @@
 	state   find-next-race
 	
 
-
 !output! ("VBP reached bottom of list-- abstain from voting")
 )
 
 
-
 ;Production Parameters
+(spp Select-Choice_Imaginal-Match-Stop :u 1000)
 (spp Select-Choice_Search-Screen-Ordered :u 8)
-(spp check-contest :u 1000)
-
-
-
-
-
+(spp VBP-Select-Choice_Search-Screen-Ordered :u 1000)
+(spp check-contest :u 4000)
 

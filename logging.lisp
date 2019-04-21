@@ -32,7 +32,7 @@
 (defparameter final-strats '())
 (defparameter final-candidates '())
 (defparameter final-indices '())
-(defparameter vote-for-this-race 'false)
+(defparameter vote-for-this-race nil)
 
 ; ready to log
 (defun create-new-file ()
@@ -88,17 +88,17 @@
 	(setf final-strats (append final-strats (list current-strat)))
 	(setf final-candidates (append final-candidates (list candidate)))
 	(setf final-indices (append final-indices (list index)))
-	(setf vote-for-this-race 'true)
+	(setf vote-for-this-race t)
 
 )
 
 
 ; Called whenever find-next-race is called in order to track abstentions and resets the boolean
-(defun log-finish
+(defun log-finish ()
 
-	(if (= vote-for-this-race 'false) 
-		((log-candidate nil nil))())
-	(setf vote-for-this-race 'false)
+	(if (not vote-for-this-race) 
+		(log-candidate nil nil))
+	(setf vote-for-this-race nil)
 
 )
 

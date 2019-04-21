@@ -77,7 +77,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-
 ;****************************************
 ;****************************************
 ;start to vote
@@ -204,8 +203,6 @@
 	state   find-next-race
 	
 
-	
-
 )
 
 ;****************************************
@@ -237,8 +234,6 @@
 
 !output! ("Contest is: ~s" =textVal)
 )
-
-
 
 ;****************************************
 ; Successful retrieval of candidate to vote for
@@ -617,15 +612,13 @@
 	state   find-next-race
 	
 
-	
-
 !output! ("VBP reached bottom of list-- abstain from voting")
 )
 
 
+
 ;Production Parameters
+(spp Select-Choice_Imaginal-Match-Stop :u 1000)
 (spp Select-Choice_Search-Screen-Ordered :u 8)
 (spp check-contest :u 4000)
-
-
 

@@ -1,7 +1,7 @@
 
 (CLEAR-ALL)
 (DEFINE-MODEL COMBINED
-              (SGP :V NIL :NEEDS-MOUSE T :ESC T :PROCESS-CURSOR T)
+              (SGP :V T :NEEDS-MOUSE T :ESC T :PROCESS-CURSOR T)
               (SGP :VISUAL-FINST-SPAN 10)
               (SGP :CURSOR-NOISE T)
               (SETF VG-GLOMMING-RADIUS 8)
@@ -104,27 +104,27 @@
                       (LEWISSHINE ISA CANDIDATE NAME "lewisshine"
                        PARTY "Dem" RACE "countyjudge")
                       (PARTY ISA VOTEPARTY DEFAULT "Dem"))
-              (SDP GORDONBEARCE :BASE-LEVEL 0.7)
-              (SDP COREYDERY :BASE-LEVEL 0.7)
-              (SDP ROBERTMETTLER :BASE-LEVEL 0.7)
-              (SDP RICKSTICKLES :BASE-LEVEL 0.7)
-              (SDP CASSIEPRINCIPE :BASE-LEVEL 0.7)
-              (SDP RICKORGAN :BASE-LEVEL 0.7)
-              (SDP THERESEGUSTIN :BASE-LEVEL 0.7)
-              (SDP ELISEELLZEY :BASE-LEVEL 0.6)
-              (SDP POLLYRYLANDER :BASE-LEVEL 0.6)
-              (SDP JILLIANBALAS :BASE-LEVEL 0.6)
-              (SDP WESLEYSTEVEN-MILLETTE :BASE-LEVEL 0.6)
-              (SDP SUSANNERAEL :BASE-LEVEL 0.6)
-              (SDP PETERVARGA :BASE-LEVEL 0.6)
-              (SDP TIMGRASTY :BASE-LEVEL 0.6)
-              (SDP DERRICKMELGAR :BASE-LEVEL 0.5)
-              (SDP COREYBEHNKE :BASE-LEVEL 0.5)
-              (SDP DEANCAFFEE :BASE-LEVEL 0.5)
-              (SDP JASONVALLE :BASE-LEVEL 0.5)
-              (SDP HOWARDGRADY :BASE-LEVEL 0.5)
-              (SDP CLYDEGAYTONJR. :BASE-LEVEL 0.5)
-              (SDP LEWISSHINE :BASE-LEVEL 0.5)
+              (SDP GORDONBEARCE :BASE-LEVEL 0.8)
+              (SDP COREYDERY :BASE-LEVEL 0.8)
+              (SDP ROBERTMETTLER :BASE-LEVEL 0.8)
+              (SDP RICKSTICKLES :BASE-LEVEL 0.8)
+              (SDP CASSIEPRINCIPE :BASE-LEVEL 0.8)
+              (SDP RICKORGAN :BASE-LEVEL 0.8)
+              (SDP THERESEGUSTIN :BASE-LEVEL 0.8)
+              (SDP ELISEELLZEY :BASE-LEVEL 0.8)
+              (SDP POLLYRYLANDER :BASE-LEVEL 0.8)
+              (SDP JILLIANBALAS :BASE-LEVEL 0.8)
+              (SDP WESLEYSTEVEN-MILLETTE :BASE-LEVEL 0.8)
+              (SDP SUSANNERAEL :BASE-LEVEL 0.8)
+              (SDP PETERVARGA :BASE-LEVEL 0.8)
+              (SDP TIMGRASTY :BASE-LEVEL 0.8)
+              (SDP DERRICKMELGAR :BASE-LEVEL 0.8)
+              (SDP COREYBEHNKE :BASE-LEVEL 0.8)
+              (SDP DEANCAFFEE :BASE-LEVEL 0.8)
+              (SDP JASONVALLE :BASE-LEVEL 0.8)
+              (SDP HOWARDGRADY :BASE-LEVEL 0.8)
+              (SDP CLYDEGAYTONJR. :BASE-LEVEL 0.8)
+              (SDP LEWISSHINE :BASE-LEVEL 0.8)
               (SDP VOTE :BASE-LEVEL 0.8)
               (P FIND-FIRST-RACE
                  =GOAL>
@@ -152,6 +152,9 @@
                  RIGHT
                  -1)
               (P FIND-RACE-SAME-COLUMN
+                 ?MANUAL>
+                 STATE
+                 FREE
                  =GOAL>
                  STATE
                  FIND-NEXT-RACE
@@ -198,8 +201,8 @@
                  =GOAL>
                  STATE
                  ATTENDING-RACE-SAME-COLUMN
-                 TO-DO
-                 SELECTCANDIDATE)
+                 !EVAL!
+                 (LOG-FINISH))
               (P FIND-RACE-SAME-COLUMN-NO-MATCH
                  =GOAL>
                  STATE
@@ -722,6 +725,7 @@
                  MAKEVOTE
                  STATE
                  FOUND-CONTEST-DESCRIPTION
+                 =IMAGINAL>
                  =VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
@@ -733,6 +737,7 @@
                  STATE
                  FREE
                  ==>
+                 =IMAGINAL>
                  +VISUAL>
                  ISA
                  MOVE-ATTENTION
@@ -747,6 +752,7 @@
                  MAKEVOTE
                  STATE
                  ATTENDED-CONTEST-DESCRIPTION
+                 =IMAGINAL>
                  =VISUAL>
                  ISA
                  TEXT
@@ -755,7 +761,6 @@
                  ?RETRIEVAL>
                  STATE
                  FREE
-                 =IMAGINAL>
                  ==>
                  +RETRIEVAL>
                  ISA
@@ -786,9 +791,7 @@
                  ISA
                  MAKEVOTE
                  STATE
-                 FIND-NEXT-RACE
-                 !EVAL!
-                 (LOG-CANDIDATE NIL NIL))
+                 FIND-NEXT-RACE)
               (P SELECT-CHOICE_ENCODE-CONTEST-DESCRIPTION
                  =GOAL>
                  ISA
@@ -804,12 +807,12 @@
                  RACE
                  =TEXTVAL
                  ==>
-                 =IMAGINAL>
                  +RETRIEVAL>
                  ISA
                  CANDIDATE
                  RACE
                  =TEXTVAL
+                 =IMAGINAL>
                  =GOAL>
                  STATE
                  ENCODED-CONTEST-DESCRIPTION
@@ -826,8 +829,8 @@
                  CANDIDATE
                  RACE
                  =R
-                 PARTY
-                 =P
+                 NAME
+                 =N
                  =IMAGINAL>
                  ==>
                  =IMAGINAL>
@@ -835,13 +838,13 @@
                  MAKEVOTE
                  RACE
                  =R
-                 PARTY
-                 =P
+                 CANDIDATE
+                 =N
                  =GOAL>
                  STATE
                  SEARCH-SCREEN
                  !OUTPUT!
-                 ("I'm voting for: ~s" =P))
+                 ("I'm voting for: ~s" =N))
               (P SELECT-CHOICE_SEARCH-SCREEN-ORDERED
                  =GOAL>
                  ISA
@@ -852,17 +855,17 @@
                  STATE
                  FREE
                  =IMAGINAL>
-                 PARTY-GROUP
+                 CANDIDATE-GROUP
                  =VAL2
                  ==>
                  =IMAGINAL>
                  +VISUAL-LOCATION>
                  ISA
                  VISUAL-LOCATION
-                 KIND
-                 TEXT
                  GROUP
                  =VAL2
+                 KIND
+                 TEXT
                  >
                  SCREEN-Y
                  CURRENT
@@ -883,7 +886,7 @@
                  ISA
                  VISUAL-LOCATION
                  KIND
-                 =TEXT
+                 TEXT
                  GROUP
                  =VAL2
                  ?VISUAL>
@@ -920,7 +923,7 @@
                  STATE
                  ENCODED-SEARCH
                  !OUTPUT!
-                 ("Looking at Party: ~s" =VAL))
+                 ("Looking at Candidate: ~s" =VAL))
               (P SELECT-CHOICE_IMAGINAL-MATCH-STOP
                  =GOAL>
                  ISA
@@ -930,7 +933,7 @@
                  =IMAGINAL>
                  ISA
                  MAKEVOTE
-                 PARTY
+                 CANDIDATE
                  =VAL
                  =VISUAL>
                  ISA
@@ -982,8 +985,6 @@
                  =GOAL>
                  STATE
                  SEARCH-BY-PARTY
-                 !OUTPUT!
-                 ("Initial retrieval failure, voting by party")
                  !EVAL!
                  (SETF CURRENT-STRAT 'PARTY))
               (P VBP-RETRIEVAL-FAILS-AFTER-SEARCHING
@@ -1126,13 +1127,11 @@
                  =GOAL>
                  STATE
                  FIND-NEXT-RACE
-                 !EVAL!
-                 (LOG-CANDIDATE NIL NIL)
                  !OUTPUT!
                  ("VBP reached bottom of list-- abstain from voting"))
               (SPP SELECT-CHOICE_IMAGINAL-MATCH-STOP :U 1000)
               (SPP SELECT-CHOICE_SEARCH-SCREEN-ORDERED :U 8)
-              (SPP CHECK-CONTEST :U 1000)
+              (SPP CHECK-CONTEST :U 4000)
               (P FIND-BUBBLE
                  =GOAL>
                  STATE

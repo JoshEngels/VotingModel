@@ -51,14 +51,13 @@
 ;;; one that matches a name in memory.
 ;;;
 ;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 ;****************************************
 ;****************************************
 ;start to vote
 ;****************************************
 ;****************************************
+
 
 ;****************************************
 ;Put the visual location somewhere on the screen
@@ -173,9 +172,7 @@
 ; sends to navigation production
 =goal>
 	ISA     MakeVote
-	state  	find-next-race
-	
-
+	state   find-next-state
 	
 
 )
@@ -210,9 +207,8 @@
 !output! ("Contest is: ~s" =textVal)
 )
 
-
 ;****************************************
-; Successful retrieval of candidate's party to vote for
+; Successful retrieval of candidate to vote for
 
 (P Retrieval-Success
 
@@ -241,6 +237,7 @@
 	state   search-screen
 
 !output! ("I'm voting for: ~s" =p)
+
 )
 
 ;****************************************
@@ -304,7 +301,7 @@
 )
 
 ;****************************************
-;Search for that party in memory
+;Search for that name in memory
 
 (P Select-Choice_Encode-Search
 
@@ -375,6 +372,28 @@
 
 )
 
+;****************************************
+
+(P Select-Choice_Click-Candidate
+
+=goal>
+	ISA       MakeVote
+	state     moved-to-candidate
+	
+
+?manual>
+	state    free
+
+==>
+
++manual>
+	ISA    click-mouse
+
+=goal>
+	state     find-next-state
+	
+
+)
 
 ;****************************************
 ; don't match, search again
@@ -394,7 +413,6 @@
 	state    search-screen
 
 )
-
 ;****************************************
 
 ; Productions that handle retrieval failure (i.e. when retrieval of candidate fails)
@@ -446,6 +464,7 @@
 !eval! (setf current-strat 'party)
 
 )
+
 
 ;****************************************
 ;; restarts search from top
@@ -583,9 +602,7 @@
 ==>
 
 =goal>
-	state   find-next-race
-	
-
+	state   find-next-state
 	
 
 !output! ("VBP reached bottom of list-- abstain from voting")
@@ -593,9 +610,8 @@
 
 
 ;Production Parameters
-(spp Select-Choice_Search-Screen-Fastest :u 8)
+(spp Select-Choice_Imaginal-Match-Stop :u 1000)
 (spp check-contest :u 1000)
-
 
 
 

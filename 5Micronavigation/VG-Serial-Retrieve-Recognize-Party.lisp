@@ -856,6 +856,7 @@
 )
 
 ;Production Parameters
+(spp Select-Choice_Imaginal-Match-Stop_Retrieval :u 1000)
 (spp Select-Choice_Search-Screen-Ordered_Retrieval :u 8)
 (spp Select-Choice_Search-Screen-Ordered_Recognition :u 8)
 (spp check-contest :u 4000)

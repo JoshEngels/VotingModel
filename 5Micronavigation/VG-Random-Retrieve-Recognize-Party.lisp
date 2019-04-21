@@ -824,10 +824,14 @@
 )
 
 
+
+
 ;Production Parameters
+(spp Select-Choice_Imaginal-Match-Stop_Retrieval :u 1000)
 (spp Select-Choice_Search-Screen-Fastest_Retrieval :u 8)
 (spp Select-Choice_Search-Screen-Fastest_recognition :u 8)
 (spp check-contest :u 4000)
+
 
 
 

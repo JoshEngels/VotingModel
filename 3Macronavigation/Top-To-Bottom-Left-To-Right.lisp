@@ -60,6 +60,10 @@
 ; Does a visual location request for the next race in this column
 (P Find-Race-Same-Column
 
+; goes back to having everything in a set state each time. need to figure out
+?manual>
+	state     free
+
 =goal>
 	state			find-next-race
 	left			=left-bound
@@ -89,8 +93,8 @@
 	
 =goal>
 	state		attending-race-same-column
-	to-do		SelectCandidate
-
+	
+!eval! (log-finish)
 
 )
 
