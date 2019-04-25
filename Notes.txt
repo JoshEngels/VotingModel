@@ -28,6 +28,7 @@ Move params to own file
 Document (honestly this to do list is too long idk even know if I have this somewhere else)
 What are the time consuming parts of the model --> fix these (check tutorials?) (maybe don't create new window, etc.)
 Dynamic programming from different spots to speedup (i.e. store spots) (break independent parts apart and determine their probabilities independently)
+Note that when making all graphs need to change scale
 
 Problems --> talk about in paper:
 Names for groups for different object types (oval, text observed) repeat counts
@@ -37,6 +38,7 @@ Would really be good to not use this at all and use super and sub groups: perhap
 Confusion in names of models like serial_party and serial_retrieve-party: how is retrieve-party and retrieve-recognize-party different?
 Can make grouping versions very quickly: should I?
 Misclicks (or reason for needing to avoid misclicks) not in my model --> reason errors are a little different / less
+Move combine out of combine
 
 When pasting in:
 Delete before and after the start voting section, leaving in selection production utilities

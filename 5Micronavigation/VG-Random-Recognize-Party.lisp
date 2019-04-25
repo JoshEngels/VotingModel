@@ -2,7 +2,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
 ;;; Author      : Mike Byrne [and others]
-;;; Copyright   : (c) 2016 Mike Byrne
+;;; Copyright   : (c) 2019 Mike Byrne
 ;;; Address     : Department of Psychology 
 ;;;             : Rice University
 ;;;             : Houston, TX 77005
@@ -14,7 +14,7 @@
 ;;; Filename    : VG-Random-Recognize-Party.lisp
 ;;; Version     : r1
 ;;; 
-;;; Description : Model of voting on virtual VoteBox DRE.
+;;; Description : Micronavigation Strategy
 ;;;             : * Uses a recognition-based memory strategy
 ;;;             : * Uses random visual search strategy.
 ;;;             : * Retrieval fails randomly if name is under the activation threshold.
@@ -26,62 +26,13 @@
 ;;; To do       : *
 ;;; 
 ;;; ----- History -----
-;;; 2019.1.31   Xianni Wang
-;;;				: * updated screen learning code
-;;;				: * removed clear-finsts production
-;;; 2018.9.5    Xianni Wang
-;;;				: * added defparameter and !eval! functions to log strategies for simulation
-;;; 2018.5.19   Xianni Wang
-;;;				: * added two more activation levels 
-;;;				: * added candidate chunks and abstain chunks
-;;; 2018.4.25   Xianni Wang
-;;;				: * removed unnecessary imaginal buffers
-;;; 2018.4.24   Xianni Wang
-;;;				: * added Clear-Finsts production
-;;; 2018.4.14   Xianni Wang
-;;;				: * adjusted the format
-;;; 2018.4.4	Xianni Wang
-;;;				: * adapted file with visual grouping learning model
-;;; 2017.4.27	Marita Sailor
-;;;				: * model not properly handling motor noise when tested with run-multiple
-;;;				: * I think I forgot to update this one when I got the others to work
-;;;				: * replaced the old navigation productions with the new ones
-;;; 2017.4.13	Marita Sailor
-;;;				: * duplicated file from Off-by-one folder
-;;;				: * replaced Candidate chunks in DM
-;;;				: * moved abstain chunks from this file
-;;; 2017.4.12	Marita Sailor
-;;;				: * added sgp process-cursor
-;;;				: * added find-cursor production, modified Advance-screen-click-advance
-;;; 2017.4.3	Marita Sailor
-;;;				: * duplicated file from Intentional Abstention folder
-;;;				: * added cursor noise
-;;; 2017.2.19	Marita Sailor
-;;;				: * duplicated file from other folder
-;;;				: * created new chunk type "Abstain" 
-;;;				: * made 3 abstain chunks for testing
-;;;				: * wrote new production "check-contest" 
-;;;				: * slightly modified encode-contest description production
-;;;				: * set production parameter for check-contest to avoid skipping
-;;;				: * set abstention chunk activation levels
-;;; 2016.11.22	Marita Sailor
-;;;				: * added base-level activations for all chunks
-;;; 2016.11.14	Marita Sailor
-;;;				: * model check-up
-;;; 2016.11.12	Marita Sailor
-;;;				: * fixed issues production Past-End-State (now works every time) 
-;;; 2016.11.04	Marita Sailor 
-;;;				: * default party stored in MakeVote chunk
-;;;				: * other fixes (when to stop, adjusted VBP productions )
-;;;				: * added (sgp :visual-finst-span 10) 
-;;; 2016.11.03	Marita Sailor 
-;;;				: * replaced serial search with random search
-;;; 2016.10.26	Marita Sailor 
-;;;				: * Created file, duplicated from Recog-Serial-Party and renamed
+;;; 2019.4.22   Joshua Engels
+;;;				: * Cut and transformed the micronavigation code (see conversion.txt) from the file of the same name as this one for use in constructing full models
 ;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; General Docs:
+;;; See old voting box model file of the same name for further editing history
 ;;; 
 ;;; As noted above, this model searches for candidates using a random search strategy.
 ;;; Retrieval will fail randomly and if this happens the model will select a candidate
@@ -89,11 +40,6 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;****************************************
-;****************************************
-;start to vote
-;****************************************
-;****************************************
 
 ;****************************************
 ;Put the visual location somewhere on the screen

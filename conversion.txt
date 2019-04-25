@@ -1,0 +1,9 @@
+This is the process for converting old model files to micronavigation strategies (note that this will probably not be used anymore as all 8 have been converted):
+
+
+1. Delete all code before the start voting header and after the navigation header (with the exemption of selection production utilities)
+2. Find and replace vbp-moved-to-candidate with moved-to-candidate 
+3. Find and replace ready-to-advance with find-next-race
+4. Delete the productions which require the goal buffer to have moved-to-candidate in its state field
+5. Turn the find and replace to regex and find and replace "to-do.*?$" with "" (quotes only for clarity, do not include)
+6. Delete the production past-end-state

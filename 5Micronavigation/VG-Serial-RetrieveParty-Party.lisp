@@ -2,7 +2,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
 ;;; Author      : Mike Byrne [and others]
-;;; Copyright   : (c) 2016 Mike Byrne
+;;; Copyright   : (c) 2019 Mike Byrne
 ;;; Address     : Department of Psychology 
 ;;;             : Rice University
 ;;;             : Houston, TX 77005
@@ -12,9 +12,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
 ;;; Filename    : VG-Serial-RetreiveParty-Party.lisp
-;;; Version     : r1
+;;; Version     : r2
 ;;; 
-;;; Description : Model of voting on virtual VoteBox DRE.
+;;; Description : Micronavigation Strategy
 ;;;             : Performs a serial search
 ;;;             : Uses a retrieve-based memory strategy to search candidates by party
 ;;;             : If initial retrieval fails, performs a serial search by party
@@ -23,38 +23,19 @@
 ;;;
 ;;; To do       : * 
 ;;; ----- History -----
-;;;
-;;; 2019.1.31   Xianni Wang
-;;;				: * updated screen learning code
-;;; 2018.9.5    Xianni Wang
-;;;				: * added defparameter and !eval! functions to log strategies for simulation
-;;; 2018.5.19   Xianni Wang
-;;;				: * added two more activation levels 
-;;;				: * added candidate chunks and abstain chunks
-;;; 2018.4.25   Xianni Wang
-;;;				: * removed unnecessary imaginal buffers
-;;; 2018.4.14   Xianni Wang
-;;;				: * adjusted the format
-;;; 2018.4.8 Xianni Wang
-;;;				: * adapted file with studying model
-;;; 2018.2.26 Xianni Wang
-;;;				: * created file 
-;;;				: * tested, model works!
+;;; 2019.4.22   Joshua Engels
+;;;				: * Cut and transformed the micronavigation code (see conversion.txt) from the file of the same name as this one for use in constructing full models
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; General Docs:
+;;; See old voting box model file of the same name for further editing history
 ;;;
 ;;; This model does a serial search down the list of party until it finds the
 ;;; one that matches a name in memory.
 ;;;
 ;;;
 
-;****************************************
-;****************************************
-;start to vote
-;****************************************
-;****************************************
 
 ;****************************************
 ;Put the visual location somewhere on the screen

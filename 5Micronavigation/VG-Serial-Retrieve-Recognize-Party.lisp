@@ -2,7 +2,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
 ;;; Author      : Mike Byrne [and others]
-;;; Copyright   : (c) 2016 Mike Byrne
+;;; Copyright   : (c) 2019 Mike Byrne
 ;;; Address     : Department of Psychology 
 ;;;             : Rice University
 ;;;             : Houston, TX 77005
@@ -12,9 +12,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
 ;;; Filename    : VG-Serial-Retreive-Recognize-Party.lisp
-;;; Version     : r1
+;;; Version     : r2
 ;;; 
-;;; Description : Model of voting on virtual VoteBox DRE.
+;;; Description : Micronavigation Strategy
 ;;;             : * Uses a retrieval-based serial strategy to search for candidates by name.
 ;;;             : * Model abstains if it reaches the bottom and no name has matched
 ;;;
@@ -23,79 +23,20 @@
 ;;; To do       : * 
 ;;; 
 ;;; ----- History -----
-;;; 2019.2.14   Xianni Wang
-;;;				: * modified the logical flow
-;;; 2019.1.31   Xianni Wang
-;;;				: * updated screen learning code
-;;;				: * removed clear-finsts production
-;;; 2018.9.5    Xianni Wang
-;;;				: * added defparameter and !eval! functions to log strategies for simulation
-;;; 2018.5.19   Xianni Wang
-;;;				: * added two more activation levels 
-;;;				: * added candidate chunks and abstain chunks
-;;; 2018.4.25   Xianni Wang
-;;;				: * removed unnecessary imaginal buffers
-;;;				: * added Clear-Finsts production
-;;; 2018.4.14   Xianni Wang
-;;;				: * adjusted the format
-;;; 2018.4.4    Xianni Wang
-;;;				: * adapted file with visual grouping learning model
-;;; 2017.4.20   Marita Sailor
-;;;				: * duplicated file from Off-by-one folder
-;;;				: * replaced Candidate chunks in DM
-;;;				: * moved abstain chunks from this file
-;;; 2017.4.16	Marita Sailor
-;;;				: * duplicated file from Intentional Abstention folder
-;;;				: * added cursor-noise and process-cursor
-;;;				: * added find-cursor and find-cursor-2 chunks
-;;;				: * adjust end goal state of P Advance-Screen_Imaginal-Match-Stop
-;;;				: * new productions: find-cursor-location, find-cursor-incorrect
-;;;				: * tested and works
-;;; 2017.3.21  Marita Sailor
-;;;				: * duplicated file from Updated DM folder
-;;;				: * added Abstain chunk type
-;;;				: * added Abstain chunks to DM and base-level activations
-;;;				: * added checking-contest Selection chunk
-;;;				: * added intermediary productions 1) check-contest and 2) abstain
-;;;				: * modified Encode-contest production 
-;;;				: * adjusted production parameter for check-contest
-;;; 2016.11.22 Marita Sailor
-;;;				: * added base-level activations for all chunks
-;;; 2016.11.14 Marita Sailor
-;;;				: * model check-up 
-;;; 2016.10.28 Marita Sailor 
-;;;				: * Fixed all of the control flow problems. Model works!
-;;; 2016.10.27 Marita Sailor 
-;;;				: * current issue is sending it back to the ordered search when it knows who
-;;;				: to vote for, but that name doesn't match what it's currently looking at
-;;; 2016.10.26 Marita Sailor 
-;;;				: * Fixed FIND-LOC-FAILURE 
-;;;				: * added default VoteParty chunk to DM
-;;;				: * added productions to handle retrieval failure
-;;;				: * Enabled forgetting
-;;;				: * changed control flow, but haven't tested
-;;; 2016.09.22 Marita Sailor
-;;;				: * Added header
+;;; 2019.4.22   Joshua Engels
+;;;				: * Cut and transformed the micronavigation code (see conversion.txt) from the file of the same name as this one for use in constructing full models
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; General Docs:
-;;; Previously named SearchWithRace_InOrder_VBModel.lisp
+;;; See old voting box model file of the same name for further editing history
+;;; Previously named SearchWithRace_InOrder_VBModel.lisp 
 ;;;
 ;;; This model does a serial search down the list of candidates until it finds the
 ;;; one that matches a name in memory.
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-
-;****************************************
-;****************************************
-;start to vote
-;****************************************
-;****************************************
-
-;****************************************
 
 (P Select-Choice_Locate-Contest-Description
 

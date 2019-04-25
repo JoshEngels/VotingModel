@@ -2,7 +2,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
 ;;; Author      : Mike Byrne [and others]
-;;; Copyright   : (c) 2016 Mike Byrne
+;;; Copyright   : (c) 2019 Mike Byrne
+;;; Address     : Department of Psychology 
+;;;             : Rice University
+;;;             : Houston, TX 77005
+;;;             : byrne@rice.edu
+;;; 
+;;; 
+;;;  -*- mode: LISP; Syntax: COMMON-LISP;  Base: 10 -*-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Author      : Mike Byrne [and others]
+;;; Copyright   : (c) 2019 Mike Byrne
 ;;; Address     : Department of Psychology 
 ;;;             : Rice University
 ;;;             : Houston, TX 77005
@@ -11,73 +22,25 @@
 ;;; 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
-;;; Filename    : VG-Random-Retrieve-Party.lisp
-;;; Version     : r1
+;;; Filename    : VG-Serial-Retreive-Party.lisp
+;;; Version     : r2
 ;;; 
-;;; Description : Model of voting on virtual VoteBox DRE.
-;;;             : * Model attends contest and retrieves desired candidate using a random search strategy.
-;;;             : * If initial retrieval fails, performs a random search by party
-;;;             : * Model will also vote by party if it searches the list and doesn't remember who it was initially voting for.
-;;;             : * Abstains from race if retrieval of default party fails
-;;; 
+;;; Description : Micronavigation Stragety
+;;;             : * Uses a retrieval-based serial strategy to search for candidates by name.
+;;;             : * Model abstains if it reaches the bottom and no name has matched
+;;;
 ;;; Bugs        : * None known
 ;;;
 ;;; To do       : * 
 ;;; 
 ;;; ----- History -----
-;;;
-;;; 2019.1.31   Xianni Wang
-;;;				: * updated screen learning code
-;;;				: * removed clear-finsts production
-;;; 2018.9.5    Xianni Wang
-;;;				: * added defparameter and !eval! functions to log strategies for simulation
-;;; 2018.5.19   Xianni Wang
-;;;				: * added two more activation levels 
-;;;				: * added candidate chunks and abstain chunks
-;;; 2018.4.25   Xianni Wang
-;;;				: * removed unnecessary imaginal buffers
-;;; 2018.4.24   Xianni Wang
-;;;				: * added Clear-Finsts production
-;;; 2018.4.14   Xianni Wang
-;;;				: * adjusted the format
-;;; 2018.4.1    Xianni Wang
-;;;				: * adapted file with visual grouping learning model
-;;; 2017.4.20   Marita Sailor
-;;;				: * duplicated file from Off-by-one folder
-;;;				: * replaced Candidate chunks in DM
-;;;				: * moved abstain chunks from this file
-;;; 2017.4.16	Marita Sailor
-;;;				: * duplicated file from Intentional Abstention folder
-;;;				: * added cursor-noise and process-cursor
-;;;				: * added find-cursor and find-cursor-2 chunks
-;;;				: * adjust end goal state of P Advance-Screen_Imaginal-Match-Stop
-;;;				: * new productions: find-cursor-location, find-cursor-incorrect
-;;;				: * tested and works
-;;; 2017.3.19  Marita Sailor
-;;;				: * duplicated file from Updated DM folder
-;;;				: * added Abstain chunk type, created 3 Abstain chunks corresponding to last 3 races
-;;;				: * added checking-contest chunk
-;;;				: * added intermediary productions check-contest and abstain
-;;;				: * adjusted and reorganized imaginal buffer requests
-;;;				: * added spp for check-contest 
-;;; 2017.2.4   Marita Sailor
-;;;				: * added all candidates to DM
-;;;				: * added in activation levels for all candidates 
-;;; 2016.11.14 Marita Sailor
-;;;				: * model check-up
-;;; 2016.11.06 Marita Sailor 
-;;;				: * fixed previous issues-- everything works now
-;;; 2016.11.05 Marita Sailor 
-;;;				: * Enabled forgetting and set visual finst span parameter
-;;;				: * having issues with retrieving candidate from imaginal buffer
-;;; 2016.11.03 Marita Sailor 
-;;;				: * Changed file name from Retrieve-Random to Retrieve-Random-Party
-;;; 2016.09.22 Marita Sailor
-;;;				: * Added header
+;;; 2019.4.22   Joshua Engels
+;;;				: * Cut and transformed the micronavigation code (see conversion.txt) from the file of the same name as this one for use in constructing full models
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; General Docs:
+;;; See old voting box model file of the same name for further editing history
 ;;;
 ;;; The model does a single retrieveal from DM for each race and then does a random 
 ;;; search for the string that was retrieved from memory. Votes by party if retrieval fails.
@@ -85,11 +48,6 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;****************************************
-;****************************************
-;start to vote
-;****************************************
-;****************************************
 
 ;****************************************
 

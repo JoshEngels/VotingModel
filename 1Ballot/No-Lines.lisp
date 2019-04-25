@@ -235,7 +235,6 @@
     (- (random (1+ (* 2 n))) n))
 
 
-; invibislbe for now
 (defun vote (realtime use-model visible)
 
   
@@ -358,11 +357,11 @@
 		(proc-display)
 		(start-hand-at-mouse)
 		(if realtime (run 200 :real-time t) (run 200))
-		;(run 200 :real-time t)
-		(run 200)
-		)())
+		(log-ballot))
+ )
 		
-	(log-ballot)
+		
+	
 
 		
 ))

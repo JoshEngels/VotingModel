@@ -2,7 +2,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
 ;;; Author      : Mike Byrne [and others]
-;;; Copyright   : (c) 2016 Mike Byrne
+;;; Copyright   : (c) 2019 Mike Byrne
 ;;; Address     : Department of Psychology 
 ;;;             : Rice University
 ;;;             : Houston, TX 77005
@@ -12,9 +12,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
 ;;; Filename    : VG-Serial-Recognize-Party.lisp
-;;; Version     : r1
+;;; Version     : r2
 ;;; 
-;;; Description : Model of voting on virtual VoteBox DRE.
+;;; Description : Micronavigation Strategy
 ;;;             : * Uses a recognition-based memory strategy
 ;;;             : * Uses serial visual search strategy.
 ;;;             : * Retrieval fails randomly if name is under the activation threshold.
@@ -25,65 +25,13 @@
 ;;; To do       : * 
 ;;; 
 ;;; ----- History -----
-;;; 2019.1.31   Xianni Wang
-;;;				: * updated screen learning code
-;;;				: * removed clear-finsts production
-;;; 2018.9.5    Xianni Wang
-;;;				: * added defparameter and !eval! functions to log strategies for simulation
-;;; 2018.5.19   Xianni Wang
-;;;				: * added two more activation levels 
-;;;				: * added candidate chunks and abstain chunks
-;;; 2018.4.25   Xianni Wang
-;;;				: * removed unnecessary imaginal buffers
-;;;				: * added Clear-Finsts production
-;;; 2018.4.14   Xianni Wang
-;;;				: * adjusted the format
-;;; 2018.4.1    Xianni Wang
-;;;				: * adapted file with visual grouping learning model
-;;; 2017.04.20  Marita Sailor
-;;;				: * duplicated file from Off-by-one folder
-;;;				: * replaced Candidate chunks in DM
-;;;				: * moved abstain chunks from this file
-;;; 2017.04.12  Marita Sailor
-;;;				: * duplicated file from Intentional Abstention folder
-;;;				: * added cursor-noise and process-cursor
-;;;				: * adjust end goal state of P Advance-Screen_Imaginal-Match-Stop
-;;;				: * find-cursor and find-cursor-2 chunks
-;;;				: * new productions: find-cursor-location, find-cursor-incorrect
-;;;				: * tested and works
-;;; 2017.03.18  Marita Sailor
-;;;				: * duplicated file from other folder
-;;;				: * made similar changes that were made in Recog-Random-Party
-;;; 2016.11.22  Marita Sailor
-;;;				: * added base-level activations for all chunks
-;;; 2016.11.14  Marita Sailor
-;;;				: * model check-up
-;;; 2016.10.18  Marita Sailor
-;;;				: * fixed End-Here production
-;;;				: * Model will now end at CountyJudge
-;;; 2016.10.12  Marita Sailor
-;;;				: * added End-Here production, but never fires
-;;; 2016.10.11  Marita Sailor
-;;;				: * Figured out problems: the model fails on the last race when it abstains or votes by race
-;;;				: * continuously loops because it can't see "next page" (on the very last page)
-;;;				: * Halt! production wont ever fire because model hasn't retrieved a name
-;;; 2016.10.04  Marita Sailor 
-;;;				: * Model works! If initial candidate retrieval fails, model performs a
-;;;				: random search by party and checks if it matches 
-;;;				: the default party in DM. If default party retrieval fails, then 
-;;;				: it abstains from the race. 
-;;; 2016.10.03  Marita Sailor 
-;;;				: * Works better now. Implemented default party but still having issues.
-;;; 2016.09.26  Marita Sailor 
-;;;				: * More edits, control flow should not skip Encode-Race
-;;; 2016.09.23  Marita Sailor 
-;;;				: * Added productions to handle infinite loop and voting by party (still unfinished)
-;;; 2016.09.22  Marita Sailor 
-;;;				: * Added header
+;;; 2019.4.22   Joshua Engels
+;;;				: * Cut and transformed the micronavigation code (see conversion.txt) from the file of the same name as this one for use in constructing full models
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; General Docs:
+;;; See old voting box model file of the same name for further editing history
 ;;; 
 ;;; As noted above, this model searches for candidates by working down the list.
 ;;; Retrieval will fail randomly and if this happens, the model will select a candidate

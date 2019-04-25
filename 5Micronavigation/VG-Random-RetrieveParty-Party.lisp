@@ -172,7 +172,7 @@
 ; sends to navigation production
 =goal>
 	ISA     MakeVote
-	state   find-next-state
+	state   find-next-race
 	
 
 )
@@ -390,7 +390,7 @@
 	ISA    click-mouse
 
 =goal>
-	state     find-next-state
+	state     find-next-race
 	
 
 )
@@ -602,7 +602,7 @@
 ==>
 
 =goal>
-	state   find-next-state
+	state   find-next-race
 	
 
 !output! ("VBP reached bottom of list-- abstain from voting")
