@@ -15,8 +15,8 @@
 ;;; Version     : 1
 ;;; 
 ;;; Description : * Combines the different pieces of a model (rigourously described in the contract pdf) in two useful ways:
-;;;             : * One function, run-single, runs a single model composed of specified or default model pieces in a specified way, useful for testing
-;;;             : * The other, run-lists, runs every combination of models a given nubmer of times for creating data sets
+;;;             : * One function, run-single, runs a single model composed of specified or default model pieces, useful for testing
+;;;             : * The other, run-lists, runs every possible combination of models a given nubmer of times for creating data sets
 ;;;
 ;;; Bugs        : * None known
 ;;;

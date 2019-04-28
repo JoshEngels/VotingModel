@@ -1,5 +1,48 @@
+;;;  -*- mode: LISP; Syntax: COMMON-LISP;  Base: 10 -*-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Author      : Joshua Engels
+;;; Copyright   : (c) 2019 Joshua Engels
+;;; Address     : Lovett College
+;;;             : Rice University
+;;;             : Houston, TX 77005
+;;;             : jae4@rice.edu
+;;; 
+;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Filename    : No-Lines.lisp
+;;; Version     : 1
+;;; 
+;;; Description : A ballot
+;;;				: * This file establishes an act-r window that represents a complete ballot with no lines seperating the races.
+;;;
+;;; Bugs        : * None known
+;;;
+;;; To do       : * The logging does not work if a button is unclicked (because there is no such method yet in logging) 
+;;;				: * See logging.lisp todo for more info
+;;; 
+;;; ----- History -----
+;;; 2019.4.24   Joshua Engels
+;;;				: * Documented the file, cleaned it up overall
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; General Docs:
+;;;
+;;; Each race defined in the cntst-lst construction is sequentially put on the ballot from top to bottom and left to right. 
+;;; The races are offset from each other with basically arbitrary x and y values (just what made it work), so care should be taken
+;;; when writing new ballot functions using this as a model or when changing the races (i.e. adding more candidates would screw things up)
+;;; Pressing the buttons causes a log candidate event to occur with the given candidate and other neccesary information (that's what the maps
+;;; are for). 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; This first section of code defines the list of races: their names, candidates, and parties, and are used in the second section to construction
+;; the ballot
 (defparameter cntst-lst nil)
 
+; A single race
 (defclass contest ()
   ((office-name :accessor office-name :initarg :office-name :initform nil)
 
@@ -9,7 +52,8 @@
 	)
   )
   
-	
+
+; A single candidate  
 (defclass cand-choice ()
   ((cand-name :accessor cand-name :initarg :cand-name :initform nil)
    (party-name :accessor party-name :initarg :party-name :initform "")
@@ -18,6 +62,7 @@
    (my-idx :accessor my-idx :initarg :my-idx :initform nil)
    ))
 
+; The contest list
 (setf cntst-lst
 	  (list
 	   
@@ -231,62 +276,69 @@
 	))
 
 
+;; Gets a random number between 1 and n
 (defun rand (n)
-    (- (random (1+ (* 2 n))) n))
+	(- (random (1+ (* 2 n))) n))
 
-
+;; A ballot function that gets called by combine.lisp and that runs the model (or a human) on the constructed ballot
+;; realtime is a boolean that specifies whether to run thge model in real time or not (only pertanent if use-model is true)
+;; use-model is a boolean that specifies whether to use the model or allow just human interaction with the ballot
+;; visible is a boolean that specifies whether the ballot window should be made visible or not
 (defun vote (realtime use-model visible)
 
   
+	; Resets the act r enviroment
 	(reset)
   
   
+	; Constructs the window and populates it with race-titles, candidates, parties, and buttons
 	(let* (
 		(window (open-exp-window "Ballet" :width 900 :height 700 :visible visible)) 
 		(starting-x 10) 
-		(i 0)
-		(j 0)
-		(button-map (make-hash-table)) 
-		(button-state (make-hash-table)) 
-		(button-index (make-hash-table)) 
-		(button-candidate (make-hash-table)) 
+		(i 0) ; column number
+		(j 0) ; row number
+		
+		; Maps the buttons to various objects so that these values can be accessed in the click response method, where we only have accessed
+		; to the object itself
+		(button-map (make-hash-table)) ; Maps the buttons to the array of candidate and party objects on screen (to use to change their color to blue)
+		(button-state (make-hash-table)) ; Maps the buttons to their state (to know whether to set to blue or black)
+		(button-index (make-hash-table)) ; Maps the button to their race's index in cntst-lst 
+		(button-candidate (make-hash-table)) ; Maps the button to their associated candidate object from cntst-lst
+		
+		 ; Holdovers from constructing a ballot with noise. Can make a new ballot with the values increased to get a ballot with noise
 		(noise 0)
 		(noise_macro 0))
 		
 	
+		; Places all of the races on the screen
 		(loop
 	
-			(setf j 0)
-			(setf starting-x (+ (* i 300) 10))
+			(setf j 0) ; row reset to 0
+			(setf starting-x (+ (* i 300) 10)) ; starting-x incremented (because it is a new column)
 		
-			;starting x is i * 160 + 10
 			
-			(loop 
-
-				
+			(loop 	
 				
 				
 				; Constructs the ballot
 				(let* (
 
+					; starting-y incremented (because it is a new row within the column)
 					(starting-y (+ (* j 85) 10))
-				
+
+					; Again, a holdover. Randomx = startingx here
 					(randomx (+ starting-x (rand noise_macro)))
 					(randomy (+ starting-y (rand noise_macro)))
 				
+				
+					; initialization to build the race
 					(candidate-party-object-array (make-array '(6)))
-
 					(contest (pop cntst-lst))
 					(candidates (cand-lst contest))
-				
-				
 					(candidate (pop candidates))
 					(y-offset 20)
 					(index 0)
-					
-					(button_temp nil))
-									
-					
+					(button_temp nil))					
 
 					
 					; Adds the race name
@@ -298,13 +350,13 @@
 			
 					do 	(progn 
 						
-						; Candidates
+						; Displays and stores candidates
 						(setf (aref candidate-party-object-array index) (add-text-to-exp-window :text (cand-name candidate) :x (+ randomx 30 (rand noise)) :y (+ randomy y-offset (rand noise))))
 						
-						; Parties
+						; Displays and stores parties
 						(setf (aref candidate-party-object-array (+ index 3)) (add-text-to-exp-window :text (party-name candidate) :x (+ randomx 200 (rand noise)) :y (+ randomy y-offset (rand noise))))
 
-						; Buttons
+						; Displays and stores buttons
 						(setf button_temp (add-button-to-exp-window :text "" :x randomx :y (+ randomy y-offset 2) :width 20 :height 10 :action 
 						(lambda (button)
 						(if (= (gethash button button-state) 0) 
@@ -333,7 +385,7 @@
 			
 				(setq j (+ j 1))
 			
-				(when (> j 7) (return j))
+				(when (> j 7) (return j)) ; more than 7 rows, break the loop
 				
 				(when (not cntst-lst) (return j)) ;checks if we've run out of races
 		
@@ -341,7 +393,7 @@
 		
 		(setq i (+ i 1))
 				
-		(when (> i 2) (return i))
+		(when (> i 2) (return i)) ; more than 3 column, break the loop
 		
 		(when (not cntst-lst) (return i)) ;checks if we've run out of races
 
@@ -350,18 +402,12 @@
 	
 	)
 	
-	
+	; Runs the model for 200 seconds on the ballot if use-model is true
 	(if use-model
 		(progn
 		(install-device window)
 		(proc-display)
 		(start-hand-at-mouse)
 		(if realtime (run 200 :real-time t) (run 200))
-		(log-ballot))
- )
-		
-		
-	
-
-		
+		(log-ballot)))
 ))
