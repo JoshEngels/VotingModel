@@ -1,10 +1,47 @@
-;****************************************
-; These productions encode the groups of this race
-; Make sure not to use any references to the right bound here as it still may reference the last column
-;****************************************
+;;;  -*- mode: LISP; Syntax: COMMON-LISP;  Base: 10 -*-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Author      : Joshua Engels
+;;; Copyright   : (c) 2019 Joshua Engels
+;;; Address     : Lovett College 
+;;;             : Rice University
+;;;             : Houston, TX 77005
+;;;             : jae4@rice.edu
+;;; 
+;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Filename    : Relative-Positions.lisp
+;;; Version     : 1
+;;; 
+;;; Description : Encoding strategy
+;;;				: * Starts off with visual attention at the race header and determines the race header, candidate, and party groups
+;;;				: * using only relative positions. This means that there are no cheats or look ups in memory; the groups are encoded by
+;;;				: * the structure of a race.
+;;;
+;;; Bugs        : * If the ballot has noise, the relative movement from candidate to party will not work in a race with only one candidate.
+;;;				: * This is because the way the navigation works is kind of a cheat. In order to maintain relative movement, the model finds
+;;;				: * the candidate of lowest y and finds text to the right of it with greater y not in its group. This is neccesary because otherwise
+;;;				: * the nearest text might be below in the next race. This is not a problem if the ballot had "no noise", i.e. if the candidates
+;;;				: * and parties had the exact same y.
+;;;
+;;; To do       : 
+;;;
+;;; ----- History -----
+;;; 2019.4.28   Joshua Engels
+;;;				: * Documented the file
+;;;
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; General Docs:
+;;; See contract.pdf for info on what fields the model has access to from the macronavigation
+;;;   
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Encodes the race and makes a request for a button associated with this race
-; No attend production because productions that lead into this have one
+;; Encodes the race and makes a request for a button associated with this race
+;; No attend production because productions that lead into this have one
 (P Encode-Race
 
  =goal>
@@ -47,7 +84,7 @@
 
 )
 
-; Attends the button 
+;; Attends the button 
 (P Attend-Button
 
 =goal>
@@ -73,7 +110,8 @@
 
 )
 
-; Encodes the button's group and makes a request for a candidate
+; Makes a request for a candidate (text closest to the bubble and to the right of it and not equal to the race group)
+; Does not store its group, but could be added later
 (P Encode-Button
 
  =goal>
@@ -113,7 +151,7 @@
 
 )
 
-; Attends a candidate for this race
+;; Attends a candidate for this race
 (P Attend-Candidate
 
 =goal>
@@ -139,7 +177,7 @@
 
 )
 
-; Encodes the candidate group and makes a visual request for another candidate with greatest y so we can eventually find the party
+;; Encodes the candidate group and makes a visual request for the candidate with greatest y
 (P Encode-Candidate
 
  =goal>
@@ -207,7 +245,7 @@
 	
 )
 
-; Makes the request to finnaly find the party by requesting a party with y less than or equal to this bubble
+; Makes the request to finnaly find the party by requesting a party with y less than or equal to this position
 (P Find-Party
 
 =goal>

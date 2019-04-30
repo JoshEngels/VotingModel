@@ -14,15 +14,30 @@
 ;;; Filename    : logging.lisp
 ;;; Version     : 1
 ;;; 
-;;; Description : 
+;;; Description : This file contains a number of logging functions that are read in by combine.lisp and called by the model to track voting.
+;;;
+;;; Bugs        : * None known
+;;;
+;;; To do       : * The logging process works for now but there are a number of ways it should be improved
+;;;				: * The unlog should be implemented, so that a person could click and then unclick a candidate
+;;;				: * The main problem is that choosing to abstain does not have a button trigger. Figuring out a better way to track the model's
+;;;				: * decesions is important.
+;;;
+;;; ----- History -----
+;;; 2019.4.28   Joshua Engels
+;;;				: * Documented the file
+;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; General Docs:
-;;;
-;;; This model does a serial search down the list of candidates until it finds the
-;;; one that matches a name in memory.
-;;;
-;;; Change the name of the created file
+;;; Logging works as follos:
+;;; - When starting a new list of runs, create-new-file is called, which creates the new output file in data with the timestamp as its name
+;;; - Everytime someone votes for a candidate, the button response method calls log-candidate which appends the pertanent infromation to the info lists
+;;; - When state next-race is reached, log-finish is called, which checks if any candidate was voted on; if not, it appends an abstension to the lists
+;;; - When a ballot is finished by a specific model, the model's results and description is output to the output file in data
+;;; The files created are saved in the data file with a time stamp as its title. Runs that one wants to save and analyze can have these file names
+;;; changed.
+;;; 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -68,18 +83,12 @@
 )
 
 
-;; the general logging function 
-(defun log-line ()
-  (with-open-file (strm logging-file-name :direction :output :if-exists :append :if-does-not-exist :create)
-    (format strm "~S	~S	~S	~S	~S	~S	~S	~S~%" (get-time) (read-from-string current-micro) (read-from-string current-dm) run-number '22 'Nameofrace 'VOTE-SUMMARY (list (append final-candidates '(nil nil)) (append final-indices '(nil nil)) final-strats))
-  )
-)
-
-
-; logs a single ballot and resets the global variables for the next ballot (to be called at end of ballot function)
+;; Logs the results of a a single ballot run and resets the global variables for the next ballot (to be called at end of ballot function)
 (defun log-ballot ()
 
-	(log-line)
+	(with-open-file (strm logging-file-name :direction :output :if-exists :append :if-does-not-exist :create)
+    (format strm "~S	~S	~S	~S	~S	~S	~S	~S~%" (get-time) (read-from-string current-micro) (read-from-string current-dm) run-number '22 'Nameofrace 'VOTE-SUMMARY (list (append final-candidates '(nil nil)) (append final-indices '(nil nil)) final-strats))
+	)
 
 	(setf run-number (+ run-number 1))
 	(setf final-strats '())
@@ -89,7 +98,7 @@
 )
 
 
-; Logs a single candidate (to be called within ballot function when button is pressed)
+;; Logs a single candidate (to be called within ballot function when button is pressed)
 (defun log-candidate (candidate index)
 
 	(setf final-strats (append final-strats (list current-strat)))
@@ -100,7 +109,7 @@
 )
 
 
-; Called whenever find-next-race is called in order to track abstentions and resets the boolean
+;; Called whenever find-next-race is called in order to track abstentions and resets the boolean
 (defun log-finish ()
 
 	(if (not vote-for-this-race) 
@@ -115,7 +124,7 @@
 
 )
 
-; Resets the count. To be called whenever something changes on the model level
+; Resets the count. To be called whenever something changes on the model level (e.g. a micronavigation strategy change)
 (defun reset-count ()
 	(setf run-number 1)
 )

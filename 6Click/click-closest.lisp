@@ -1,9 +1,42 @@
-; This file moves to the nearest bubble and clicks on it
-; The entering goal state is moved-to-candidate and the exiting goal state is find-next-race
+;;;  -*- mode: LISP; Syntax: COMMON-LISP;  Base: 10 -*-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Author      : Joshua Engels
+;;; Copyright   : (c) 2019 Joshua Engels
+;;; Address     : Lovett College 
+;;;             : Rice University
+;;;             : Houston, TX 77005
+;;;             : jae4@rice.edu
+;;; 
+;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; 
+;;; Filename    : click-closest.lisp
+;;; Version     : 1
+;;; 
+;;; Description : Click Strategy
+;;;				: * Clicks the button in this race group that is closest to the currently attended position
+;;;
+;;; Bugs        : 
+;;;
+;;; To do       : 
+;;;
+;;; ----- History -----
+;;; 2019.4.28   Joshua Engels
+;;;				: * Documented the file
+;;;
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; General Docs:
+;;; 
+;;;   
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 
 ; Finds the bubble closest to the currently attended location
-; Does not use the todo field (navigate) (include in things to change when pasting in)
 (P find-bubble
 
 =goal>

@@ -34,7 +34,7 @@
 ;;; The races are offset from each other with basically arbitrary x and y values (just what made it work), so care should be taken
 ;;; when writing new ballot functions using this as a model or when changing the races (i.e. adding more candidates would screw things up)
 ;;; Pressing the buttons causes a log candidate event to occur with the given candidate and other neccesary information (that's what the maps
-;;; are for). 
+;;; are for). The ballot is regularly laid out (with no noise), with candidates and parties and buttons sharing the same y value.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
