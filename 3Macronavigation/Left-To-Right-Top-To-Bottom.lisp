@@ -50,6 +50,7 @@
 =goal>
 	state			start-voting
 	left			=left-bound
+	top				=top-bound
 	
 ==>
 
@@ -61,7 +62,7 @@
 	screen-y	lowest
 	
 =goal>
-	state		attending-race-next-column
+	state		attending-race-next-row
 	right		-1 
 
 )
@@ -71,7 +72,7 @@
 ; This production gets called every time we have finished with the last race, i.e. it is the "first" production for each race most of the time.
 ; We are guarenteed attention somewhere in the last race (as well as a number of other different conditions, see Contract.pdf).
 ; The production makes a visual location request for the next text that is below this current race and within the left and right bounds.
-(P Find-Race-Same-Column
+(P Find-Race-Same-Row
 
 ; This manual check is a sort of hack that might need to be changed eventually. Basically logging only happens when the manual event is 
 ; processed (because the logic is in the ballot function in the button pressed function), so if this check is not here sometimes a race willgoes
@@ -107,7 +108,7 @@
 =imaginal>
 	
 =goal>
-	state		attending-race-same-column
+	state		attending-race-same-row
 	
 ; Tell logging.lisp that we are done with the last race and to mark it as an abstension if it has not recieved anything since the last time this
 ; function was called
