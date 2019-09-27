@@ -11,7 +11,7 @@
 ;;; 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
-;;; Filename    : No-Lines.lisp
+;;; Filename    : No-Lines-Color.lisp
 ;;; Version     : 1
 ;;; 
 ;;; Description : A ballot
@@ -23,8 +23,8 @@
 ;;;				: * See logging.lisp todo for more info
 ;;; 
 ;;; ----- History -----
-;;; 2019.4.24   Joshua Engels
-;;;				: * Documented the file, cleaned it up overall
+;;; 2019.9.27   Joshua Engels
+;;;				: * Created the file
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -35,6 +35,7 @@
 ;;; when writing new ballot functions using this as a model or when changing the races (i.e. adding more candidates would screw things up)
 ;;; Pressing the buttons causes a log candidate event to occur with the given candidate and other neccesary information (that's what the maps
 ;;; are for). The ballot is regularly laid out (with no noise), with candidates and parties and buttons sharing the same y value.
+;;; Plus colors!
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
