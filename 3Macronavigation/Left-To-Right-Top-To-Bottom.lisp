@@ -49,8 +49,7 @@
 
 =goal>
 	state			start-voting
-	left			=left-bound
-	top				=top-bound
+
 	
 ==>
 
@@ -63,7 +62,6 @@
 	
 =goal>
 	state		attending-race-next-row
-	right		-1 
 
 )
 
@@ -82,8 +80,8 @@
 
 =goal>
 	state			find-next-race
-	left			=left-bound
-	right			=right-bound
+	top				=top-bound
+	bottom			=bottom-bound
 
 	
 =imaginal>
@@ -95,15 +93,12 @@
 
 +visual-location>
 	ISA			visual-location
-	kind		text
-	> screen-x	=left-bound
-	< screen-x	=right-bound
-	> screen-y	current
+	color		'red
+	> screen-x	current
 	- group		=race-group
 	- group		=candidate-group
 	- group		=party-group
-	screen-y	lowest
-	kind		text
+	:nearest	current
 	
 =imaginal>
 	
@@ -118,11 +113,11 @@
 
 
 ;****************************************
-; This production being called means that we have reached the end of a column, so we begin the process of finding the top race in the next column
-(P Find-Race-Same-Column-No-Match
+; This production being called means that we have reached the end of a row, so we begin the process of finding the top race in the next row
+(P Find-Race-Same-Row-No-Match
 
 =goal>
-	state		attending-race-same-column	
+	state		attending-race-same-row	
 	
 ?visual-location>
 	buffer		failure
@@ -130,15 +125,15 @@
 ==>
 
 =goal>
-	state		find-top-race
+	state		find-left-race
 
 )
 
-; We have found the next race within this column and so we pass control to encoding process
-(P Attend-Race-Same-Column
+; We have found the next race within this row and so we pass control to encoding process
+(P Attend-Race-Same-Row
 
 =goal>
-	state		attending-race-same-column	
+	state		attending-race-same-row	
 		
 =visual-location>
 	ISA			visual-location
@@ -170,36 +165,37 @@
 
 
 ;****************************************
-; This is the next of the productions that find the next race if it is in a different column (after find-race-same-column-no-match)
-; It finds the top race in this column to prepare for the switch to the next column
-(P Find-Top-Race
+; This is the next of the productions that find the next race if it is in a different column (after find-race-same-row-no-match)
+; It finds the leftmost race header in this row to prepare for the switch to the next row
+(P Find-Left-Race
 
 =goal>
-	state		find-top-race
-	left		=left-bound
-	right		=right-bound
+	state		find-left-race
+	top			=top-bound
+	bottom		=bottom-bound
 	
 ==>
 
 +visual-location>
 	ISA			visual-location
-	> screen-x	=left-bound
-	< screen-x	=right-bound
-	screen-y	lowest
+	>= screen-y	=bottom-bound
+	<= screen-y	=top-bound
+	screen-x	lowest
 	kind		text
+	color 		'red
 
 =goal>
-	state		attending-top-race
+	state		attending-left-race
 
 )
 
 
 ;****************************************
-; This production attends the top race after we have found its location in preperation for the move to the next column.
-(P Attend-Top-Race
+; This production attends the left race after we have found its location in preperation for the move to the next column.
+(P Attend-Left-Race
 
 =goal>
-	state		attending-top-race
+	state		attending-left-race
 	
 =visual-location>
 	ISA			visual-location	
@@ -215,62 +211,45 @@
 	screen-pos	=visual-location
 	
 =goal>
-	state		find-race-next-column
+	state		find-race-next-row
 	
 )
 
 
 ;****************************************
-; This production makes the visual location request for the top race in the next column over
-; Another big cheat is here: we make a guess (called right-guess) for an x location that is to the right of any text in this column
-; and hopefully to the left of any text in the next column
-(P Find-Race-Next-Column
+; This production makes the visual location request for the leftmost race in the next row over
+(P Find-Race-Next-Row
 
 =goal>
 	state 		find-race-next-column
-	right		=right-bound
-	left		=left-bound
+	top			=top-bound
+	bottom		=bottom-bound
 	
 =visual>
 
 
-; Cheating big time; the guess is the current "right-bound" (a calculation from the last race group that can lead us astray) plus half the width
-; of the column. Note this would not be neccesary in the ballot without noise, and if it is causing problems and we are only using a ballot without
-; noise it can be removed and the other commented visual location request below used instead
-!bind! =right-guess (+ =right-bound (- =right-bound =left-bound))
-
-
 ==>
 
-; +visual-location>
-	; ISA			visual-location
-	; kind		text
-	; > screen-x	=right-bound
-	; :nearest	current
 	
 +visual-location>
 	ISA			visual-location
 	kind		text
-	screen-y	lowest
-	> screen-x	=right-bound
-	< screen-x	=right-guess
+	>= screen-y	=top-bound
 	:nearest	current	
+	color		'red
 	
 =goal>
-	state		attending-race-next-column
+	state		attending-race-next-row
 
 )	
 
 
 ;****************************************
-; We have found a race in the next column, so attend it
-; More cheating ensures that the left of the column is to the left of everything, even if there is noise. As mentioned above, this is unnecesary
-; in a ballot without noise and so can be removed if it is causing problems
-(P Attend-Race-Next-Column
+; We have found a race in the next row, so attend it
+(P Attend-Race-Next-Row
 
 =goal>
-	state		attending-race-next-column
-	right		=old-right
+	state		attending-race-next-row
 	
 ?imaginal>
 	state		free
@@ -283,9 +262,8 @@
 	screen-x	=center-x
 	width		=width
 	kind		text
+	screen-y	=new-bottom
 
-; More cheating	
-!bind! =new-left (/ (+ =old-right (- =center-x (/ =width 2))) 2)
 
 ==>
 
@@ -305,17 +283,17 @@
 	
 =goal>
 	state		storing-race-group	
-	left		=new-left
+	bottom		=new-bottom
 	
 )
 
 ;****************************************
-; If there is nothing found when looking for a new column, we are at the bottom right corner of the ballet and there are no more races, 
+; If there is nothing found when looking for a new row, we are at the bottom right corner of the ballet and there are no more races, 
 ; so we can end the model
-(P Find-Race-Next-Column-No-Match
+(P Find-Race-Next-Row-No-Match
 
 =goal>
-	state			attending-race-next-column
+	state			attending-race-next-row
 
 ?visual-location>
 	buffer			failure

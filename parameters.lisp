@@ -45,7 +45,7 @@
 (setf *actr-enabled-p* t)
 
 ; Declarative Memory Chunk Types
-(chunk-type MakeVote race candidate party button position screen state handpos to-do found default endState left right)
+(chunk-type MakeVote race candidate party button position screen state handpos to-do found default endState left right top bottom)
 (chunk-type Candidate name party race)
 (chunk-type VoteParty default)
 (chunk-type Abstain contest)
