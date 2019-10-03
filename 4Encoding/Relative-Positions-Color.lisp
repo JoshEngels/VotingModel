@@ -56,10 +56,15 @@
 	kind		text
 	group		=group1
 	screen-y	=screen-y
+	screen-x	=center-x
+	width		=width
 
 
 =imaginal>
 	race-group	none
+
+!bind! =new-left (- (- =center-x (/ =width 2)) 5)
+
 
 ==>
 
@@ -76,7 +81,8 @@
  
 =goal>
 	state		find-button-group
-	race-top	=screen-y
+	left 		=new-left
+	
 	
 !output! ("Example of race is: ~s" =text)
 
@@ -110,6 +116,8 @@
 
 )
 
+; Top and bottom mean something different
+
 ; Makes a request for a candidate (text closest to the bubble and to the right of it and not equal to the race group)
 ; Does not store its group, but could be added later
 (P Encode-Button
@@ -117,7 +125,7 @@
  =goal>
 	state   	storing-button-group
 	left		=left-bound
-	race-top	=top
+	top			=top
 
 =visual>
 	
@@ -182,7 +190,7 @@
 
  =goal>
 	state   	storing-candidate-group
-	race-top	=top
+	top			=top
 
 	
 =visual>
@@ -227,6 +235,7 @@
 =visual-location>
 	ISA			visual-location	
 	kind		text
+	screen-y	=bottom
 
 ?visual>
 	state		free	
@@ -242,6 +251,8 @@
 	
 =goal>
 	state		find-party-group-part-2
+	bottom		=bottom
+
 	
 )
 
@@ -251,7 +262,7 @@
 =goal>
 	state   	find-party-group-part-2
 	left		=left-bound
-	race-top			=top
+	top			=top
 	
 =visual>
 

@@ -1,54 +1,11 @@
-;;;  -*- mode: LISP; Syntax: COMMON-LISP;  Base: 10 -*-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
-;;; Author      : Joshua Engels
-;;; Copyright   : (c) 2019 Joshua Engels
-;;; Address     : Lovett College 
-;;;             : Rice University
-;;;             : Houston, TX 77005
-;;;             : jae4@rice.edu
-;;; 
-;;; 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
-;;; Filename    : Left-To-Right-Top-To-Bottom.Lisp
-;;; Version     : 1
-;;; 
-;;; Description : Macronavigation strategy
-;;;				: * If starting, finds the race in the top left corner. Otherwise tries to find the next race in the column, or if there is 
-;;;				: * no such race the top race in the next column, or if there is no such next column ends the model run.
-;;;
-;;; Bugs        : * None known
-;;;
-;;; To do       : * There are a few places where I have had to cheat to make the model work (because we do not have access to relative group 
-;;;				: * positios or super and sub groups). These places are documented, but eventually it would be better if they were removed. The
-;;;				: * reason these cheats are neccesary is mostly because of navigating a ballot with noise. If one is not using a ballot with noise,
-;;;				: * and these cheats are causing problems, they can be removed.
-;;;
-;;; ----- History -----
-;;; 2019.9.27   Joshua Engels
-;;;				: * Created the file
-;;;
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; General Docs:
-;;;
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-
-;****************************************
-; This production makes a visual location request for the first race on the ballot (the race in the top left corner) by requesting the text
-; with lowest y that has an x between -1 (the initial x bound) and 150.
-; This is one of the places where we must cheat. The 150 number is hardcoaded in as a guess (it must be greater than the middle of the race header
-; for it to work but less than the next column over). Eventually it would be better to be able to say something like "find the group closest to
-; the top left corner" 
 (P Find-First-Race
 
 =goal>
 	state			start-voting
+	left			=left-bound
+
 
 	
 ==>
@@ -59,6 +16,7 @@
 	> screen-x	=left-bound
 	< screen-x	150 ; This is the cheat
 	screen-y	lowest
+	color		red
 	
 =goal>
 	state		attending-race-next-row
@@ -82,6 +40,8 @@
 	state			find-next-race
 	top				=top-bound
 	bottom			=bottom-bound
+	right			=right
+	left			=left
 
 	
 =imaginal>
@@ -93,8 +53,10 @@
 
 +visual-location>
 	ISA			visual-location
-	color		'red
-	> screen-x	current
+	color		red
+	>= screen-x	=right
+	<= screen-y	=top-bound
+	>= screen-y	=bottom-bound
 	- group		=race-group
 	- group		=candidate-group
 	- group		=party-group
@@ -108,6 +70,8 @@
 ; Tell logging.lisp that we are done with the last race and to mark it as an abstension if it has not recieved anything since the last time this
 ; function was called
 !eval! (log-finish)
+
+!output! ("Last race outline top ~s bottom ~s left ~s right~s" =top-bound =bottom-bound =left =right)
 
 )
 
@@ -182,7 +146,7 @@
 	<= screen-y	=top-bound
 	screen-x	lowest
 	kind		text
-	color 		'red
+	color 		red
 
 =goal>
 	state		attending-left-race
@@ -236,7 +200,7 @@
 	kind		text
 	>= screen-y	=top-bound
 	:nearest	current	
-	color		'red
+	color		red
 	
 =goal>
 	state		attending-race-next-row

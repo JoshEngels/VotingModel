@@ -23,8 +23,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Parameters
-(sgp :v nil :needs-mouse t :esc t :process-cursor t)
-		
+; (sgp :v nil :needs-mouse t :esc t :process-cursor t)
+(sgp :v t :needs-mouse t :esc t :process-cursor t)
+	
+	
 (sgp :visual-finst-span 10) ;neccesary to avoid forgetting where we looked for the recognition strategies
 
 (sgp :cursor-noise t) ; Turn this on and off to turn cursor noise on and off
