@@ -73,7 +73,7 @@
 
 
 ; Makes a visual location request for the race header that is to the right, and nearest to this race header
-; Without greater than the current y clause, could lead to a cycle, but for now keep for simplicity
+; Need greater than y clause
 (P Find-Race-Same-Row
 
 =goal>
@@ -83,6 +83,7 @@
 
 =visual-location>
 	screen-right	=current-right
+	screen-top		=current-top
 
 =imaginal>
 	
@@ -93,9 +94,9 @@
 	kind			text
 	color			red
 	> screen-left	=current-right
+	> screen-bottom	=current-top ; Kind of a hack
 	screen-left		lowest
 	:nearest		current-y
-;	>= screen-y current
 	
 =imaginal>
 	
@@ -170,9 +171,9 @@
 
 +visual-location>
 	ISA			visual-location
-	screen-x	lowest
+	screen-left	lowest
 	color 		red
-	:nearest	current
+	:nearest	current-y
 
 =goal>
 	state		attending-left-race
@@ -202,6 +203,8 @@
 =goal>
 	state		find-race-next-row
 	
+=visual-location>
+	
 )
 
 
@@ -210,10 +213,12 @@
 (P Find-Race-Next-Row
 
 =goal>
-	state 		find-race-next-column
+	state 		find-race-next-row
 	
 =visual>
 
+=visual-location>
+	screen-left	=current-left
 
 ==>
 
@@ -221,9 +226,9 @@
 +visual-location>
 	ISA			visual-location
 	kind		text
+	= screen-left	=current-left
 	> screen-y	current
-	screen-x	lowest
-	:nearest	current	
+	screen-y	lowest
 	color		red
 	
 =goal>
