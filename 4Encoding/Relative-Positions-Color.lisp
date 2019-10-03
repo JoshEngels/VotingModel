@@ -3,7 +3,7 @@
 ;; No attend production because productions that lead into this have one
 (P Encode-Race
 
- =goal>
+=goal>
 	state   	storing-race-group
 
 =visual>
@@ -12,10 +12,10 @@
 =visual-location>
 	ISA			visual-location	
 	kind		text
+	group		=group1
 
 =imaginal>
 	race-group	none
-
 
 ==>
 

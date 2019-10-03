@@ -12,8 +12,9 @@
 	ISA			visual-location
 	kind		text
 	color		red
-	screen-x	lowest
+	screen-left lowest
 	screen-y	lowest
+	
 	
 =goal>
 	state		attending-race-next-row
