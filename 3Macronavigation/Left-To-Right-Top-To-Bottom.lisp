@@ -64,6 +64,8 @@
 	ISA			move-attention
 	screen-pos	=visual-location
 	
+=visual-location>
+	
 =goal>
 	state		find-race-same-row
 	
@@ -77,15 +79,23 @@
 =goal>
 	state		find-race-same-row
 	
+=visual>
+
+=visual-location>
+	screen-right	=current-right
+
+=imaginal>
+	
 ==>
 
 +visual-location>
-	ISA			visual-location
-	kind		text
-	color		red
-	> screen-x	current
+	ISA				visual-location
+	kind			text
+	color			red
+	> screen-left	=current-right
+	screen-left		lowest
+	:nearest		current-y
 ;	>= screen-y current
-	:nearest	current
 	
 =imaginal>
 	

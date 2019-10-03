@@ -11,7 +11,7 @@
 ;;; 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
-;;; Filename    : No-Lines.lisp
+;;; Filename    : No-Lines-Color.lisp
 ;;; Version     : 1
 ;;; 
 ;;; Description : A ballot
@@ -23,8 +23,8 @@
 ;;;				: * See logging.lisp todo for more info
 ;;; 
 ;;; ----- History -----
-;;; 2019.4.24   Joshua Engels
-;;;				: * Documented the file, cleaned it up overall
+;;; 2019.9.27   Joshua Engels
+;;;				: * Created the file
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -35,6 +35,7 @@
 ;;; when writing new ballot functions using this as a model or when changing the races (i.e. adding more candidates would screw things up)
 ;;; Pressing the buttons causes a log candidate event to occur with the given candidate and other neccesary information (that's what the maps
 ;;; are for). The ballot is regularly laid out (with no noise), with candidates and parties and buttons sharing the same y value.
+;;; Plus colors!
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -342,7 +343,7 @@
 
 					
 					; Adds the race name
-					(add-text-to-exp-window :text (office-name contest) :x randomx :y randomy)
+					(add-text-to-exp-window :text (office-name contest) :color 'red :x randomx :y randomy)
 
 				
 					; Constructs the rest of the ballot
@@ -351,23 +352,25 @@
 					do 	(progn 
 						
 						; Displays and stores candidates
-						(setf (aref candidate-party-object-array index) (add-text-to-exp-window :text (cand-name candidate) :x (+ randomx 30 (rand noise)) :y (+ randomy y-offset (rand noise))))
+						(setf (aref candidate-party-object-array index) (add-text-to-exp-window :text (cand-name candidate) :color 'purple :x (+ randomx 30 (rand noise)) :y (+ randomy y-offset (rand noise))))
 						
 						; Displays and stores parties
-						(setf (aref candidate-party-object-array (+ index 3)) (add-text-to-exp-window :text (party-name candidate) :x (+ randomx 200 (rand noise)) :y (+ randomy y-offset (rand noise))))
+						(setf (aref candidate-party-object-array (+ index 3)) (add-text-to-exp-window :text (party-name candidate) :color 'blue :x (+ randomx 200 (rand noise)) :y (+ randomy y-offset (rand noise))))
 
 						; Displays and stores buttons
-						(setf button_temp (add-button-to-exp-window :text "" :x randomx :y (+ randomy y-offset 2) :width 20 :height 10 :action 
+						(setf button_temp (add-button-to-exp-window :color 'white :text "" :x randomx :y (+ randomy y-offset 2) :width 20 :height 10 :action 
 						(lambda (button)
 						(if (= (gethash button button-state) 0) 
 							(progn
-								(modify-text-for-exp-window (aref (gethash button button-map) (gethash button button-index)) :color 'blue)
-								(modify-text-for-exp-window (aref (gethash button button-map) (+ (gethash button button-index) 3)) :color 'blue)
-								(log-candidate (cand-name (gethash button button-candidate)) (gethash button button-index)) 
+								(modify-button-for-exp-window button :color 'black)
+								; (modify-text-for-exp-window (aref (gethash button button-map) (gethash button button-index)) :color 'purple)
+								; (modify-text-for-exp-window (aref (gethash button button-map) (+ (gethash button button-index) 3)) :color 'purple)
+								; (log-candidate (cand-name (gethash button button-candidate)) (gethash button button-index)) 
 								(setf (gethash button button-state) 1))
 							(progn
-								(modify-text-for-exp-window (aref (gethash button button-map) (gethash button button-index)) :color 'black)
-								(modify-text-for-exp-window (aref (gethash button button-map) (+ (gethash button button-index) 3)) :color 'black)
+								(modify-button-for-exp-window button :color 'white)
+								; (modify-text-for-exp-window (aref (gethash button button-map) (gethash button button-index)) :color 'black)
+								; (modify-text-for-exp-window (aref (gethash button button-map) (+ (gethash button button-index) 3)) :color 'blue)
 								;(unlog-candidate (gethash button button-candidate)) 
 								(setf (gethash button button-state) 0))))))	
 
@@ -408,6 +411,5 @@
 		(install-device window)
 		(proc-display)
 		(start-hand-at-mouse)
-		(if realtime (run 200 :real-time t) (run 200))
-		(log-ballot)))
+		(if realtime (run 200 :real-time t) (run 200))))
 ))
