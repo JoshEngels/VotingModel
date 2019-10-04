@@ -325,11 +325,11 @@
 				(let* (
 
 					; starting-y incremented (because it is a new row within the column)
-					(starting-y (+ (* j 85) 10))
+					(starting-y (+ (* j (nth i '(85 73 85))) 10))
 
 					; Again, a holdover. Randomx = startingx here
-					(randomx (+ starting-x (rand noise_macro)))
-					(randomy (+ starting-y (rand noise_macro)))
+					(randomx (+ starting-x (rand 0)))
+					(randomy (+ starting-y (rand 0)))
 				
 				
 					; initialization to build the race
