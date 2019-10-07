@@ -285,7 +285,7 @@
 ;; realtime is a boolean that specifies whether to run thge model in real time or not (only pertanent if use-model is true)
 ;; use-model is a boolean that specifies whether to use the model or allow just human interaction with the ballot
 ;; visible is a boolean that specifies whether the ballot window should be made visible or not
-(defun vote (realtime use-model visible)
+(defun vote (realtime use-model visible dolog)
 
   
 	; Resets the act r enviroment
@@ -412,5 +412,5 @@
 		(proc-display)
 		(start-hand-at-mouse)
 		(if realtime (run 200 :real-time t) (run 200))
-		(log-ballot)))
+		(if dolog (log-ballot))))
 ))

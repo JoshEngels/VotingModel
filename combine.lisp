@@ -127,7 +127,7 @@
 	(load (concatenate 'string base-file-name "logging.lisp")) ;load in the logging functions
 	(create-new-file) ;create a new logging file
 	(create-specific file-names)
-	(vote realtime use-model visible)
+	(vote realtime use-model visible nil)
 
 )
 
@@ -176,7 +176,7 @@
 				(progn 
 				(print trial)
 				(create-specific (list nil dm nil nil micro nil))
-				(vote nil t visible))
+				(vote nil t visible t))
 				)
 			)))
 			
