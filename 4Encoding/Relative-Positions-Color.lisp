@@ -10,9 +10,13 @@
 	value		=text
 	
 =visual-location>
-	ISA			visual-location	
-	kind		text
-	group		=group1
+	ISA				visual-location	
+	kind			text
+	group			=group1
+	screen-left		=current-left
+	screen-right	=current-right
+
+
 
 =imaginal>
 	race-group	none
@@ -20,20 +24,120 @@
 ==>
 
 +visual-location>
-	ISA			visual-location
-	> screen-y	current
-	color		purple
-	:nearest	current
+	ISA				visual-location
+	> screen-y		current
+	:nearest		current
+	> screen-right	=current-left
+	< screen-left	=current-right
+	kind			oval
 	
 =imaginal>
 	race-group  =group1
  
 =goal>
-	state		find-candidate-group	
+	state		find-button-group	
 	
 !output! ("Example of race is: ~s" =text)
 
 
+)
+
+;; Attends a button for this race
+(P Attend-Button
+
+=goal>
+	state		find-button-group
+
+=visual-location>
+	ISA			visual-location	
+	kind		oval
+
+?visual>
+	state		free
+	
+==>
+
++visual>
+	ISA			move-attention
+	screen-pos	=visual-location
+	
+=visual-location>
+	
+=goal>
+	state		storing-button-group
+
+)
+
+;; Makes a location request for a clicked button
+(P Check-Button
+
+ =goal>
+	state   	storing-button-group
+
+=visual-location>
+	group		=button-group
+
+==>
+
++visual-location>
+	ISA			visual-location
+	kind		oval
+	group		=button-group
+	color		black
+ 
+=goal>
+	state		find-clicked-button
+	
+	
+)
+
+;; We have already voted, send back to macronavigation
+(P Already-Voted
+
+=goal>
+	state		find-clicked-button
+
+=visual-location>
+	ISA			visual-location	
+	kind		oval
+	
+=visual>
+
+?visual>
+	state		free
+	
+==>
+
+
+=goal>
+	state		already-voted
+
+)
+
+;; We have already voted, send back to macronavigation
+(P Not-Already-Voted
+
+=goal>
+	state		find-clicked-button
+
+
+?visual-location>
+	buffer			failure
+
+?visual>
+	state		free
+	
+==>
+
+
++visual-location>
+	ISA			visual-location
+	color		purple
+	:nearest	current
+	> screen-x	current
+	
+=goal>
+	state		find-candidate-group
 
 )
 
@@ -68,8 +172,6 @@
 
  =goal>
 	state   	storing-candidate-group
-	top			=top
-
 	
 =visual>
 	value		=text

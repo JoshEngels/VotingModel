@@ -22,6 +22,43 @@
 
 ; ------------------- These next productions find the race header and request a race in the same row
 
+
+; Deals with if we've already seen this race
+(P Deal-With-Already-Voted-First-Col
+
+=goal> 
+	state			already-voted
+	
+=imaginal>
+	first-race-col	true
+	
+==>
+
+=goal> 
+	state			find-left-race
+)
+
+; Deals with if we've already seen this race
+(P Deal-With-Already-Voted-Not-First-Col
+
+=goal> 
+	state			already-voted
+	
+=imaginal>
+	first-race-col	nil
+	
+==>
+
+=goal> 
+	state			find-next-race
+	
+=imaginal>
+
+)
+
+
+
+
 ; Makes a visual location request for the race title
 (P Find-Race-Title
 
@@ -73,7 +110,6 @@
 
 
 ; Makes a visual location request for the race header that is to the right, and nearest to this race header
-; Need greater than y clause
 (P Find-Race-Same-Row
 
 =goal>
@@ -94,7 +130,7 @@
 	kind			text
 	color			red
 	> screen-left	=current-right
-	> screen-bottom	=current-top ; Kind of a hack
+;	> screen-bottom	=current-top
 	screen-left		lowest
 	:nearest		current-y
 	
@@ -148,6 +184,8 @@
 	race-group		none
 	candidate-group	none
 	party-group		none
+	first-race-col	nil
+
 
 +visual>
 	ISA			move-attention
@@ -238,7 +276,7 @@
 
 
 ; ;****************************************
-; ; We have found a race in the next row, so attend it
+; ; We have found a race in the next row, so attend it and check if we have voted on it
 (P Attend-Race-Next-Row
 
 =goal>
@@ -261,6 +299,7 @@
 	race-group		none
 	candidate-group	none
 	party-group		none
+	first-race-col	true
 
 +visual>
 	ISA			move-attention
@@ -271,13 +310,15 @@
 	kind		text
 	
 =goal>
-	state		storing-race-group	
+	state		storing-race-group
 	
 )
 
+
+
 ; ;****************************************
 ; ; If there is nothing found when looking for a new row, we are at the bottom right corner of the ballet and there are no more races, 
-; ; so we can end the model
+; ; so we can end the mode
 (P Find-Race-Next-Row-No-Match
 
 =goal>
