@@ -119,7 +119,6 @@
 
 =visual-location>
 	screen-right	=current-right
-	screen-top		=current-top
 
 =imaginal>
 	
@@ -138,8 +137,6 @@
 	
 =goal>
 	state		attending-race-same-row
-
-; !output! ("Last race outline top ~s bottom ~s left ~s right~s" =top-bound =bottom-bound =left =right)
 
 )
 
@@ -276,7 +273,7 @@
 
 
 ; ;****************************************
-; ; We have found a race in the next row, so attend it and check if we have voted on it
+; ; We have found a race in the next row, so attend it and start encoding
 (P Attend-Race-Next-Row
 
 =goal>
