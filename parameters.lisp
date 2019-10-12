@@ -57,4 +57,4 @@
 (chunk-type VisualGroup race-group candidate-group party-group nextpage-group nextpage-text party-text candidate-text race-text button-group)
 		
 ; First Goal
-(add-dm (Vote ISA MakeVote state start-voting default "DEM" endState "nameofrace" left -1 right -1 top -1 bottom -1))
+(add-dm (Vote ISA MakeVote state start-voting default "DEM" endState "nameofrace"))
