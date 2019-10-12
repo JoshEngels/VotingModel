@@ -65,6 +65,9 @@
 ?manual>
 	state		free
 	
+?visual>
+	state		free
+	
 =visual-location>
 	ISA			visual-location
 	kind		oval
@@ -75,14 +78,21 @@
 	ISA     move-cursor
 	loc     =visual-location
 
+=visual-location>
+
++visual>
+	ISA			move-attention
+	screen-pos	=visual-location
+
 
 =goal>
 	state	moving-mouse-to-bubble
 	
+	
 
 )
 
-; Clicks the bubble and sets the state to find-next-race
+; Clicks the bubble and start the find next race procedure
 (P click-bubble
 
 =goal>
@@ -98,5 +108,5 @@
 
 =goal>
 	state 	find-next-race
-
+	
 )

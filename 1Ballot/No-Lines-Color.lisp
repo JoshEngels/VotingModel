@@ -325,7 +325,7 @@
 				(let* (
 
 					; starting-y incremented (because it is a new row within the column)
-					(starting-y (+ (* j 85) 10))
+					(starting-y (+ (* j (nth i '(85 73 85))) 10))
 
 					; Again, a holdover. Randomx = startingx here
 					(randomx (+ starting-x (rand noise_macro)))
@@ -363,12 +363,14 @@
 						(if (= (gethash button button-state) 0) 
 							(progn
 								(modify-button-for-exp-window button :color 'black)
+								(proc-display)
 								; (modify-text-for-exp-window (aref (gethash button button-map) (gethash button button-index)) :color 'purple)
 								; (modify-text-for-exp-window (aref (gethash button button-map) (+ (gethash button button-index) 3)) :color 'purple)
 								; (log-candidate (cand-name (gethash button button-candidate)) (gethash button button-index)) 
 								(setf (gethash button button-state) 1))
 							(progn
 								(modify-button-for-exp-window button :color 'white)
+								(proc-display)
 								; (modify-text-for-exp-window (aref (gethash button button-map) (gethash button button-index)) :color 'black)
 								; (modify-text-for-exp-window (aref (gethash button button-map) (+ (gethash button button-index) 3)) :color 'blue)
 								;(unlog-candidate (gethash button button-candidate)) 
