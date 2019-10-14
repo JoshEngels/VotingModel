@@ -124,8 +124,6 @@
 ;; (in this case the realtime parameter does not matter)
 (defun run-single (file-names realtime use-model visible)
 
-	(load (concatenate 'string base-file-name "logging.lisp")) ;load in the logging functions
-	(create-new-file) ;create a new logging file
 	(create-specific file-names)
 	(vote realtime use-model visible nil)
 

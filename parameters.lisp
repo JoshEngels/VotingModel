@@ -23,8 +23,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Parameters
-; (sgp :v nil :needs-mouse t :esc t :process-cursor t)
-; (sgp :v t :needs-mouse t :esc t :process-cursor t :show-focus t)
 (sgp :v t :esc t :show-focus t)
 
 
