@@ -211,9 +211,14 @@
 
 (setf min-race-size 1)
 
-(setf max-race-size 5)
+(setf max-race-size 4)
 
-(setf race-lengths (loop for x from 1 to (length all-races) collect (+ min-race-size (random (- max-race-size min-race-size)))))
+; inclusive
+(defun randrange (low high)
+(+ low (random (- (+ high 1) low)))
+)
+
+(setf race-lengths (loop for x from 1 to (length all-races) collect (randrange min-race-size max-race-size)))
 
 (setf cntst-lst (maplist 
 	(lambda (race-length) 
@@ -223,11 +228,33 @@
 				(loop for i from 1 to (car race-length) collect 
 					(make-instance 'cand-choice
 						:cand-name (pop all-candidates) 
-						:party-name (nth i all-parties)))))
+						:party-name (nth (- i 1) all-parties)))))
 	race-lengths))
 	
 
-; Generate all-perfect dm
+; Generate all-perfect dm and corresponding sdps
+(setf all-perfect-dm '(add-dm))
+(setf all-perfect-sdp '())
+(dolist (race cntst-lst) 
+
+	(let* (
+		(index (randrange 0 (- (length (cand-lst race)) 1)))
+		(candidate (nth index (cand-lst race)))
+		)
+	
+		(setf all-perfect-dm (append 
+			all-perfect-dm 
+			(list (list (read-from-string (cand-name candidate)) 'ISA 'Candidate 'name (cand-name candidate) 'party (party-name candidate) 'race (office-name race)))
+		))
+		(setf all-perfect-sdp (append 
+			all-perfect-sdp 
+			(list (list 'sdp (read-from-string (cand-name candidate)) ':base-level .8))
+		))
+	)
+	
+
+)
+; (print (cand-name (nth (randrange 0 (- (length (cand-lst race)) 1)) (cand-lst race)))))
 
 
 
