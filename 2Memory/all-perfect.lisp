@@ -72,7 +72,6 @@
 ; default party chunk
 (sdp Vote :base-level .8)
 
-
 ; no Activations for other candidates
 
 

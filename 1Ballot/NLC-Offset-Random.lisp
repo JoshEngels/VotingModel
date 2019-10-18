@@ -63,228 +63,172 @@
    (my-idx :accessor my-idx :initarg :my-idx :initform nil)
    ))
    
+ ; From rosetta code
+(defun nshuffle (sequence)
+  (loop for i from (length sequence) downto 2
+        do (rotatef (elt sequence (random i))
+                    (elt sequence (1- i))))
+  sequence)
+    
+   
+(setf all-candidates 
+'(
+	"DarronGokey"
+	"NilsaRusso"
+	"ErinFite"
+	"VondaFill"
+	"ThaddeusShriver"
+	"MorrisLoadholt"
+	"EmeraldDonadio"
+	"CelestaSuzuki"
+	"IsabelBrumit"
+	"EmeryKahler"
+	"JaimePolich"
+	"AudreaSizelove"
+	"CheyenneScoggin"
+	"WilliamWohlwend"
+	"ShalonTittle"
+	"CaryRosati"
+	"JoetteMusselman"
+	"AmberWiese"
+	"QuentinErb"
+	"AndriaHammes"
+	"JewelWillams"
+	"ClotildeHung"
+	"MarqueriteKupfer"
+	"KristinaSakamoto"
+	"KristleIrby"
+	"MargertFavors"
+	"ChiMcnerney"
+	"IsidroHervey"
+	"BritanySkipworth"
+	"BilliGastelum"
+	"RoslynTassone"
+	"LaraBradberry"
+	"AmmieRathman"
+	"NewtonRickles"
+	"ArronDevault"
+	"JayneCatania"
+	"GerriSwanigan"
+	"SuziMcgeehan"
+	"ThomasenaAvera"
+	"MalkaRogowski"
+	"BlossomMoone"
+	"FelicitaFesler"
+	"WendolynSchermerhorn"
+	"ShaquitaBilbrey"
+	"PhillisMeyers"
+	"DodieDefazio"
+	"LavernaCloud"
+	"MelvinaPewitt"
+	"ElzaKurek"
+	"MelanyMillikan"
+	"NamBainter"
+	"LaraineKnapik"
+	"RosalineMckitrick"
+	"FrancescoManahan"
+	"RoseannSchilke"
+	"DarrickMolloy"
+	"MorganWelton"
+	"NataliaWasmund"
+	"GailKunst"
+	"EleneHamburger"
+	"NatalyaWidner"
+	"LymanCarranza"
+	"MeiPlatero"
+	"OliverHenne"
+	"CarminaWebre"
+	"HarryWisecup"
+	"KaiDelapp"
+	"HisakoMerlos"
+	"DoriBeauchemin"
+	"DonFluellen"
+	"MadlynMcaninch"
+	"AlmetaShepler"
+	"KipXie"
+	"TrishFava"
+	"LaviniaHupp"
+	"OsvaldoOrtez"
+	"NichelleLeming"
+	"MichalPannone"
+	"SharylWomac"
+	"YvoneMoench"
+	"DelfinaNapoli"
+	"OzellaLadue"
+	"GillianDufault"
+	"JillianGarnes"
+	"DeonnaMestas"
+	"JoleneZiglar"
+	"EdnaMcinnis"
+	"KimberelyYbanez"
+	"DonteCockett"
+	"DenyseHeine"
+	"CharlynSchrack"
+	"OllieLuck"
+	"MarilouTepper"
+	"SerinaKendall"
+	"StacyScarberry"
+	"GertieCoulston"
+	"NickoleMckane"
+	"ElenorSaeger"
+	"FondaJester"
+	"SamathaCostas"
+))
+
+
+(setf all-parties '("DEM" "REP" "LIB" "IND" "GRE"))
+(setf all-races 
+'(
+	"PresidentoftheUnitedStates"
+	"UnitedStatesSenator"
+	"UnitedStatesRepresentativeDistrict7"
+	"Governor"
+	"LieutenantGovernor"
+	"AttorneyGeneral"
+	"ComptrollerofPublicAccounts"
+	"CommissionerofGeneralLandOffice"
+	"CommissionerofAgriculture"
+	"RailroadCommissioner"
+	"StateSenator"
+	"StateRepresentativeDistrict134"
+	"MemberStateBoardofEducationDistrict2"
+	"PresidingJudgeTexasSupremeCourtPlace2"
+	"PresidingJudgeCourtofCriminalAppeals"
+	"DistrictAttorney"
+	"CountyTreasurer"
+	"Sheriff"
+	"CountyTaxAssessor"
+	"JusticeofthePeace"
+	"CountyJudge"
+))
  
-(setf all-candidates '())
-(let ((in (open (concatenate 'string base-file-name "1Ballot/NameList.txt") :if-does-not-exist nil)))
-  (when in
-    (loop for line = (read-line in nil)
-         while line do (setf so-far (append all-candidates (list line))))
-    (close in)))
-(print all-candidates)
+ 
 
 
-; The contest list
-(setf cntst-lst
-	  (list
-	   
-	   (make-instance 'contest
-		 :office-name "PresidentoftheUnitedStates"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "GordonBearce" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "VernonStanleyAlbury" :party-name "DEM")
-		  (make-instance 'cand-choice
-			:cand-name "JanetteFroman" :party-name "LIB")))
-	   
-	   (make-instance 'contest
-		 :office-name "UnitedStatesSenator"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "CecileCadieux" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "FernBrzezinski" :party-name "DEM")
-		  (make-instance 'cand-choice
-			:cand-name "CoreyDery" :party-name "IND")))
-	   
-	   (make-instance 'contest
-		 :office-name "UnitedStatesRepresentativeDistrict7"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "PedroBrouse" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "RobertMettler" :party-name "DEM")))
 
-	   (make-instance 'contest
-		 :office-name "Governor"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "GlenTravisLozier" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "RickStickles" :party-name "DEM")
-		  (make-instance 'cand-choice
-			:cand-name "MauriceHumble" :party-name "IND")))
 
-	   (make-instance 'contest
-		 :office-name "LieutenantGovernor"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "ShaneTerrio" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "CassiePrincipe" :party-name "DEM")))
+(setf all-candidates (nshuffle all-candidates))
 
-	   (make-instance 'contest
-		 :office-name "AttorneyGeneral"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "TimSpeight" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "RickOrgan" :party-name "DEM")))
+(setf min-race-size 1)
 
-	   
-	   (make-instance 'contest
-		 :office-name "ComptrollerofPublicAccounts"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "ThereseGustin" :party-name "IND")
-		  (make-instance 'cand-choice
-			:cand-name "GregConverse" :party-name "DEM")))
+(setf max-race-size 5)
 
-	   
-	   (make-instance 'contest
-		 :office-name "CommissionerofGeneralLandOffice"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "SamSaddler" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "EliseEllzey" :party-name "DEM")))
+(setf race-lengths (loop for x from 1 to (length all-races) collect (+ min-race-size (random (- max-race-size min-race-size)))))
 
-	   
-	   (make-instance 'contest
-		 :office-name "CommissionerofAgriculture"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "PollyRylander" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "RobertoAron" :party-name "DEM")))
+(setf cntst-lst (maplist 
+	(lambda (race-length) 
+		(make-instance 'contest 
+			:office-name (pop all-races)
+			:cand-lst 
+				(loop for i from 1 to (car race-length) collect 
+					(make-instance 'cand-choice
+						:cand-name (pop all-candidates) 
+						:party-name (nth i all-parties)))))
+	race-lengths))
+	
 
-	   
-	   (make-instance 'contest
-		 :office-name "RailroadCommissioner"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "JillianBalas" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "ZacharyMinick" :party-name "DEM")))
+; Generate all-perfect dm
 
-	   
-	   (make-instance 'contest
-		 :office-name "StateSenator"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "RicardoNigro" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "WesleyStevenMillette" :party-name "DEM")))
-
-	   
-	   (make-instance 'contest
-		 :office-name "StateRepresentativeDistrict134"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "PetraBencomo" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "SusanneRael" :party-name "DEM")))
-
-	   
-	   (make-instance 'contest
-		 :office-name "MemberStateBoardofEducationDistrict2"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "PeterVarga" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "MarkBaber" :party-name "DEM")))
-
-	   
-	   (make-instance 'contest
-		 :office-name "PresidingJudgeTexasSupremeCourtPlace2"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "TimGrasty" :party-name "DEM")))
-
-	   
-	   (make-instance 'contest
-		 :office-name "PresidingJudgeCourtofCriminalAppeals"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "DanPlouffe" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "DerrickMelgar" :party-name "DEM")))
-
-	   
-	   (make-instance 'contest
-		 :office-name "DistrictAttorney"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "CoreyBehnke" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "JenniferALundeed" :party-name "DEM")))
-
-	   
-	   (make-instance 'contest
-		 :office-name "CountyTreasurer"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "DeanCaffee" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "GordonKallas" :party-name "DEM")))
-
-	   
-	   (make-instance 'contest
-		 :office-name "Sheriff"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "StanleySaari" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "JasonValle" :party-name "DEM")))
-
-	   
-	   (make-instance 'contest
-		 :office-name "CountyTaxAssessor"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "HowardGrady" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "RandyHClemons" :party-name "DEM")))
-
-	   
-	   (make-instance 'contest
-		 :office-name "JusticeofthePeace"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "DeborahKamps" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "ClydeGaytonJr" :party-name "DEM")))
-
-	   
-	   (make-instance 'contest
-		 :office-name "CountyJudge"
-		 :cand-lst
-		 (list
-		  (make-instance 'cand-choice
-			:cand-name "DanAtchley" :party-name "REP")
-		  (make-instance 'cand-choice
-			:cand-name "LewisShine" :party-name "DEM")))
-	))
 
 
 ;; A ballot function that gets called by combine.lisp and that runs the model (or a human) on the constructed ballot
