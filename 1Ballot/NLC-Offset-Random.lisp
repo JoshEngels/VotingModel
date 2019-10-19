@@ -250,10 +250,11 @@
 			all-perfect-sdp 
 			(list (list 'sdp (read-from-string (cand-name candidate)) ':base-level .8))
 		))
-	)
-	
-
+	)	
 )
+(setf all-perfect (append '() (list all-perfect-dm) all-perfect-sdp))
+; (setf all-perfect-dm (append all-perfect-dm '( (Party ISA VoteParty default "Dem"))))
+
 ; (print (cand-name (nth (randrange 0 (- (length (cand-lst race)) 1)) (cand-lst race)))))
 
 

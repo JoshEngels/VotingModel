@@ -95,7 +95,10 @@
 		
 		;Creates and writes the model file
 		(setf model-combination (append model-combination (get-to-add parameters-file))) ;Adds parameters to the model
-		(setf model-combination (append model-combination (get-to-add memory-file))) ;Adds declaritive memory to the model
+		;(setf model-combination (append model-combination (get-to-add memory-file))) ;Adds declaritive memory to the model
+		(print all-perfect)
+		(print (get-to-add memory-file))
+		(setf model-combination (append model-combination all-perfect))
 		(setf model-combination (append model-combination (get-to-add macronavigation-file))) ;Adds macronavigation to the model
 		(setf model-combination (append model-combination (get-to-add encoding-file))) ;Adds encoding to the model
 		(setf model-combination (append model-combination (get-to-add micronavigation-file))) ;Adds micronavigation to the model
