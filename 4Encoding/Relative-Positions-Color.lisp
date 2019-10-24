@@ -134,7 +134,7 @@
 	ISA			visual-location
 	color		purple
 	:nearest	current
-	> screen-x	current
+	= screen-top	current
 	
 =goal>
 	state		find-candidate-group
@@ -192,6 +192,7 @@
 	ISA			visual-location
 	kind		text
 	:nearest	current
+	= screen-y	current
 	color		blue
 
 =imaginal>

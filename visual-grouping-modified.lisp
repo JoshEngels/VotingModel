@@ -586,6 +586,13 @@ comment out a block
       (set-chunk-slot-value-fct feat 'group (get-group vg-scene feat))
     )
 	
+	
+
+	; This is a hack
+	(dolist (feat feat-lst)
+		(if (equal (chunk-slot-value-fct feat 'kind) 'OVAL) (set-chunk-slot-value-fct feat 'screen-y (+ (chunk-slot-value-fct feat 'screen-y) 1)))
+	)
+	
 	(dolist (feat feat-lst)
 		(set-chunk-slot-value-fct feat 'screen-left (* 2 (floor (/ (- (chunk-slot-value-fct feat 'screen-x) (/ (chunk-slot-value-fct feat 'width) 2)) 2))))
 	)
@@ -601,6 +608,7 @@ comment out a block
 	(dolist (feat feat-lst)
 		(set-chunk-slot-value-fct feat 'screen-bottom (* 2 (floor (/ (+ (chunk-slot-value-fct feat 'screen-y) (/ (chunk-slot-value-fct feat 'height) 2)) 2))))
 	)
+
 	
     feat-lst
   )
