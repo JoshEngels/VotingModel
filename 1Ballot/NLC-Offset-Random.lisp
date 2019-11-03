@@ -69,6 +69,13 @@
         do (rotatef (elt sequence (random i))
                     (elt sequence (1- i))))
   sequence)
+  
+ 
+
+; inclusive
+(defun randrange (low high)
+(+ low (random (- (+ high 1) low)))
+)
     
    
 (setf all-candidates 
@@ -173,6 +180,106 @@
 	"ElenorSaeger"
 	"FondaJester"
 	"SamathaCostas"
+	"AlbertaBoles"
+	"CedrickZerby"
+	"KellyeActon"
+	"RolfForan"
+	"GlenPippins"
+	"MollieTussey"
+	"HarryKohn"
+	"AlphaGillespie"
+	"LesliePhares"
+	"SylviaHooper"
+	"CarolyneWeich"
+	"TawnaBearse"
+	"LynnClayborne"
+	"HarrietteDifilippo"
+	"VerniaHornstein"
+	"SheridanDominy"
+	"GoldaBattaglia"
+	"MarylinSchuetz"
+	"DouglassWansley"
+	"LakeishaDrake"
+	"CharlieMoreles"
+	"AnnelleGiusti"
+	"LemuelBrantner"
+	"DominicaCaggiano"
+	"LessieOleary"
+	"CorrinPeralez"
+	"FatimaDelp"
+	"NoreenHenson"
+	"JulianaTilman"
+	"EmogeneHemsley"
+	"JeaniceAlber"
+	"MikiVassel"
+	"MarivelTullius"
+	"LakeshaEves"
+	"AlleneBrumbaugh"
+	"MarianYarnell"
+	"RheaShows"
+	"MyrnaAlvarez"
+	"CorinnaLehto"
+	"AronStephen"
+	"LilaBoothby"
+	"KaronDouthitt"
+	"NewtonDubuc"
+	"MarcelineEdmundson"
+	"VickiNugent"
+	"AleshaKennedy"
+	"LoretteFeaster"
+	"OpalHector"
+	"FernandaBrannum"
+	"RaulAndrepont"
+	"DaneHigginson"
+	"TashaEarheart"
+	"ClaudiaMcclintock"
+	"MelaniKincaid"
+	"GlynisMccabe"
+	"LaureneShute"
+	"ClaytonEscoto"
+	"HannahOrtner"
+	"RolandOsman"
+	"EleonorTiller"
+	"MeghanMater"
+	"JanieceNeel"
+	"GilLuckie"
+	"MorganPulice"
+	"MurraySturm"
+	"AltonGaffney"
+	"GeorgiannBuitron"
+	"WilliamsSaini"
+	"ShanellDepalma"
+	"LigiaKaram"
+	"RevaDidier"
+	"JackquelineAlmaguer"
+	"CindieSalo"
+	"LadyAtwood"
+	"DebrahFlournoy"
+	"WhitleyRowden"
+	"RandiMork"
+	"MaricelaBreault"
+	"CurtisHenrichs"
+	"DustinLuis"
+	"BarberaNickels"
+	"WillyCallihan"
+	"RosinaKirtley"
+	"EliaPusey"
+	"BernardoRailsback"
+	"YahairaYaeger"
+	"DelmaRing"
+	"SongMullenax"
+	"HaileyWass"
+	"LahomaTabron"
+	"VivianaFernando"
+	"EddyDetamore"
+	"GhislaineQuintanar"
+	"TessaHans"
+	"MyrtieParkison"
+	"WardToki"
+	"SharondaAllie"
+	"AlexWohlwend"
+	"SimonCreighton"
+	"LatoyaLewallen"
 ))
 
 
@@ -200,6 +307,32 @@
 	"CountyTaxAssessor"
 	"JusticeofthePeace"
 	"CountyJudge"
+	"CityController"
+	"BoardOfTrustees"
+	"CollegeBoardOfTrustees"
+	"CityCouncilAtLargePostion1"
+	"CityCouncilAtLargePostion2"
+	"CityCouncilAtLargePostion3"
+	"CityCouncilDistrictA"
+	"CityCouncilDistrictB"
+	"CityCouncilDistrictC"
+	"CityCouncilDistrictD"
+	"CityCouncilDistrictE"
+	"CityCouncilDistrictF"
+	"CityCouncilDistrictG"
+	"CityCouncilDistrictH"
+	"CityCouncilDistrictI"
+	"CityCouncilDistrictJ"
+	"CityCouncilDistrictK"
+	"CityCouncilDistrictL"
+	"CityCouncilDistrictM"
+	"CityCouncilDistrictN"
+	"CityCouncilDistrictO"
+	"CityCouncilDistrictP"
+	"CityCouncilDistrictQ"
+	"CityCouncilDistrictR"
+	"CityCouncilDistrictS"
+	"CityCouncilDistrictT"
 ))
  
  
@@ -212,11 +345,6 @@
 (setf min-race-size 1)
 
 (setf max-race-size 4)
-
-; inclusive
-(defun randrange (low high)
-(+ low (random (- (+ high 1) low)))
-)
 
 (setf race-lengths (loop for x from 1 to (length all-races) collect (randrange min-race-size max-race-size)))
 
@@ -233,8 +361,8 @@
 	
 
 ; Generate all-perfect dm and corresponding sdps
-(setf all-perfect-dm '(add-dm))
-(setf all-perfect-sdp '())
+(defparameter all-perfect-dm '(add-dm))
+(defparameter all-perfect-sdp '())
 (dolist (race cntst-lst) 
 
 	(let* (
@@ -253,9 +381,9 @@
 	)	
 )
 (setf all-perfect (append '() (list all-perfect-dm) all-perfect-sdp))
-; (setf all-perfect-dm (append all-perfect-dm '( (Party ISA VoteParty default "Dem"))))
 
-; (print (cand-name (nth (randrange 0 (- (length (cand-lst race)) 1)) (cand-lst race)))))
+
+
 
 
 
@@ -263,7 +391,13 @@
 ;; realtime is a boolean that specifies whether to run thge model in real time or not (only pertanent if use-model is true)
 ;; use-model is a boolean that specifies whether to use the model or allow just human interaction with the ballot
 ;; visible is a boolean that specifies whether the ballot window should be made visible or not
-(defun vote (realtime use-model visible dolog)
+(defun vote (realtime use-model visible dolog &optional (contest-parameters '(10 18 15)))
+
+	;; Logging
+	(defparameter race-sizes '())
+	(defparameter race-sizes-column '())
+	(defparameter race-indexes-voted-on '())
+	(defparameter race-parameters contest-parameters)
 
   
 	; Resets the act r enviroment
@@ -272,6 +406,11 @@
   
 	; Constructs the window and populates it with race-titles, candidates, parties, and buttons
 	(let* (
+	
+		(y-spacing-between-races (nth 0 contest-parameters))
+		(y-spacing-after-title (nth 1 contest-parameters))
+		(y-spacing-between-candidates (nth 2 contest-parameters))
+		
 		(wheight 600)
 		(wwidth 900)
 		(window (open-exp-window "Ballet" :width wwidth :height wheight :visible visible)) 
@@ -279,39 +418,45 @@
 		(starting-y 10)
 		(current-x starting-x) 
 		(current-y starting-y)
-		(y-spacing-between-races 10)
-		(y-spacing-after-title 20)
-		(y-spacing-between-candidates 15)
 		(x-offset-button 0)
 		(x-offset-candidate 30)
 		(x-offset-party 200)
 		(column-width 300)
-		(max-candidates 50)
 		
 		; Maps the buttons to various objects so that these values can be accessed in the click response method, where we only have accessed
 		; to the object itself
 		(button-map (make-hash-table)) ; Maps the buttons to the array of candidate and party objects on screen (to use to change their color to blue)
 		(button-state (make-hash-table)) ; Maps the buttons to their state (to know whether to set to blue or black)
 		(button-index (make-hash-table)) ; Maps the button to their race's index in cntst-lst 
-		(button-candidate (make-hash-table))) ; Maps the button to their associated candidate object from cntst-lst
+		(button-candidate (make-hash-table)) ; Maps the button to their associated candidate object from cntst-lst
+		(button-race (make-hash-table))) ; Maps the button to their race index
+
 	
 		; Places all of the races on the screen
 		; Column loop
 		(loop		
+		
+			(setf current-column-sizes '())
+		
 			; Item low
 			(loop 	
+			
 								
 				; Constructs the ballot
 				(let* (
 				
 					; initialization to build the race
-					(candidate-party-object-array (make-array (* max-candidates 2)))
+					(candidate-party-object-array (make-array (* max-race-size 2)))
 					(contest (pop cntst-lst))
 					(candidates (cand-lst contest))
 					(candidate (pop candidates))
 					(index 0)
 					(button_temp nil))					
 
+					; Log creation of race
+					(setf race-sizes (append race-sizes (list (+ (list-length candidates) 1))))
+					(setf current-column-sizes (append current-column-sizes (list (+ (list-length candidates) 1))))
+					
 					
 					; Adds the race name, increment current y
 					(add-text-to-exp-window :text (office-name contest) :color 'red :x current-x :y current-y)
@@ -336,7 +481,8 @@
 							(progn
 								(modify-button-for-exp-window button :color 'black)
 								(proc-display)
-								(setf (gethash button button-state) 1))
+								(setf (gethash button button-state) 1)
+								(setf race-indexes-voted-on (append race-indexes-voted-on (list (gethash button button-race)))))
 							(progn
 								(modify-button-for-exp-window button :color 'white)
 								(proc-display)
@@ -347,6 +493,8 @@
 						(setf (gethash button_temp button-state) 0)
 						(setf (gethash button_temp button-index) index)
 						(setf (gethash button_temp button-candidate) candidate)
+						(setf (gethash button_temp button-race) (- (length race-sizes) 1))
+
 
 						
 						; Loop increment operations
@@ -366,6 +514,10 @@
 
 		
 			)
+			
+				
+		; More logging
+		(setf race-sizes-column (append race-sizes-column (list current-column-sizes)))
 		
 		(setf current-x (+ current-x column-width))
 		(setf current-y	starting-y)

@@ -130,6 +130,36 @@
 
 )
 
+;; A utility function that gets the date stamp in the form year-month-day_hour-minute-second
+(defun datestamp ()
+  (multiple-value-bind
+    (second minute hour day month year day-of-week dst-p tz)
+    (get-decoded-time)
+    (declare (ignore day-of-week dst-p tz))
+    (format nil "~4d-~2,'0d-~2,'0d_~2,'0d-~2,'0d-~2,'0d"
+	      year month day hour minute second))
+)
+
+
+(defun test-ranges ()
+
+	
+	(setf logging-file-name (concatenate 'string base-file-name "data/" (datestamp) ".csv" ))
+	
+
+	(loop for race-spacing from 5 to 15 do
+		(loop for after-title-spacing from 20 to 22 do
+			(loop for between-candidates-spacing from 15 to 18 do
+				(loop for i from 0 to 20 do (
+				progn
+				(create-specific '(nil nil nil nil nil nil))
+				(vote nil t nil nil (list race-spacing after-title-spacing between-candidates-spacing))
+				(setf data (append race-sizes-column (list race-sizes race-indexes-voted-on race-parameters)))
+				(with-open-file (strm logging-file-name :direction :output :if-exists :append :if-does-not-exist :create)
+					(format strm "~{~a~^, ~}~%"  (mapcar #'(lambda (x) (format nil "~{~a~^ ~}" x)) data))))))))
+
+)
+
 
 ;; Used to run every single possible combination of strategies and log them all into a single file
 ;; Input is the number of trials to run for each combination of strategies and whether to make the models visible,
