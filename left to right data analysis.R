@@ -4,7 +4,7 @@ library(tidyverse)
 
 ## ------------------- import data --------------------##
 setwd("C:/Users/Joshua Engels/Desktop/A-Voting-Folder/data")
-votes <- read_delim("race_summary.csv",col_names=TRUE, delim=",")
+votes <- read_delim("single_layout_summary.csv",col_names=TRUE, delim=",")
 
 
 ## ------------------- add columns --------------------##
@@ -40,8 +40,13 @@ columnError <- votes %>% group_by(column) %>% summarise(
 yError <- votes %>% group_by(bins) %>% summarise(
   percentVotedOn = mean(yesVoted))
 
+# Error rate by size of race
+raceLengthError <- votes %>% group_by(raceLength) %>% summarise(
+  percentVotedOn = mean(yesVoted))
+
 ## --------------------- show graphs -------------- ##
 
+# Error rate by space between races
 ggplot(
   raceSpaceError,
   aes(x=raceSpace, y=1 - percentVotedOn)) + geom_point() + 
@@ -70,4 +75,22 @@ ggplot(
   theme_minimal() + 
   labs(title="Voting Error by Y Position (pixels from screen top)", 
        x="Y Position", 
+       y = "Percent Error")
+
+# Error rate by column position
+ggplot(
+  columnError,
+  aes(x=column, y = 1 - percentVotedOn)) +
+  geom_bar(stat="identity", fill="steelblue", width=0.8) +
+  theme_minimal() + 
+  labs(title="Voting Error by Column", 
+       x="Column Number", 
+       y = "Percent Error")
+
+# Error rate by race length
+ggplot(raceLengthError, aes(x = raceLength, y = 1 - percentVotedOn)) +
+  geom_bar(stat = "identity", width = 0.75, fill="steelblue") +
+  theme_minimal() + 
+  labs(title="Voting Error by Number of Candidates Per Race", 
+       x="Number of Candidates Per Race", 
        y = "Percent Error")

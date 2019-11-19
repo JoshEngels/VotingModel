@@ -126,7 +126,7 @@
 (defun run-single (file-names realtime use-model visible)
 
 	(create-specific file-names)
-	(vote realtime use-model visible nil)
+	(vote realtime use-model visible t)
 
 )
 
@@ -157,6 +157,22 @@
 				(setf data (append race-sizes-column (list race-sizes race-indexes-voted-on race-parameters)))
 				(with-open-file (strm logging-file-name :direction :output :if-exists :append :if-does-not-exist :create)
 					(format strm "~{~a~^, ~}~%"  (mapcar #'(lambda (x) (format nil "~{~a~^ ~}" x)) data))))))))
+
+)
+
+(defun test-ranges2 ()
+
+	
+	(setf logging-file-name (concatenate 'string base-file-name "data/" (datestamp) ".csv" ))
+	
+
+				(loop for i from 0 to 5000 do (
+					progn
+					(create-specific '(nil nil nil nil nil nil))
+					(vote nil t nil nil)
+					(setf data (append race-sizes-column (list race-sizes race-indexes-voted-on race-parameters)))
+					(with-open-file (strm logging-file-name :direction :output :if-exists :append :if-does-not-exist :create)
+						(format strm "~{~a~^, ~}~%"  (mapcar #'(lambda (x) (format nil "~{~a~^ ~}" x)) data)))))
 
 )
 

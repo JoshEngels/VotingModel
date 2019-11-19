@@ -208,7 +208,8 @@
 	ISA			visual-location
 	screen-left	lowest
 	color 		red
-	:nearest	current-y
+	<= screen-y	current
+	screen-y	highest
 
 =goal>
 	state		attending-left-race

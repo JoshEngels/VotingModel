@@ -1,6 +1,6 @@
 import csv
 
-with open('data/test_data3.csv') as input, open('data/race_summary.csv', 'w', newline='') as output:
+with open('data/single_layout.csv') as input, open('data/single_layout_summary.csv', 'w', newline='') as output:
 
     csv_reader = csv.reader(input, delimiter=',')
     csv_writer = csv.writer(output, delimiter=',')

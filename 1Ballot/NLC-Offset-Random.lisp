@@ -391,7 +391,7 @@
 ;; realtime is a boolean that specifies whether to run thge model in real time or not (only pertanent if use-model is true)
 ;; use-model is a boolean that specifies whether to use the model or allow just human interaction with the ballot
 ;; visible is a boolean that specifies whether the ballot window should be made visible or not
-(defun vote (realtime use-model visible dolog &optional (contest-parameters '(10 18 15)))
+(defun vote (realtime use-model visible dolog &optional (contest-parameters '(10 20 16)))
 
 	;; Logging
 	(defparameter race-sizes '())
