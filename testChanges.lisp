@@ -7,31 +7,75 @@
 
 
 (add-dm
- (start)
- (end)
- (goal state start)
+ (one)
+ (two)
+ (three)
+ (done)
+ (oldloc)
+ (goal state one oldloc nil)
 )
 
     
-(P Find-First-Race
+(P Find-First
 
 =goal>
-	state			start
+	state			one
 	
 ==>
 
 +visual-location>
 	ISA			visual-location
 	kind		text
-	color		red
-	screen-left lowest
-	screen-y	lowest
 	:nearest	current
-	:closest	current
+;	:nearest2	current
 	
 	
 =goal>
-	state		end
+	state		two
+	
+)
+
+(P Test-Storage
+
+=goal>
+	state			two
+	
+=visual-location>
+	ISA			visual-location	
+	kind		text
+	
+==>
+
++visual>
+	ISA			move-attention
+	screen-pos	=visual-location
+	
+=goal>
+	state		three
+	oldloc		=visual-location
+	
+)
+
+(P Find-Second
+
+=goal>
+	state			three
+	
+=visual>
+
+	
+==>
+
+
++visual-location>
+	ISA				visual-location
+	kind			text
+	> screen-left	current-right
+
+	
+=goal>
+	state		done
+	
 )
 
 (goal-focus goal)
