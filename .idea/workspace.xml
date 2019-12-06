@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="807ae056-2c30-4325-a46b-6fd59f8ffae7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.Rhistory" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/2019-05-01_12-08-00.tsv" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/2019-05-01_12-08-00.tsv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/2019-11-14_15-48-48.csv" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/2019-11-14_15-48-48.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/With-Mouse-Noise.png" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/With-Mouse-Noise.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/With-Mouse-Noise.tsv" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/With-Mouse-Noise.tsv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Without-Mouse-Noise-Small-Scale.png" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/Without-Mouse-Noise-Small-Scale.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Without-Mouse-Noise.png" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/Without-Mouse-Noise.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Without-Mouse-Noise.tsv" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/Without-Mouse-Noise.tsv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sketch 1.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/sketch 1.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sketch 2.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/sketch 2.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sketch 3.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/sketch 3.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sketch 4.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/oldData/sketch 4.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/missed_races.py" beforeDir="false" afterPath="$PROJECT_DIR$/generate_race_by_race.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,11 +18,12 @@
     <session id="-1805011401">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.16" value="2" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -42,16 +31,16 @@
           <entry key="JPG" value="1" />
           <entry key="R" value="1" />
           <entry key="Rhistory" value="1" />
-          <entry key="csv" value="3" />
-          <entry key="py" value="2" />
+          <entry key="csv" value="6" />
+          <entry key="py" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSV" value="3" />
+          <entry key="CSV" value="6" />
           <entry key="Image" value="1" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="2" />
+          <entry key="Python" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -75,10 +64,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/generate_race_by_race.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="70" selection-start-line="2" selection-start-column="70" selection-end-line="2" selection-end-column="70" />
+            <state relative-caret-position="51">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analysis.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -100,6 +94,7 @@
         <option value="$PROJECT_DIR$/missed_races.py" />
         <option value="$PROJECT_DIR$/check_back.py" />
         <option value="$PROJECT_DIR$/generate_race_by_race.py" />
+        <option value="$PROJECT_DIR$/analysis.py" />
       </list>
     </option>
   </component>
@@ -134,7 +129,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Python Projects" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -197,7 +192,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -231,31 +225,24 @@
       </provider>
       <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/race_summary.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="-3468">
-          <caret column="1" selection-start-column="1" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data/race_summary.csv" />
     <entry file="file://$PROJECT_DIR$/oldData/sketch 1.JPG">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/.Rhistory">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/check_back.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data/.Rhistory" />
+    <entry file="file://$PROJECT_DIR$/check_back.py" />
+    <entry file="file://$PROJECT_DIR$/data/test_data.csv" />
+    <entry file="file://$PROJECT_DIR$/data/test_data2.csv" />
+    <entry file="file://$PROJECT_DIR$/data/test_data3.csv" />
     <entry file="file://$PROJECT_DIR$/generate_race_by_race.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="70" selection-start-line="2" selection-start-column="70" selection-end-line="2" selection-end-column="70" />
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

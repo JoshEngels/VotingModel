@@ -11,7 +11,7 @@
 ;;; 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
-;;; Filename    : No-Lines-Color.lisp
+;;; Filename    : NLC-Offset-Random.lisp
 ;;; Version     : 1
 ;;; 
 ;;; Description : A ballot
@@ -344,7 +344,7 @@
 
 (setf min-race-size 1)
 
-(setf max-race-size 4)
+(setf max-race-size 7)
 
 (setf race-lengths (loop for x from 1 to (length all-races) collect (randrange min-race-size max-race-size)))
 
@@ -411,8 +411,8 @@
 		(y-spacing-after-title (nth 1 contest-parameters))
 		(y-spacing-between-candidates (nth 2 contest-parameters))
 		
-		(wheight 600)
-		(wwidth 900)
+		(wheight 800)
+		(wwidth 1200)
 		(window (open-exp-window "Ballet" :width wwidth :height wheight :visible visible)) 
 		(starting-x 10)
 		(starting-y 10)
