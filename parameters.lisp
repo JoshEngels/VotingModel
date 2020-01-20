@@ -23,8 +23,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Parameters
-; (sgp :v t :esc t :show-focus t)
-(sgp :v nil :esc t :show-focus t :process-cursor nil)
+(sgp :v t :esc t :show-focus t)
+; (sgp :v nil :esc t :show-focus t :process-cursor nil)
 
 	
 	
@@ -54,5 +54,5 @@
 (chunk-type Abstain contest)
 (chunk-type VisualGroup race-group candidate-group party-group nextpage-group nextpage-text party-text candidate-text race-text button-group)
 		
-; First Goal
-(add-dm (Vote ISA MakeVote state start-voting default "DEM" endState "nameofrace"))
+; First Goal and other chunks
+(add-dm (Vote ISA MakeVote state start-voting default "DEM" endState "nameofrace" direction rightwards anchor nil) (anchor) (direction) (leftwards) (rightwards))

@@ -17,7 +17,6 @@
 	screen-right	=current-right
 
 
-
 =imaginal>
 	race-group	none
 

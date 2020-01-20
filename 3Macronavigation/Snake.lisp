@@ -1,4 +1,4 @@
-; Assumes verticles are exactly lines up
+; Assumes verticles are exactly lined up
 
 ; Makes a visual location request for the first race
 (P Find-First-Race
@@ -18,7 +18,7 @@
 	
 =goal>
 	state		attending-race-next-row
-	direction	right
+;	direction	right
 )
 
 
@@ -322,6 +322,7 @@
 	
 =goal>
 	state		storing-race-group
+	anchor		=visual-location
 	
 )
 
