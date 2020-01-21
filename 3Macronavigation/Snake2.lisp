@@ -242,7 +242,7 @@
 ==>
 
 =goal>
-	state		find-race-next-row
+	state		find-race-new-row
 
 )
 
@@ -263,7 +263,7 @@
 	screen-left	current
 	color 		red
 	>= screen-y	current
-	screen-y	highest
+	screen-y	lowest
 
 =goal>
 	state		attending-race-new-row
@@ -286,7 +286,7 @@
 	screen-left	current
 	color 		red
 	>= screen-y	current
-	screen-y	highest
+	screen-y	lowest
 
 =goal>
 	state		attending-race-new-row
