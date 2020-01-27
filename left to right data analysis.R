@@ -1,10 +1,12 @@
 rm(list = ls())
 library(tidyverse)
+library(hrbrthemes)
+
 
 
 ## ------------------- import data --------------------##
 setwd("C:/Users/Joshua Engels/Desktop/A-Voting-Folder/data")
-votes <- read_delim("single_layout_summary.csv",col_names=TRUE, delim=",")
+votes <- read_delim("multi_layout_summary.csv",col_names=TRUE, delim=",")
 
 
 ## ------------------- add columns --------------------##
@@ -13,12 +15,14 @@ votes <- read_delim("single_layout_summary.csv",col_names=TRUE, delim=",")
 votes$yesVoted <- votes$votedOn >= 0
 
 # Add new bins
-votes$bins <- floor(votes$yPos / 10)
+votes$bins <- floor(votes$yPos / 40)
+
+newNewVotes <- filter(votes, yPos < 400)
 
 
 ## ------------------ calculate values to graph ------##
 
-averageError = mean(votes$yesVoted)
+averageError = mean(newNewVotes$yesVoted)
 
 # Eror rate by various spacing variables
 raceSpaceError <- votes %>% group_by(raceSpace) %>% summarise(
@@ -94,3 +98,35 @@ ggplot(raceLengthError, aes(x = raceLength, y = 1 - percentVotedOn)) +
   labs(title="Voting Error by Number of Candidates Per Race", 
        x="Number of Candidates Per Race", 
        y = "Percent Error")
+
+
+
+
+
+
+# -------------- More interesting graphs
+
+position_map <- function(binSize, maxY){
+  
+  # Maybe excludes the lower part of the graph
+  votes$bins <- floor(votes$yPos / binSize)
+  newVotes = filter(votes, yPos < maxY)
+  maxBins <- max(votes$bins)
+  
+  
+  # By position on screen:
+  positionError <- newVotes %>% 
+    group_by(bins, column) %>% 
+    summarise(percentVotedOn = mean(yesVoted))
+  
+  ggplot(positionError, 
+         aes(x=column, y=(maxBins - bins) * binSize, fill=1 - percentVotedOn)) + geom_tile() +
+    scale_fill_distiller(palette = "Reds", name = "Percent Error", direction="horizontal") +
+    xlab("Column Number") +
+    ylab("Pixels from Bottom") +
+    ggtitle("Voting Error by Ballot Position") +
+    theme_ipsum()
+}
+
+position_map(10, 600)
+position_map(10, 500)
