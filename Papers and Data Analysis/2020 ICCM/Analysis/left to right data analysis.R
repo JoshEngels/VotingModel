@@ -52,7 +52,7 @@ ggplot(
   raceSpaceError,
   aes(x=raceSpace, y=100 * (1 - percentVotedOn))) + geom_point() + 
   theme_minimal() + 
-  labs(title="Voting Error by Space Between Races", 
+  labs(
        x="Pixels Between Races", 
        y = "Percent Error") +
   geom_hline(yintercept=100 * (1 - averageSuccess), linetype="dashed", color = "red") +
@@ -81,18 +81,18 @@ ggplot(
 # Error rate by column position
 ggplot(
   columnError,
-  aes(x=column, y = 1 - percentVotedOn)) +
-  geom_bar(stat="identity", fill="steelblue", width=0.8) +
+  aes(x=column, y = 100 * (1 - percentVotedOn))) +
+  geom_bar(stat="identity", fill="blue", width=0.8) +
   theme_minimal() +
-  labs(title="Voting Error by Column",
+  labs(
        x="Column Number",
        y = "Percent Error")
 
 # Error rate by race length
 ggplot(raceLengthError, aes(x = raceLength, y = 100 * (1 - percentVotedOn))) +
-  geom_bar(stat = "identity", width = 0.75, fill="steelblue") +
+  geom_bar(stat = "identity", width = 0.75, fill="red") +
   theme_minimal() + 
-  labs(title="Voting Error by Number of Candidates Per Race", 
+  labs(
        x="Number of Candidates Per Race", 
        y = "Percent Error")
 
@@ -121,9 +121,8 @@ position_map <- function(binSize, maxY){
     scale_fill_distiller(palette = "Reds", name = "Percent Error", direction="horizontal") +
     xlab("Column Number") +
     ylab("Pixels from Bottom") +
-    ggtitle("Voting Error by Ballot Position") +
-    theme_ipsum()
-}
+    theme_minimal()
+  }
 
 position_map(10, 600)
 position_map(10, 500)
