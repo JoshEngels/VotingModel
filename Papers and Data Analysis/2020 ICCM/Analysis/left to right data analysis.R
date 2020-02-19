@@ -5,7 +5,7 @@ library(hrbrthemes)
 
 
 ## ------------------- import data --------------------##
-setwd("C:/Users/Joshua Engels/Desktop/A-Voting-Folder/data")
+setwd("C:/Users/Joshua Engels/Desktop/A-Voting-Folder/Papers and Data Analysis/2020 ICCM/Data")
 votes <- read_delim("multi_layout_summary2.csv",col_names=TRUE, delim=",")
 # maxY = 500
 # votes = filter(votes, yPos < maxY)
@@ -144,10 +144,14 @@ testtest <- melt(closestBeforeError, id=c("before_bins"))
 # Stacked
 ggplot(testtest, aes(fill=variable, y=value, x=binSize * before_bins)) + 
   geom_bar(position="stack", stat="identity") + 
-  labs(title="Voting Error by Closest Race Distance", 
-       x="Y distance in pixels to closest race in prior column", 
+  labs(
+       x="Verticle pixel distance to closest race in prior column", 
        y = "Number of races") +
-  scale_fill_discrete(name = "Legend", labels = c("Voted On", "Not Voted On"))
+  scale_fill_manual(name = "Legend", labels = c("Voted on", "Not voted on"), values = c("blue", "red")) +
+  coord_cartesian(xlim=c(0,75)) +
+  theme_minimal() +
+  theme(text = element_text(size=13))
+
   
 
 test <- votes %>% group_by(before_bins) %>% tally()

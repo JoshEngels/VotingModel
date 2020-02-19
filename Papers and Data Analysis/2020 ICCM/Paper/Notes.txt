@@ -1,0 +1,8 @@
+Need to make a strong argument for why what we are looking into is important:
+Talk with mike...
+1. Proof of concept
+2. Emergent behavior
+3. Responsive to ballot features that do indeed make things harder for voters, so we are! identifying known bad ballots features, and moreover we are identifying! new bad ballot features --> will work on new ballots.
+
+Run again with more trials? --> deffinetely need to write trial numbers somewhere
+Explain future of grouping
