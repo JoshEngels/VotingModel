@@ -6,7 +6,7 @@ library(hrbrthemes)
 
 ## ------------------- import data --------------------##
 setwd("C:/Users/Joshua Engels/Desktop/A-Voting-Folder/Papers and Data Analysis/2020 ICCM/Data")
-votes <- read_delim("multi_layout_summary2.csv",col_names=TRUE, delim=",")
+votes <- read_delim("multi_layout_summary_50.csv",col_names=TRUE, delim=",")
 # maxY = 500
 # votes = filter(votes, yPos < maxY)
 
@@ -57,7 +57,7 @@ ggplot(
        y = "Percent Error") +
   geom_hline(yintercept=100 * (1 - averageSuccess), linetype="dashed", color = "red") +
   geom_smooth(method='lm') +
-  coord_cartesian(ylim=c(10,20))
+  coord_cartesian(ylim=c(8,18))
 
 
 # # Y position start frequency
@@ -82,7 +82,7 @@ ggplot(
 ggplot(
   columnError,
   aes(x=column, y = 100 * (1 - percentVotedOn))) +
-  geom_bar(stat="identity", fill="blue", width=0.8) +
+  geom_bar(stat="identity", fill="blue", width=0.7) +
   theme_minimal() +
   labs(
        x="Column Number",
@@ -90,7 +90,7 @@ ggplot(
 
 # Error rate by race length
 ggplot(raceLengthError, aes(x = raceLength, y = 100 * (1 - percentVotedOn))) +
-  geom_bar(stat = "identity", width = 0.75, fill="red") +
+  geom_bar(stat = "identity", width = 0.7, fill="red") +
   theme_minimal() + 
   labs(
        x="Number of Candidates Per Race", 

@@ -344,7 +344,7 @@
 
 (setf min-race-size 1)
 
-(setf max-race-size 7)
+(setf max-race-size 4)
 
 (setf race-lengths (loop for x from 1 to (length all-races) collect (randrange min-race-size max-race-size)))
 
@@ -458,6 +458,7 @@
 					(setf current-column-sizes (append current-column-sizes (list (+ (list-length candidates) 1))))
 					
 					
+					
 					; Adds the race name, increment current y
 					(add-text-to-exp-window :text (office-name contest) :color 'red :x current-x :y current-y)
 					(setf current-y (+ current-y y-spacing-after-title))
@@ -502,6 +503,8 @@
 						(setf candidate (pop candidates))
 						(setf index (+ index 1)))
 						))
+						
+				
 			
 				(when (not cntst-lst) (return)) ;checks if we've run out of races
 

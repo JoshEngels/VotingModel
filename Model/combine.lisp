@@ -39,7 +39,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Base folder name (need to set)
-(defparameter base-file-name "C:/Users/Joshua Engels/Desktop/A-Voting-Folder/")
+(defparameter base-file-name "C:/Users/Joshua Engels/Desktop/A-Voting-Folder/Model/")
 
 
 ;; Utility function that should not be called externally
@@ -146,11 +146,10 @@
 	
 	(setf logging-file-name (concatenate 'string base-file-name "data/" (datestamp) ".csv" ))
 	
-
+(loop for i from 1 to 28 do
 	(loop for race-spacing from 5 to 15 do
 		(loop for after-title-spacing from 20 to 22 do
-			(loop for between-candidates-spacing from 15 to 18 do
-				(loop for i from 0 to 20 do (
+			(loop for between-candidates-spacing from 15 to 18 do (
 				progn
 				(create-specific '(nil nil nil nil nil nil))
 				(vote nil t nil nil (list race-spacing after-title-spacing between-candidates-spacing))

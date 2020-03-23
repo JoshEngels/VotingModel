@@ -1,6 +1,6 @@
 import csv
 
-with open('data/multi_layout_data.csv') as input, open('data/multi_layout_summary2.csv', 'w', newline='') as output:
+with open('../Data/multi_layout_50_runs.csv') as input, open('../Data/multi_layout_summary_50.csv', 'w', newline='') as output:
 
     csv_reader = csv.reader(input, delimiter=',')
     csv_writer = csv.writer(output, delimiter=',')
@@ -14,6 +14,9 @@ with open('data/multi_layout_data.csv') as input, open('data/multi_layout_summar
     param_count = 0
     current_param = None
     for row in csv_reader:
+
+        if len(row) == 0:
+            continue
 
         first_col, second_col, third_col, all_races, order, params = \
             [[int(e) for e in elem.strip().split(" ")] for elem in row]
